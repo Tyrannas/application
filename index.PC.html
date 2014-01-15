@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>La Séparation</title>
+		<meta charset="UTF-8" />
+		<link type="text/css" src="res/style/style.css" />
+		
+		<script type="text/javascript">
+			var loaded_scripts = 0;
+			var n_scripts = 13;
+			function scriptLoaded(script_path) {
+				loaded_scripts++;
+				console.debug(loaded_scripts + '/' + n_scripts + " : " + script_path);
+			}
+		</script>
+		
+		<script src="src/lib/createjs-2013.12.12.min.js"></script>
+		
+		<script type="text/javascript" src="src/var.js"></script>
+		<script type="text/javascript" src="src/rooter.js"></script>
+		<script type="text/javascript" src="src/functions.js"></script>
+		<script type="text/javascript" src="src/main.js"></script>
+		
+			<!-- Intro -->
+			<script type="text/javascript" src="src/intro/intro.js"></script>
+			
+			<!-- lib_separation -->
+				<!-- Logo -->
+				<script type="text/javascript" src="src/lib_separation/logo/logo.js"></script>
+				<!-- Event -->
+				<script type="text/javascript" src="src/lib_separation/event/event.js"></script>
+				<script type="text/javascript" src="src/lib_separation/event/touchmove.js"></script>
+				<script type="text/javascript" src="src/lib_separation/event/tap.js"></script>
+				<script type="text/javascript" src="src/lib_separation/event/cut.js"></script>
+				<script type="text/javascript" src="src/lib_separation/event/erase.js"></script>
+				<script type="text/javascript" src="src/lib_separation/event/open.js"></script>
+	<!-- <script type="text/javascript" src="src/lib_separation/event/word.js"></script> -->
+				
+		<script async type="text/javascript" src="res/style/google-webfont.js"></script>
+	</head>
+	<body></body>
+	<script>
+		WebFontConfig =
+		{
+			custom: {
+				families: ['centraleb','centralec','centraleh','demibasb','demibash','demihautb','demihauth','ombre'],
+				urls: [ 'res/style/style.css' ],
+			},
+			active: function () {
+				function start() {
+					if(loaded_scripts == n_scripts) {
+						main();
+					} else {
+						console.debug(loaded_scripts);
+						setTimeout(function() { start(); }, 100);
+					}
+				}
+				start();
+			}
+		};
+	</script>
+</html>
