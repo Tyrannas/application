@@ -21,10 +21,10 @@ function debug(str) {
 	}
 }
 
-var onDevice = (navigator.userAgent.match((/(iPhone|iPod|iPad|Android|BlackBerry|PlayBook|IEMobile)/)) == null) ? false : true;
+var onDevice = createjs.Touch.isSupported();//(navigator.userAgent.match((/(iPhone|iPod|iPad|Android|BlackBerry|PlayBook|IEMobile)/)) == null) ? false : true;
 
 function appOnDevice() {
-	return false; // return onDevice;
+	return onDevice; 
 }
 
 function appOnDevice_real() {
