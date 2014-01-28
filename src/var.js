@@ -19,4 +19,6 @@ var canvas;			// Canvas contenant le jeu
 var ctx;			// Context2D du canvas
 var stage;			// Stage contenant le canvas
 
+var fontConst;
+
 scriptLoaded('src/var.js');

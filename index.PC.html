@@ -7,7 +7,7 @@
 		
 		<script type="text/javascript">
 			var loaded_scripts = 0;
-			var n_scripts = 13;
+			var n_scripts = 29;
 			function scriptLoaded(script_path) {
 				loaded_scripts++;
 				console.debug(loaded_scripts + '/' + n_scripts + " : " + script_path);
@@ -27,6 +27,24 @@
 			<!-- lib_separation -->
 				<!-- Logo -->
 				<script type="text/javascript" src="src/lib_separation/logo/logo.js"></script>
+				<!-- Codes -->
+				<script type="text/javascript" src="src/lib_separation/codes/codes.js"></script>
+				<!-- Word -->
+				<script type="text/javascript" src="src/lib_separation/word/word.js"></script>
+				<script type="text/javascript" src="src/lib_separation/word/constantes.js"></script>
+				<!-- Word_constructor -->
+				<script type="text/javascript" src="src/lib_separation/word_constructor/coupable_haut.js"></script>
+				<script type="text/javascript" src="src/lib_separation/word_constructor/coupable_bas.js"></script>
+				<script type="text/javascript" src="src/lib_separation/word_constructor/coupable_entier.js"></script>
+				<script type="text/javascript" src="src/lib_separation/word_constructor/centrale.js"></script>
+				<script type="text/javascript" src="src/lib_separation/word_constructor/ombre.js"></script>
+				<!-- Word_animation -->
+				<script type="text/javascript" src="src/lib_separation/word_animation/animation.js"></script>
+				<script type="text/javascript" src="src/lib_separation/word_animation/coupable_haut.js"></script>
+				<script type="text/javascript" src="src/lib_separation/word_animation/coupable_bas.js"></script>
+				<script type="text/javascript" src="src/lib_separation/word_animation/centrale.js"></script>
+				<script type="text/javascript" src="src/lib_separation/word_animation/ombre.js"></script>
+				<script type="text/javascript" src="src/lib_separation/word_animation/effects.js"></script>
 				<!-- Event -->
 				<script type="text/javascript" src="src/lib_separation/event/event.js"></script>
 				<script type="text/javascript" src="src/lib_separation/event/touchmove.js"></script>
@@ -34,7 +52,9 @@
 				<script type="text/javascript" src="src/lib_separation/event/cut.js"></script>
 				<script type="text/javascript" src="src/lib_separation/event/erase.js"></script>
 				<script type="text/javascript" src="src/lib_separation/event/open.js"></script>
-	<!-- <script type="text/javascript" src="src/lib_separation/event/word.js"></script> -->
+				<script type="text/javascript" src="src/lib_separation/event/word.js"></script>
+				<!-- Destroy -->
+				<script type="text/javascript" src="src/lib_separation/destroy/destroy.js"></script>
 				
 		<script async type="text/javascript" src="res/style/google-webfont.js"></script>
 	</head>
@@ -43,7 +63,7 @@
 		WebFontConfig =
 		{
 			custom: {
-				families: ['centraleb','centralec','centraleh','demibasb','demibash','demihautb','demihauth','ombre'],
+				families: ['centraleb','centralec','centraleh','demibasb','demibash','demihautb','demihauth','ombre','demihaut_entier'],
 				urls: [ 'res/style/style.css' ],
 			},
 			active: function () {
