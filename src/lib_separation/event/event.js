@@ -4,22 +4,40 @@
 var Event = {};
 
 var events = {
-	tap : (appOnDevice_real() ? 'tap' : 'click'),
-	touchmove : (appOnDevice_real() ? 'touchmove' : 'stagemousemove'), // mousemove
-	dbltap : (appOnDevice_real() ? 'dbltap' : 'dblclick'),
+	tap : (appOnDevice_real() ? 'click' : 'click'),
+	touchmove : (appOnDevice_real() ? 'touchmove' : 'mousemove'), // mousemove
+	dbltap : (appOnDevice_real() ? 'dblclick' : 'dblclick'),
 };
 
-Event.getMousePos = function() {
-	return { x: stage.mouseX, y: stage.mouseY };
+Event.getMousePos = function(event) {
+	if(!appOnDevice_real()) {
+		return { x: event.stageX, y: event.stageY };
+	}
+	else {
+		return { x: event.nativeEvent.changedTouches[0].pageX,
+				 y:  event.nativeEvent.changedTouches[0].pageY
+		};
+	}
+}
+Event.getMousePosMove = function(event) {
+	if(!appOnDevice_real()) {
+		return { x: event.clientX, y: event.clientY };
+	}
+	else {
+		return { 
+				x: event.touches[0].clientX,
+				y: event.touches[0].clientY
+		};
+	}
 }
 
 Event.getTouchPos = function(event) {
-	return Event.getMousePos();
+	return Event.getMousePos(event);
 }
 
-var old_touch_move = {x:0, y:0};
+var old_touch_move = {x:-1, y:-1};
 Event.getTouchMove = function(event) {
-	var new_touch_move = Event.getMousePos();
+	var new_touch_move = Event.getMousePosMove(event);
 	var coords = {
 		x1: old_touch_move.x,
 		y1: old_touch_move.y,
@@ -44,10 +62,15 @@ Event.invertTouchmoveXY = function(coords) {
 Event.touchmove = function(event) {
 	event.preventDefault;
 	var coords = Event.getTouchMove(event);
+	if(!(coords.x1 < 0 || coords.x1 < 0)) {
+		Event.cut(coords);
+		Event.erase(coords);
+		Event.open(Event.invertTouchmoveXY(coords));
+	}
+}
 
-	Event.cut(coords);
-	Event.erase(coords);
-	Event.open(Event.invertTouchmoveXY(coords));
+Event.touchend = function(event) {
+	old_touch_move = {x:-1, y:-1};
 }
 
 Event.destroy = function(id, type) {

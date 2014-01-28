@@ -54,10 +54,11 @@ Logo.prototype.generate = function() {
 	this.container.addChild(this.arc_up, this.arc_down, this.central_line);
 	
 	this.containerDestroy = function() {
-		this.arc_up.clear();
-		this.arc_down.clear();
-		this.central_line.clear();
-		// this.container.destroy();
+		this.arc_up.graphics.clear();
+		this.arc_down.graphics.clear();
+		this.central_line.graphics.clear();
+		this.container.removeChild(this.arc_up, this.arc_down, this.central_line);
+		stage.removeChild(this.container);
 	}
 }
 
@@ -73,9 +74,9 @@ Logo.prototype.destroy = function() {
 }
 
 Logo.prototype.animateIntro = function(handler) {
-	var anim_duration = 2000;
+	var anim_duration = 200;
 	var logo = this;
-
+	
 	rotation90(this);
 
 	function rotation90() {

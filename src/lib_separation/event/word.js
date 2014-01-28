@@ -15,12 +15,12 @@ Word.prototype.addGesture = function() {
 	}
 	function onBegin(dir) {
 		if(!word.inAnimation) {
-			sound_police_begin(word.getPolice(), dir);
+			// sound_police_begin(word.getPolice(), dir);
 		}
 	}
 	function onAbort(dir) {
 		if((dir != 0 || word.getPolice() == 3) && !word.inAnimation) {
-			sound_police_abort(word.getPolice());
+			// sound_police_abort(word.getPolice());
 			word.eventOnAbort();
 		}
 	}
@@ -94,7 +94,7 @@ Word.prototype.removeGesture = function() {
 }
 
 Word.prototype.eventOnAbort = function() {
-	var events_fct = { 0: 'downCut', 1: 'upCut', 2: 'open', 3: 'erase', 5: 'cut', 
+	var events_fct = { 0: 'downCut', 1: 'upCut', 2: 'open', 3: 'erase', 5: 'downCut', 
 	};
 	switch(this.police) {
 		case 0: case 1: case 2: case 3: case 5:
@@ -104,7 +104,6 @@ Word.prototype.eventOnAbort = function() {
 			alert('Police inconnue : ' + this.police + ' dans la fonction Word.setEventOnAbort()');
 		break;
 	}
-	mainLayer.draw();
 }
 
 Word.prototype.activeOnTap = function() {
@@ -130,4 +129,4 @@ Word.prototype.disableDbltap = function() {
 	this.removeDone('eventFinished');
 }
 
-scriptLoaded('scripts/libs/separation_toolkit/event/word.js');
+scriptLoaded('src/lib_separation/event/word.js');

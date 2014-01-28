@@ -9,15 +9,15 @@ Event.checkTouchMove = function(obj_list, coords) {
 		// On regarde si le curseur est dans le cadre
 		if((obj.y1 <= coords.y1) && (coords.y1 <= obj.y2) &&
 		   (obj.y1 <= coords.y2) && (coords.y2 <= obj.y2)) {
-			// Si le curseur est entré dans le rectangle par la gauche / le haut,
-			// c'est le début d'un event de direction 1
+			// Si le curseur est entrÃ© dans le rectangle par la gauche / le haut,
+			// c'est le dÃ©but d'un event de direction 1
 			if((coords.x1 <= obj.x1) && (obj.x1 <= coords.x2)) {
 				obj.direction = 1;
 				obj.onChange(obj.direction, obj.value);
 				obj.onBegin(obj.direction);
 			}
-			// Si le curseur est entré dans le rectangle par la droite / le bas,
-			// c'est le début d'un event de direction -1
+			// Si le curseur est entrÃ© dans le rectangle par la droite / le bas,
+			// c'est le dÃ©but d'un event de direction -1
 			else if((coords.x2 <= obj.x2) && (obj.x2 <= coords.x1)) {
 				obj.direction = -1;
 				obj.onChange(obj.direction, obj.value);
@@ -41,7 +41,7 @@ Event.checkTouchMove = function(obj_list, coords) {
 				obj.value = 1;
 			}
 			
-			// Si la valeur est à 1 c'est que le geste est fini
+			// Si la valeur est Ã  1 c'est que le geste est fini
 			if(obj.value == 1) {
 				obj.onEvent(obj.direction);
 				
@@ -54,7 +54,7 @@ Event.checkTouchMove = function(obj_list, coords) {
 			}
 			obj.old_value = obj.value;
 		}
-		// Sinon on remets à 0 l'évènement
+		// Sinon on remets Ã  0 l'Ã©vÃ¨nement
 		else
 		{
 			obj.onAbort(obj.direction);

@@ -21,8 +21,8 @@ Event.onTap = function(id2, object, callback, restart2) {
 Event.tap = function(event) {
 	event.preventDefault();
 	var coord = Event.getTouchPos(event);
-
-	// On regarde si les coordonées du 'tap' se situent dans un rectangle actif
+	// log(coord.x + ' ' + coord.y);
+	// On regarde si les coordonÃ©es du 'tap' se situent dans un rectangle actif
 	for(var i in Event.tap_obj) {
 		var obj = Event.tap_obj[i];
 		if(obj == undefined) alert('undefined : ' + i); else
@@ -39,7 +39,7 @@ Event.tap = function(event) {
 Event.onDblTap = function(id, object, callback, restart) {
 	Event.dbltap_obj[id] = false;
 	
-	// Event.dbltapId(id) pour un id spécifique au dbltap, sinon si un tap est activé avec le même id en même temps il y a conflit
+	// Event.dbltapId(id) pour un id spÃ©cifique au dbltap, sinon si un tap est activÃ© avec le mÃªme id en mÃªme temps il y a conflit
 	Event.onTap(Event.dbltapId(id), object, function(id, callback, restart) { return function() {
 		if(Event.dbltap_obj[id]) {
 			Event.dbltap_obj[id] = false;
