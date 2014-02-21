@@ -6,9 +6,9 @@ Event.cut_obj = {};
 Event.onCut = function(id, object, callbackOnEvent, callbackOnChange, callbackOnBegin, callbackOnAbort) {
 	Event.cut_obj[id] = {
 		x1: object.getX() + Math.floor(object.getWidth() * 0.1),
-		y1: object.getY() + Math.floor(object.getHeight() * -0.3),
+		y1: object.getY() + Math.floor(object.getHeight() * -0.2),
 		x2: object.getX() + Math.floor(object.getWidth() * 0.9),
-		y2: object.getY() + Math.floor(object.getHeight() * 1.3),
+		y2: object.getY() + Math.floor(object.getHeight() * 1.2),
 		onEvent: callbackOnEvent,
 		onChange: callbackOnChange,
 		onBegin: callbackOnBegin,

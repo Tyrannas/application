@@ -6,15 +6,15 @@ Event.dbltap_obj = {};
 
 Event.dbltapId = function(id) { return 'dbltap_' + id; };
 
-Event.onTap = function(id2, object, callback, restart2) {
-	Event.tap_obj[id2] = {
-		x1: object.getX(),
-		y1: object.getY(),
-		x2: object.getX() + object.getWidth(),
-		y2: object.getY() + object.getHeight(),
-		id: id2,
-		restart: restart2,
-		onTap: callback,
+Event.onTap = function(id, object, callback, restart) {
+	Event.tap_obj[id] = {
+		'x1': object.getX(),
+		'y1': object.getY(),
+		'x2': object.getX() + object.getWidth(),
+		'y2': object.getY() + object.getHeight(),
+		'id': id,
+		'restart': restart,
+		'onTap': callback,
 	};
 }
 
@@ -25,14 +25,15 @@ Event.tap = function(event) {
 	// On regarde si les coordonées du 'tap' se situent dans un rectangle actif
 	for(var i in Event.tap_obj) {
 		var obj = Event.tap_obj[i];
-		if(obj == undefined) alert('undefined : ' + i); else
-		if((obj.x1 <= coord.x) && (coord.x <= obj.x2)) {
-		if((obj.y1 <= coord.y) && (coord.y <= obj.y2)) {
-			obj.onTap();
-			if(!Event.tap_obj[i].restart) {
-				Event.destroy(Event.tap_obj[i].id, 'tap');
-			}
-		}}
+		if(obj == undefined) alert('undefined : ' + i); else {
+			if((obj.x1 <= coord.x) && (coord.x <= obj.x2)) {
+			if((obj.y1 <= coord.y) && (coord.y <= obj.y2)) {
+				obj.onTap();
+				if(!obj.restart) {
+					Event.destroy(obj.id, 'tap');
+				}
+			}}
+		}
 	}
 }
 
@@ -60,12 +61,12 @@ Event.onDblTap = function(id, object, callback, restart) {
 }
 
 Event.destroyTap = function(id) {
-	// Destroy.listItem(Event.tap_obj, id);
+	Destroy.listItem(Event.tap_obj, id);
 }
 
 Event.destroyDbltap = function(id) {
 	Event.destroyTap(Event.dbltapId(id));
-	// Destroy.listItem(Event.dbltap_obj, id);
+	Destroy.listItem(Event.dbltap_obj, id);
 }
 
 scriptLoaded('scripts/libs/separation_toolkit/event/tap.js');

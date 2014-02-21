@@ -27,4 +27,4 @@ Event.destroyOpen = function(id) {
 	Destroy.listItem(Event.open_obj, id);
 }
 
-scriptLoaded('scripts/libs/separation_toolkit/event/open.js');
+scriptLoaded('src/lib_separation/event/open.js');
