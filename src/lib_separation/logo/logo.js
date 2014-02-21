@@ -3,13 +3,15 @@
  */
 function Logo() {
 	this.container = null; // Groupe Kinetic
-	this.border = Math.floor(H / 20); // Largeur des lignes du logo (~20)
-	
-	this.width = 12 * this.border; // Largeur du logo
-	this.height = 12 * this.border; // Hauteur du logo
 	
 	this.x = 0; // Position x
 	this.y = 0; // Position y
+	
+	this.w = 0;
+	this.h = H/3;
+	this.scale = 1;
+	
+	this.destroyed = false;
 	
 	LogoConstruct(this);
 }
@@ -20,44 +22,26 @@ LogoConstruct = function(logo) {
 }
 
 Logo.prototype.generate = function() {
-	var border = this.border;
-	var radius = 4 * border;
-	var x = 6 * border;
-	var y = 6 * border;
-	var line_width = 3.5 * border;
+	// Chargement des images
+	this.up = new createjs.Bitmap(res('logo_up'));
+	this.central = new createjs.Bitmap(res('logo_central'));
+	this.down = new createjs.Bitmap(res('logo_down'));
 	
-	this.arc_up = new createjs.Shape();
-	this.arc_up.graphics
-		.setStrokeStyle(border)
-		.beginStroke(C_CONT)
-		.moveTo(x - line_width + border/2, y - border/2)
-		.bezierCurveTo(x - line_width + border/2, y - radius, x + line_width - border/2, y - radius, x + line_width - border/2, y - border/2)
-		.endStroke();
+	// Calcul de la taille et de la position
+	this.scale = getScale(this.up.image.height, this.h);
+	this.w = this.up.image.width;
+	this.h = this.up.image.height;
 	
-	this.arc_down = new createjs.Shape();
-	this.arc_down.graphics
-		.setStrokeStyle(border)
-		.beginStroke(C_CONT)
-		.moveTo(x + line_width - border/2, y + border/2)
-		.bezierCurveTo(x + line_width - border/2, y + radius, x - line_width + border/2, y + radius, x - line_width + border/2, y + border/2)
-		.endStroke();
-	
-	this.central_line = new createjs.Shape();
-	this.central_line.graphics
-		.beginFill(C_CONT)
-		.drawRect(x - line_width / 2, y - (border / 2), line_width, border);
-	
+	// Créatation du container
 	this.container = new createjs.Container();
-	this.container.regX = x;
-	this.container.regY = y;
+		this.container.regX = this.w / 2;
+		this.container.regY = this.h / 2;
+		this.container.scaleX = this.container.scaleY = this.scale;
 	
-	this.container.addChild(this.arc_up, this.arc_down, this.central_line);
+	this.container.addChild(this.up, this.down, this.central);
 	
 	this.containerDestroy = function() {
-		this.arc_up.graphics.clear();
-		this.arc_down.graphics.clear();
-		this.central_line.graphics.clear();
-		this.container.removeChild(this.arc_up, this.arc_down, this.central_line);
+		this.container.removeChild(this.up, this.down, this.central);
 		stage.removeChild(this.container);
 	}
 }
@@ -71,10 +55,17 @@ Logo.prototype.display = function() {
 
 Logo.prototype.destroy = function() {
 	this.containerDestroy();
+	
+	if(!this.destroyed) {
+		this.destroyed = true;
+		return true;
+	} else {
+		return false;
+	}
 }
 
 Logo.prototype.animateIntro = function(handler) {
-	var anim_duration = 200;
+	var anim_duration = 2000;
 	var logo = this;
 	
 	rotation90(this);
@@ -86,11 +77,11 @@ Logo.prototype.animateIntro = function(handler) {
 	}
 	
 	function openLogo() {
-		Tween.get(logo.getArcDown())
-			.to({y: W/2}, anim_duration, Ease.sineIn);
-		Tween.get(logo.getArcUp())
-			.to({y: -W/2}, anim_duration, Ease.sineIn);
-		Tween.get(logo.getCentralLine())
+		Tween.get(logo.down)
+			.to({y: W}, anim_duration, Ease.sineIn);
+		Tween.get(logo.up)
+			.to({y: -W}, anim_duration, Ease.sineIn);
+		Tween.get(logo.central)
 			.to({
 				scaleX: 0,
 				scaleY: 0,
@@ -101,8 +92,8 @@ Logo.prototype.animateIntro = function(handler) {
 	}
 	
 	function finish() {
-		logo.containerDestroy();
-		handler();
+		if(logo.destroy())
+			handler();
 	}
 }
 
@@ -110,6 +101,7 @@ Logo.prototype.animateIntro = function(handler) {
 // Set
 Logo.prototype.setX = function(data) { this.x = data + this.getRegX(); }
 Logo.prototype.setY = function(data) { this.y = data + this.getRegY(); }
+Logo.prototype.setXY = function(data, data2) { this.setX(data); this.setY(data2); }
 Logo.prototype.setCenterXY = function(x, y) {
 	this.setX(x - this.getWidth() / 2);
 	this.setY(y - this.getHeight() / 2);
@@ -121,8 +113,8 @@ Logo.prototype.getRealX = function() { return this.x; }
 Logo.prototype.getRealY = function() { return this.y; }
 Logo.prototype.getRegX = function() { return this.container.regX; }
 Logo.prototype.getRegY = function() { return this.container.regY; }
-Logo.prototype.getWidth = function() { return this.width; }
-Logo.prototype.getHeight = function() { return this.height; }
+Logo.prototype.getWidth = function() { return this.w; }
+Logo.prototype.getHeight = function() { return this.h; }
 Logo.prototype.getNode = function() { return this.container; }
 Logo.prototype.getArcUp = function() { return this.arc_up; }
 Logo.prototype.getArcDown = function() { return this.arc_down; }
