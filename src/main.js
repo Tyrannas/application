@@ -11,39 +11,48 @@ var App = {};
 
 App.init = function() {
 	// Initialisation du canvas
-	canvas = document.createElement('canvas');
-	/*if (navigator.isCocoonJS)
-	canvas.screencanvas = true;*/
-	
-	canvas.width = W;// * window.devicePixelRatio;
-	canvas.height = H;// * window.devicePixelRatio;
-	
-	// ctx = canvas.getContext();//"experimental-webgl");
-	
-	//canvas.style.backgroundColor = C_BACK;
+	canvas = CocoonJS.App.createScreenCanvas();
+	GUIcanvas = document.createElement('canvas');
+
+	GUIcanvas.width = W;// * window.devicePixelRatio;
+	GUIcanvas.height = H;// * window.devicePixelRatio;
+
 	document.body.appendChild(canvas);
-	
+	document.body.appendChild(GUIcanvas);
+
 	// Initialisation du stage
 	stage = new createjs.Stage(canvas);
+	ctx = stage.canvas.getContext('2d');
 	createjs.Touch.enable(stage);
-	// stage.enableMouseOver();
-	// stage._handleMouseDown = function(e) {
-            // this._handlePointerDown(-1, e, e.pageX, e.pageY);
-        // };
+	
+	// On enlève le lissage
+	// if(ctx.imageSmoothingEnabled) {ctx.imageSmoothingEnabled = false;}
+	// if(ctx.webkitImageSmoothingEnabled) {ctx.webkitImageSmoothingEnabled = false;}
+	// if(ctx.mozImageSmoothingEnabled) {ctx.mozImageSmoothingEnabled = false;}
+	// if(ctx.oImageSmoothingEnabled) {ctx.oImageSmoothingEnabled = false;}
+	
+	GUIstage = new createjs.Stage(GUIcanvas);
+	GUIstage.nextStage = stage;
+	// ctx = GUIstage.canvas.getContext('2d');
+	createjs.Touch.enable(GUIstage);
+	
+	gui = new Gui();
 	
 	// Initialisation des events
 	stage.on(events['tap'], function(event) { Event.tap(event); });
-	canvas.addEventListener(events['touchmove'], function(event) { Event.touchmove(event); });
+	GUIcanvas.addEventListener(events['touchmove'], function(event) { Event.touchmove(event); });
 	
-	if(appOnDevice()) {
-		canvas.addEventListener('touchend', function(event) { log('test'); Event.touchend(event); });
-	}
-	else {
-		stage.on('mouseleave', function(event) { Event.touchend(event); });
-	}
+	// if(appOnDevice()) {
+		// canvas.addEventListener('touchend', function(event) { Event.touchend(event); });
+	// }
+	// else {
+		// stage.on('mouseleave', function(event) { Event.touchend(event); });
+	// }
 	
 	// Initialisation des FPS
 	createjs.Ticker.setFPS(NB_FPS);
+	
+	initConstantes();
 	
 	Destroy.all();
 }
@@ -63,25 +72,25 @@ App.mainLoop = function() {
 	// Mise à jour du stage
 	*/
 	stage.update();
+	GUIstage.update();
 }
 
 App.start = function() {
 	Intro.start();
+	// Menu.start();
 }
 
 // Démarrage de l'application
 function main() {
-	log("Démarrage de l'application");
-	
-	App.init();
-	
-	log("Fin de l'initialisation");
-	
-	createjs.Ticker.addEventListener("tick", function() {
-		App.mainLoop();
+	Rooter.preloadAll(function(){
+		App.init();
+		
+		createjs.Ticker.addEventListener("tick", function() {
+			App.mainLoop();
+		});
+		
+		App.start();
 	});
-	
-	App.start();
 }
 
 scriptLoaded('src/main.js');
