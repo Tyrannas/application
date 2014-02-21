@@ -1,13 +1,12 @@
 <story>
 	<title>Separation</title>
-	<sentence></sentence><sentence></sentence>
 	<sentence>
 		<word police="coupable_haut" >CETTE</word>
 		<word next_value="PERCEPTION" police="coupable_haut" code="AAAAAATIAII" >SEPARATION</word>
 	</sentence>
 	<sentence></sentence>
 	<sentence>
-		<word next_value="CYGNE" police="ombre" >OMBRE</word>
+		<word police="coupable_haut" >OMBRE</word>
 		<word police="coupable_haut" >QUI</word>
 		<word police="coupable_haut" >GLISSE</word>
 	</sentence>
