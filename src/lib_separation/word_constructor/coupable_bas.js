@@ -1,43 +1,25 @@
 function Word_coupable_bas(data) {
-	/*this.up = new Kinetic.Text({
-		y: data.cst.police[data.police].offset.up,
-		text: data.value,
-		fontSize: data.fontSize,
-		fontFamily: data.cst.police[data.police].name.up,
-		fill: data.color,
-	});
-	
-	this.next_up = new Kinetic.Text({
-		y: data.cst.police[data.police].offset.up,
-		text: data.next_value,
-		fontSize: data.fontSize,
-		fontFamily: data.cst.police[data.police].name.up,
-		fill: data.color,
-		opacity: 0,
-	});
 
-	this.down = new Kinetic.Text({
-		y: data.cst.police[data.police].offset.down,
-		text: data.code,
-		fontSize: data.fontSize,
-		fontFamily: data.cst.police[data.police].name.down,
-		fill: data.color,
-	});
+	this.up = new WordLetters(data.value, data.police, 'demibash').getBmp();
+	this.down = new WordLetters(data.code, data.police, 'demibasb').getBmp();
+	this.next_up = new WordLetters(data.next_value, data.police, 'demibash').getBmp();
+
+	this.next_up.alpha = 0;
+
+	this.container = new createjs.Container()
+	this.container.width = this.up.getBounds().width;
+	this.container.height = fontConst.car.height_img;
 	
-	this.container = new Kinetic.Group({
-		width: this.up.getWidth(),
-	});
+	// var temp = new createjs.Shape();
+	// temp.graphics.beginFill("#ff0000").drawRect(0, 0, this.container.width, this.container.height);
+	// this.container.addChild(temp);
 	
-	this.container.add(this.up);
-	this.container.add(this.down);
-	this.container.add(this.next_up);
-	
-	this.destroy = function() {
-		this.up.destroy();
-		this.down.destroy();
-		this.next_up.destroy();
-		this.container.destroy();
-	}*/
+	this.container.addChild(this.up, this.down, this.next_up);
 }
 
-scriptLoaded('scripts/libs/separation_toolkit/word_kinetic/coupable_bas.js');
+Word_coupable_bas.prototype.destroy = function() {
+	this.container.removeChild(this.up, this.down, this.next_up);
+	stage.removeChild(this.container);
+}
+
+scriptLoaded('src/lib_separation/word_constructor/coupable_bas.js');

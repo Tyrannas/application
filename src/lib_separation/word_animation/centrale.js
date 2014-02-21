@@ -4,74 +4,65 @@
 	@param x_central : position x de la partie basse à remplacer
 	@param x_central_next : position x de la partie basse à afficher
 */
-
-Animation.open = function(word, dir) {/*
+var coc = 0.1; // coeff ouverture centrale
+Animation.open = function(word, dir) {
 	if(dir == -1) {
 		word.is_open_up = true;
-		word.font.up.setOffsetY(word.font.up.getHeight() * 0.5);
+		word.is_open_up_first = true;
+		word.font.up.regY = word.font.container.height * coc;
 	}
 	if(dir == 1) {
 		word.is_open_down = true;
-		word.font.down.setOffsetY(-word.font.down.getHeight() * 0.5);
+		word.is_open_up_first = false;
+		word.font.down.regY = -word.font.container.height * coc;
 	}
-	mainLayer.draw();
 	
 	if(word.is_open_down && word.is_open_up) {
-		if(1) {
-			var x_central = word.font.down.getX() / word.getScale();
-			var x_central_next = (screenWidth - word.getX()) / word.getScale();
+		if(word.is_open_up_first) {
+			var x_central = 0;
+			var x_central_next = -(W - word.getX()) / word.getScale();
 		} else {
-		
+			var x_central = 0;
+			var x_central_next = (word.getWidth() + word.getX()) / word.getScale();
 		}
 		
-		word.font.central.setX(x_central);
-		word.font.next_central.setX(x_central_next);
+		word.font.next_central.regX = x_central_next;
 		
-		word.tween[0] = new Kinetic.Tween({
-			node: word.font.central,
-			x: x_central_next,
-			duration: Word_cst.duration.downCut,
-			easing: Kinetic.Easings.EaseIn,
-			onFinish: function(){word.tween[1].play();word.tween[2].play();word.tween[3].play();},
-			opacity: 0,
-		});
+		word.tween[0] = Tween.get(word.font.central).to({
+			regX: x_central_next,
+			alpha: 0,
+		}, Word_cst.duration.open, Ease.sineIn);
 		
-		word.tween[1] = new Kinetic.Tween({
-			node: word.font.next_central,
-			x: x_central,
-			duration: Word_cst.duration.downCut,
-			easing: Kinetic.Easings.EaseOut,
-			onFinish: function(){word.animationFinished(true);},
-			opacity: 1,
-		});
+		word.tween[1] = Tween.get(word.font.next_central).wait(Word_cst.duration.open/2).to({
+			regX: x_central,
+			alpha: 1,
+		}, Word_cst.duration.open, Ease.sineOut)
+		.call(function(){word.animationFinished(true);});
 		
-		word.tween[2] = new Kinetic.Tween({
-			node: word.font.up,
-			offsetY: 0,
-			duration: Word_cst.duration.downCut,
-			easing: Kinetic.Easings.EaseIn,
-		});
+		word.tween[2] = Tween.get(word.font.up).wait(Word_cst.duration.open/2).to({
+			regY: 0,
+			alpha: 1,
+		}, Word_cst.duration.open, Ease.sineIn);
 		
-		word.tween[3] = new Kinetic.Tween({
-			node: word.font.down,
-			offsetY: 0,
-			duration: Word_cst.duration.downCut,
-			easing: Kinetic.Easings.EaseIn,
-		});
-		
-		sound_play('tear');
-		word.tween[0].play();
+		word.tween[3] = Tween.get(word.font.down).wait(Word_cst.duration.open/2).to({
+			regY: 0,
+			alpha: 1,
+		}, Word_cst.duration.open, Ease.sineIn);
 	} else {
 		word.animationFinished(false);
-}*/
+	}
 }
 
 Animation.onChange.openUp = function(word, val) {
-	word.font.up.regY = word.font.up.getHeight() * val * 0.5;
+	if(!word.is_open_up) {
+		word.font.up.regY = word.font.container.height * val * coc;
+	}
 }
 
 Animation.onChange.openDown = function(word, val) {
-	word.font.down.regY = -word.font.down.getHeight() * val * 0.5;
+	if(!word.is_open_down) {
+		word.font.down.regY = -word.font.container.height * val * coc;
+	}
 }
 
 Animation.onAbort.open = function(word) {

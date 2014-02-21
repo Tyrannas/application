@@ -57,4 +57,4 @@ imgs[1].onload = function() {
 	});
 }
 */
-scriptLoaded('scripts/libs/separation_toolkit/word_kinetic/ombre.js');
+scriptLoaded('src/lib_separation/word_constructor/ombre.js');

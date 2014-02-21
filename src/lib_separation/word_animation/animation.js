@@ -10,7 +10,7 @@ Word.prototype.animate = function(dir) {
 	if(!this.inAnimation) {
 		this.inAnimation = true;
 		this.animation(this, dir);
-		this.disableDbltap();
+		// this.disableDbltap();
 	}
 	
 	this.done('animate');
@@ -25,24 +25,26 @@ Word.prototype.animateOnChange = function(value) {
 }
 
 Word.prototype.animationFinished = function(event_finish) {
-	this.inAnimation = false;
-	// this.activeDbltap();
-	
-	if(event_finish) {
-		if(this.police != 3) { // temp police OMBRE images
-			var temp = this.next_value;
-			this.next_value = this.value;
-			this.value = temp;
-			
-			this.generate();
-			this.display();
-			} else {
-			this.removeGesture();
+	if(this.inAnimation) {
+		this.inAnimation = false;
+		// this.activeDbltap();
+		
+		if(event_finish) {
+			if(this.police != 3) { // temp police OMBRE images
+				var temp = this.next_value;
+				this.next_value = this.value;
+				this.value = temp;
+				
+				this.generate();
+				this.display();
+				} else {
+				this.removeGesture();
+			}
+			this.done('eventFinished');
 		}
-		this.done('eventFinished');
-	}
 
-	this.done('animationFinished');
+		this.done('animationFinished');
+	}
 }
 
 Word.prototype.setAnimation = function(dir) {

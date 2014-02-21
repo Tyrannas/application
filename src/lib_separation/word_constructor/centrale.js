@@ -1,54 +1,39 @@
 function Word_centrale(data) {
-	/*
-	this.up = new Kinetic.Text({
-		y: data.cst.police[data.police].offset.up,
-		text: data.value,
-		fontSize: data.fontSize,
-		fontFamily: data.cst.police[data.police].name.up,
-		fill: data.color,
-	});
-
-	this.central = new Kinetic.Text({
-		y: data.cst.police[data.police].offset.central,
-		text: data.value,
-		fontSize: data.fontSize,
-		fontFamily: data.cst.police[data.police].name.central,
-		fill: data.color,
-	});
-
-	this.next_central = new Kinetic.Text({
-		y: data.cst.police[data.police].offset.central,
-		text: data.next_value,
-		fontSize: data.fontSize,
-		fontFamily: data.cst.police[data.police].name.central,
-		fill: data.color,
-		opacity: 0,
-	});
+	this.up = new createjs.Text(
+		data.value,
+		data.fontSize + 'px ' + data.cst.police[data.police].name.up,
+		data.color);
+	this.up.y = data.cst.police[data.police].offset.up;
 	
-	this.down = new Kinetic.Text({
-		y: data.cst.police[data.police].offset.down,
-		text: data.value,
-		fontSize: data.fontSize,
-		fontFamily: data.cst.police[data.police].name.down,
-		fill: data.color,
-	});
+	this.central = new createjs.Text(
+		data.value,
+		data.fontSize + 'px ' + data.cst.police[data.police].name.central,
+		data.color);
+	this.central.y = data.cst.police[data.police].offset.central;
 	
-	this.container = new Kinetic.Group({
-		width: this.up.getWidth(),
-	});
+	this.next_central = new createjs.Text(
+		data.next_value,
+		data.fontSize + 'px ' + data.cst.police[data.police].name.central,
+		data.color);
+	this.next_central.y = data.cst.police[data.police].offset.central;
+	this.next_central.alpha = 0;
 	
-	this.container.add(this.up);
-	this.container.add(this.central);
-	this.container.add(this.next_central);
-	this.container.add(this.down);
+	this.down = new createjs.Text(
+		data.value,
+		data.fontSize + 'px ' + data.cst.police[data.police].name.down,
+		data.color);
+	this.down.y = data.cst.police[data.police].offset.down;
 	
-	this.destroy = function() {
-		this.up.destroy();
-		this.central.destroy();
-		this.next_central.destroy();
-		this.down.destroy();
-		this.container.destroy();
-	}*/
+	this.container = new createjs.Container()
+	this.container.width = this.up.getBounds().width;
+	this.container.height = this.up.getBounds().height;
+	
+	this.container.addChild(this.up, this.central, this.next_central, this.down);
 }
 
-scriptLoaded('scripts/libs/separation_toolkit/word_kinetic/centrale.js');
+Word_centrale.prototype.destroy = function() {
+	this.container.removeChild(this.up, this.central, this.next_central, this.down);
+	stage.removeChild(this.container);
+}
+
+scriptLoaded('src/lib_separation/word_constructor/centrale.js');

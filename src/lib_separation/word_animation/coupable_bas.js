@@ -6,43 +6,41 @@
 */
 Animation.upCut = function(word, x_up, x_up_next) {
 	
-	word.font.up.setX(x_up);
-	word.font.next_up.setX(x_up_next);
-	//word.font.next_up.setOpacity(1);
+	word.font.next_up.regX = x_up_next;
+	word.font.next_up.alpha = 1;
 
 	word.tween[0] = Tween.get(word.font.up).to({
-			x: x_up_next,
-			opacity: 0,
-		}, Word_cst.duration.upCut)
-		.call(function(){word.tween[1].play();});		
+			regX: x_up_next,
+			alpha: 0,
+		}, Word_cst.duration.upCut, Ease.sineOut);		
 
-	word.tween[1] = Tween.get(word.font.next_up, {paused:true}).to({
-			x: x_up,
-			opacity: 1,
-		}, Word_cst.duration.next_up, Ease.sineOut)
+	word.tween[1] = Tween.get(word.font.next_up).wait(Word_cst.duration.downCut/2).to({
+			regX: x_up,
+			alpha: 1,
+		}, Word_cst.duration.upCut, Ease.sineOut)
 		.call(function(){word.animationFinished(true);});
 }
 
 Animation.upCutLeft = function(word, dir) {
-	var x_up = word.font.down.x / word.getScale();
-	var x_up_next = -(word.getWidth() + word.getX()) / word.getScale();
+	var x_up = 0;
+	var x_up_next = (word.getWidth() + word.getX()) / word.getScale();
 	
 	Animation.upCut(word, x_up, x_up_next);
 }
 
 Animation.upCutRight = function(word, dir) {
-	var x_up = word.font.down.x / word.getScale();
-	var x_up_next = (screenWidth - word.getX()) / word.getScale();
+	var x_up = 0;
+	var x_up_next = -(W - word.getX()) / word.getScale();
 	
 	Animation.upCut(word, x_up, x_up_next);
 }
 
 Animation.onChange.upCutLeft = function(word, val) {
-	word.font.up.regX = word.font.up.getWidth() * val * 0.8;
+	word.font.up.regX = word.font.container.width * val * 0.8;
 }
 
 Animation.onChange.upCutRight = function(word, val) {
-	word.font.up.regX = -word.font.up.getWidth() * val * 0.8;
+	word.font.up.regX = -word.font.container.width * val * 0.8;
 }
 
 Animation.onAbort.upCut = function(word) {

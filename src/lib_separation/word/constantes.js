@@ -10,6 +10,7 @@ var Word_cst = {
 		
 		downCut: 2000,
 		upCut: 2000,
+		open: 2000,
 		ombre: 500,
 		
 		respire: 1200,
@@ -55,153 +56,122 @@ function Word_getNormalizedPolice(police) {
 	}
 }
 
-if(!appOnDevice()) {
-	// Selon le choix (exemple : '24px'), deviendra la variable rct (RecitConsTantes)
-	fontConst = {
-		'24px': {
-			car: {						// Caractère (lettre)
-				size: 28,					// Taille de la police
-				color: C_CONT,				// Couleur
-				height: 42,					// Hauteur réelle du caractère
+var fontConst = {
+	car: {						// Caractère (lettre)
+		size: fontSize,				// Taille de la police WILL BE REMOVED
+		color: C_CONT,				// Couleur WILL BE REMOVED
+		height_img: 264,
+		height: 264/4,
+		scale: 1,
+	},
+	police: {
+		name: 0,	// Police (par défaut coupable_haut)
+		0: {			// Police coupable_haut en deux parties
+			offsetY: {				// Décalage y
+				'demihauth': 0,					// Distance en y pour la partie haute
+				'demihautb': 0,				// Distance en y pour la partie basse
 			},
-			police: {
-				name: 0,	// Police (par défaut coupable_haut)
-				0: {			// Police coupable_haut en deux parties
-					offset: {				// Décalage y
-						up: -10,					// Distance en y pour la partie haute
-						down: 20,				// Distance en y pour la partie basse
-					},
-					name: {					// Nom des deux parties
-						up: 'demihauth',
-						down: 'demihautb',
-					},
-				},
-				5: {			// Police coupable_haut en deux parties avec écart
-					offset: {				// Décalage y
-						up: -11,					// Distance en y pour la partie haute
-						down: 21,				// Distance en y pour la partie basse
-					},
-					name: {					// Nom des deux parties
-						up: 'demihauth',
-						down: 'demihautb',
-					},
-				},
-				1: {			// Police coupable_bas en deux parties
-					offset: {				// Décalage y
-						up: -2,					// Distance en y pour la partie haute
-						down: 21,				// Distance en y pour la partie basse
-					},
-					name: {					// Nom des deux parties
-						up: 'demibash',
-						down: 'demibasb',
-					},
-				},
-				2: {			// Police centrale en trois parties
-					offset: {				// Décalage y
-						up: -8,					// Distance en y pour la partie haute
-						central: 6,
-						down: 16,				// Distance en y pour la partie basse
-					},
-					name: {					// Nom des trois parties
-						up: 'centraleh',
-						central: 'centralec',
-						down: 'centraleb',
-					},
-				},
-				3: {				// Police de l'ombre
-					offset: -5,
-				},
-				4: {				// Police coupable haut entier en une partie
-					offset: 0,			// Décalage y
-					name: 'demihaut_entier',	// Nom de la police
-				},
+		},
+		5: {			// Police coupable_haut en deux parties
+			offsetY: {				// Décalage y
+				'demihauth': 0,					// Distance en y pour la partie haute
+				'demihautb': 4,				// Distance en y pour la partie basse
 			},
-			recit: {
-				margin: {				// Marge...
-					up: 12,					// ... supérieure (size/2)
-					down: 12,				// ... inférieure
-				},
-				line: {				// Ligne
-					height: 64,			// Hauteur
-					nb: 1,				// Nombre de lignes
-				},
+		},
+		1: {			// Police coupable_bas en deux parties
+			offsetY: {				// Décalage y
+				'demibash': 0,				// Distance en y pour la partie haute
+				'demibasb': 0,				// Distance en y pour la partie basse
 			},
-		}
-	};
-}
-else {
-	// Selon le choix (exemple : '24px'), deviendra la variable rct (RecitConsTantes)
-	fontConst = {
-		'24px': {
-			car: {						// Caractère (lettre)
-				size: 28,					// Taille de la police
-				color: C_CONT,				// Couleur
-				height: 42,					// Hauteur réelle du caractère
+		},
+		2: {			// Police centrale en trois parties
+			offset: {				// Décalage y
+				up: 0,					// Distance en y pour la partie haute
+				central: 0,
+				down: 0,				// Distance en y pour la partie basse
 			},
-			police: {
-				name: 0,	// Police (par défaut coupable_haut)
-				0: {			// Police coupable_haut en deux parties
-					offset: {				// Décalage y
-						up: -8,				// Distance en y pour la partie haute
-						down: 18,				// Distance en y pour la partie basse
-					},
-					name: {					// Nom des deux parties
-						up: 'demihauth',
-						down: 'demihautb',
-					},
-				},
-				5: {			// Police coupable_haut en deux parties avec écart
-					offset: {				// Décalage y
-						up: -9,					// Distance en y pour la partie haute
-						down: 19,				// Distance en y pour la partie basse
-					},
-					name: {					// Nom des deux parties
-						up: 'demihauth',
-						down: 'demihautb',
-					},
-				},
-				1: {			// Police coupable_bas en deux parties
-					offset: {				// Décalage y
-						up: -2,					// Distance en y pour la partie haute
-						down: 21,				// Distance en y pour la partie basse
-					},
-					name: {					// Nom des deux parties
-						up: 'demibash',
-						down: 'demibasb',
-					},
-				},
-				2: {			// Police centrale en trois parties
-					offset: {				// Décalage y
-						up: -8,					// Distance en y pour la partie haute
-						central: 6,
-						down: 16,				// Distance en y pour la partie basse
-					},
-					name: {					// Nom des trois parties
-						up: 'centraleh',
-						central: 'centralec',
-						down: 'centraleb',
-					},
-				},
-				3: {				// Police de l'ombre
-					offset: -5,
-				},
-				4: {				// Police coupable haut entier en une partie
-					offset: 0,			// Décalage y
-					name: 'demihaut_entier',	// Nom de la police
-				},
+			name: {					// Nom des trois parties
+				up: 'centraleh',
+				central: 'centralec',
+				down: 'centraleb',
 			},
-			recit: {
-				margin: {				// Marge...
-					up: 12,					// ... supérieure (size/2)
-					down: 12,				// ... inférieure
-				},
-				line: {				// Ligne
-					height: 64,			// Hauteur
-					nb: 1,				// Nombre de lignes
-				},
+		},
+		3: {				// Police de l'ombre
+			offset: -5,
+		},
+		4: {				// Police coupable haut entier en une partie
+			offset: 0,			// Décalage y
+			name: 'demihaut_entier',	// Nom de la police
+		},
+	},
+	SS: {
+		'demihauth': {
+			offsetX: 0,
+			offsetY: 0,
+			letters: {
+				' ':88,'A':176,'B':176,'C':176,'D':176,'E':88,'F':88,'G':176,'H':176,'I':88,'J':88,'K':176,'L':88,'M':264,
+				'N':176,'O':176,'P':176,'Q':176,'R':176,'S':176,'T':88,'U':176,'V':176,'W':264,'X':176,'Y':176,'Z':176,'€':176,
+				'a':138,'b':138,'c':138,'d':138,'e':138,'f':69,'g':138,'h':138,'i':69,'j':69,'k':138,'l':69,'m':207,
+				'n':138,'o':138,'p':138,'q':138,'r':138,'s':138,'t':69,'u':138,'v':138,'w':207,'x':138,'y':138,'z':138,
 			},
-		}
-	};
+			matrice: [' ABCDEFGHIJKLM','NOPQRSTUVWX','YZ€', 'abcdefghijklmnop', 'qrstuvwxyz'],
+			height: 264,
+			nb_char: 54,
+		},
+		'demihautb': {
+			offsetX: 0,
+			offsetY: 0,
+			letters: {
+				' ':88,'A':176,'B':176,'C':176,'D':176,'E':88,'F':88,'G':176,'H':176,'I':88,'J':88,'K':176,'L':88,'M':264,
+				'N':176,'O':176,'P':176,'Q':176,'R':176,'S':176,'T':88,'U':176,'V':176,'W':264,'X':176,'Y':176,'Z':176,'€':176,
+				'a':138,'b':138,'c':138,'d':138,'e':138,'f':69,'g':138,'h':138,'i':69,'j':69,'k':138,'l':69,'m':207,
+				'n':138,'o':138,'p':138,'q':138,'r':138,'s':138,'t':69,'u':138,'v':138,'w':207,'x':138,'y':138,'z':138,
+			},
+			matrice: [' ABCDEFGHIJKLM','NOPQRSTUVWX','YZ€', 'abcdefghijklmnop', 'qrstuvwxyz'],
+			height: 264,
+			nb_char: 54,
+		},
+		'demibash': {
+			offsetX: 0,
+			offsetY: 0,
+			letters: {
+				' ':88,'A':176,'B':176,'C':176,'D':176,'E':88,'F':88,'G':176,'H':176,'I':88,'J':176,'K':176,'L':88,'M':264,
+				'N':176,'O':176,'P':88,'Q':176,'R':176,'S':176,'T':88,'U':176,'V':176,'W':264,'X':176,'Y':88,'Z':176,'[':88,
+				'a':138,'b':138,'c':138,'d':138,'e':138,'f':69,'g':138,'h':138,'i':69,'j':69,'k':138,'l':69,'m':207,
+				'n':138,'o':138,'p':138,'q':138,'r':69,'s':138,'t':69,'u':138,'v':138,'w':207,'x':138,'y':88,'z':138,'_':69,
+			},
+			matrice: [' ABCDEFGHIJKLN','OPMQRSTUVWX','YZ[', 'abcdefghijklmno_', 'pqrstuvwxyz'],
+			height: 264,
+			nb_char: 54,
+		},
+		'demibasb': {
+			offsetX: 0,
+			offsetY: 0,
+			letters: {
+				' ':88,'A':176,'B':176,'C':176,'D':176,'E':88,'F':88,'G':176,'H':176,'I':88,'J':176,'K':176,'L':88,'M':264,
+				'N':176,'O':176,'P':88,'Q':176,'R':176,'S':176,'T':88,'U':176,'V':176,'W':264,'X':176,'Y':88,'Z':176,'[':88,
+				'a':138,'b':138,'c':138,'d':138,'e':138,'f':69,'g':138,'h':138,'i':69,'j':69,'k':138,'l':69,'m':207,
+				'n':138,'o':138,'p':138,'q':138,'r':69,'s':138,'t':69,'u':138,'v':138,'w':207,'x':138,'y':88,'z':138,'_':69,
+			},
+			matrice: [' ABCDEFGHIJKLN','OPMQRSTUVWX','YZ[', 'abcdefghijklmno_', 'pqrstuvwxyz'],
+			height: 264,
+			nb_char: 54,
+		},
+	},
+	recit: {
+		margin: {				// Marge...
+			up: 12,					// ... supérieure (size/2)
+			down: 12,				// ... inférieure
+		},
+		line: {				// Ligne
+			height: 64,			// Hauteur
+			nb: 1,				// Nombre de lignes
+		},
+	},
+};
+
+function initConstantes() {
+	fontConst.car.scale = getScale(fontConst.car.height_img, fontConst.car.height);
 }
 
 scriptLoaded('src/lib_separation/word/constantes.js');
