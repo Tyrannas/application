@@ -24,11 +24,14 @@ Rooter.preloadAll = function(handler) {
 			{src:"img/font/demihaut_b.png", id:"font_demihautb"},
 			{src:"img/font/demibas_h.png", id:"font_demibash"},
 			{src:"img/font/demibas_b.png", id:"font_demibasb"},
+			{src:"img/font/centrale_h.png", id:"font_centraleh"},
+			{src:"img/font/centrale_c.png", id:"font_centralec"},
+			{src:"img/font/centrale_b.png", id:"font_centraleb"},
 			// Menu labo
 			{src:"img/menu_labo/input_text.png", id:"menu_labo_input_text"},
 			{src:"img/menu_labo/checkbox.png", id:"menu_labo_checkbox"},
 			{src:"img/menu_labo/checkbox_valid.png", id:"menu_labo_checkbox_valid"},
-			//
+			// Menu recit
 			{src:"img/menu_recit/vignette.png", id:"menu_recit_vignette"},
 		
 		// XML

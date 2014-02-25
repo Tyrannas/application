@@ -61,7 +61,7 @@ var fontConst = {
 		size: fontSize,				// Taille de la police WILL BE REMOVED
 		color: C_CONT,				// Couleur WILL BE REMOVED
 		height_img: 264,
-		height: 264/4,
+		height: 264/2,
 		scale: 1,
 	},
 	police: {
@@ -85,15 +85,10 @@ var fontConst = {
 			},
 		},
 		2: {			// Police centrale en trois parties
-			offset: {				// Décalage y
-				up: 0,					// Distance en y pour la partie haute
-				central: 0,
-				down: 0,				// Distance en y pour la partie basse
-			},
-			name: {					// Nom des trois parties
-				up: 'centraleh',
-				central: 'centralec',
-				down: 'centraleb',
+			offsetY: {				// Décalage y
+				'centraleh': 0,
+				'centralec': 0,
+				'centraleb': 0,
 			},
 		},
 		3: {				// Police de l'ombre
@@ -116,7 +111,6 @@ var fontConst = {
 			},
 			matrice: [' ABCDEFGHIJKLM','NOPQRSTUVWX','YZ€', 'abcdefghijklmnop', 'qrstuvwxyz'],
 			height: 264,
-			nb_char: 54,
 		},
 		'demihautb': {
 			offsetX: 0,
@@ -129,7 +123,6 @@ var fontConst = {
 			},
 			matrice: [' ABCDEFGHIJKLM','NOPQRSTUVWX','YZ€', 'abcdefghijklmnop', 'qrstuvwxyz'],
 			height: 264,
-			nb_char: 54,
 		},
 		'demibash': {
 			offsetX: 0,
@@ -142,7 +135,6 @@ var fontConst = {
 			},
 			matrice: [' ABCDEFGHIJKLN','OPMQRSTUVWX','YZ[', 'abcdefghijklmno_', 'pqrstuvwxyz'],
 			height: 264,
-			nb_char: 54,
 		},
 		'demibasb': {
 			offsetX: 0,
@@ -155,7 +147,39 @@ var fontConst = {
 			},
 			matrice: [' ABCDEFGHIJKLN','OPMQRSTUVWX','YZ[', 'abcdefghijklmno_', 'pqrstuvwxyz'],
 			height: 264,
-			nb_char: 54,
+		},
+		'centraleh': {
+			offsetX: 1,
+			offsetY: 1,
+			letters: {
+				' ':88,'A':176,'B':176,'C':176,'D':176,'E':88,'F':88,'G':176,'H':176,'I':88,'J':88,'K':176,'L':88,'M':264,
+				'N':176,'O':176,'P':176,'Q':176,'R':176,'S':176,'T':88,'U':176,'V':176,'W':264,'X':176,'Y':176,'Z':176,
+				'c':88,'e':176,'n':176,'p':88,
+			},
+			matrice: [' ABCDEFGHIJKLM','NOPQRSUVWXY','TZcenp'],
+			height: 264,
+		},
+		'centralec': {
+			offsetX: 1,
+			offsetY: 1,
+			letters: {
+				' ':88,'A':176,'B':176,'C':176,'D':176,'E':88,'F':88,'G':176,'H':176,'I':88,'J':88,'K':176,'L':88,'M':264,
+				'N':176,'O':176,'P':176,'Q':176,'R':176,'S':176,'T':88,'U':176,'V':176,'W':264,'X':176,'Y':176,'Z':176,
+				'c':88,'e':176,'n':176,'p':88,
+			},
+			matrice: [' ABCDEFGHIJKLM','NOPQRSUVWXY','TZcenp'],
+			height: 264,
+		},
+		'centraleb': {
+			offsetX: 1,
+			offsetY: 1,
+			letters: {
+				' ':88,'A':176,'B':176,'C':176,'D':176,'E':88,'F':88,'G':176,'H':176,'I':88,'J':88,'K':176,'L':88,'M':264,
+				'N':176,'O':176,'P':176,'Q':176,'R':176,'S':176,'T':88,'U':176,'V':176,'W':264,'X':176,'Y':176,'Z':176,
+				'c':88,'e':176,'n':176,'p':88,
+			},
+			matrice: [' ABCDEFGHIJKLM','NOPQRSUVWXY','TZcenp'],
+			height: 264,
 		},
 	},
 	recit: {

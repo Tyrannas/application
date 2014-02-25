@@ -22,6 +22,9 @@ function initAllSS() {
 	SS['demihautb'] = initSS('demihautb');
 	SS['demibash'] = initSS('demibash');
 	SS['demibasb'] = initSS('demibasb');
+	SS['centraleh'] = initSS('centraleh');
+	SS['centralec'] = initSS('centralec');
+	SS['centraleb'] = initSS('centraleb');
 }
 
 scriptLoaded('src/lib_separation/word_constructor/spritesheets.js');

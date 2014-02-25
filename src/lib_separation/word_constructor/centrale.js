@@ -1,28 +1,10 @@
-function Word_centrale(data) {
-	this.up = new createjs.Text(
-		data.value,
-		data.fontSize + 'px ' + data.cst.police[data.police].name.up,
-		data.color);
-	this.up.y = data.cst.police[data.police].offset.up;
-	
-	this.central = new createjs.Text(
-		data.value,
-		data.fontSize + 'px ' + data.cst.police[data.police].name.central,
-		data.color);
-	this.central.y = data.cst.police[data.police].offset.central;
-	
-	this.next_central = new createjs.Text(
-		data.next_value,
-		data.fontSize + 'px ' + data.cst.police[data.police].name.central,
-		data.color);
-	this.next_central.y = data.cst.police[data.police].offset.central;
+function Word_centrale(data) {	
+	this.up = new WordLetters(data.value, data.police, 'centraleh').getBmp();
+	this.central = new WordLetters(data.value, data.police, 'centralec').getBmp();
+	this.next_central = new WordLetters(data.next_value, data.police, 'centralec').getBmp();
+	this.down = new WordLetters(data.value, data.police, 'centraleb').getBmp();
+
 	this.next_central.alpha = 0;
-	
-	this.down = new createjs.Text(
-		data.value,
-		data.fontSize + 'px ' + data.cst.police[data.police].name.down,
-		data.color);
-	this.down.y = data.cst.police[data.police].offset.down;
 	
 	this.container = new createjs.Container()
 	this.container.width = this.up.getBounds().width;
