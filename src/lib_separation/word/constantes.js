@@ -61,7 +61,7 @@ var fontConst = {
 		size: fontSize,				// Taille de la police WILL BE REMOVED
 		color: C_CONT,				// Couleur WILL BE REMOVED
 		height_img: 264,
-		height: 264/2,
+		height: 264/4,
 		scale: 1,
 	},
 	police: {

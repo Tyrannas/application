@@ -115,8 +115,19 @@ Labo_Menu.prototype.onValid = function(handler) {
 	this.fct_onValid = handler;
 }
 Labo_Menu.prototype.valid = function() {
-	this.police_searched[0] = 0;
-	this.police_searched[1] = 1;
+	this.police_searched = new Array();
+	if(this.choices[0]) { // Police coupable
+		this.police_searched.push(0);
+		this.police_searched.push(1);
+	}
+	else if(this.choices[1]) { // Police central
+		this.police_searched.push(2);
+	}
+	else {
+		this.police_searched.push(0);
+		this.police_searched.push(1);
+		this.police_searched.push(2);
+	}
 	this.fct_onValid(this.word_searched_value, this.police_searched);
 }
 
