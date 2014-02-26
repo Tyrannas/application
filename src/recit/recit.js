@@ -46,15 +46,20 @@ Recit.displayStoriesMenu = function() {
 Recit.openStory = function(id) {
 	if(id == 0 || id == 1) {
 		if(id == 0)
-			var file = 'separation';
+			var json='{"story":{"type":"classic", "title":{"word":"test", "police":"coupable_haut"} ,"sentences":[[ {"police":"coupable_haut","word":"coucou"}], [{"police":"coupable_haut","word":"avant","next_value":"apres","code":"LLIILI"},{"police":"coupable_haut","word":"lol"}]]}}';
+			//var file = 'separation';
 		if(id == 1)
 			var file = 'quotidien';
 		
 		Destroy.all();
 		gui.Recit_displayAll();
 
+		/*
 		story = Xml.importStory(res('story_' + file));
 		story.generate(Recit.cst.margin.up);
+		story.display();
+		*/
+		story = new RecitType_classic(json);
 		story.display();
 	}
 }
