@@ -24,7 +24,7 @@ function LineConstruct() {
 	@return (true/false) : Si la largeur du mot est trop grande, on retourne false, sinon true.
 */
 Line.prototype.add = function(word) {
-	if(word.value != ' ')
+	if(word.value != ' ' && this.nb > 0)
 		this.addSpace();
 	if(this.width + word.getWidth() < W) {
 		this.width += word.getWidth();
