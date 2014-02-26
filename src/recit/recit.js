@@ -46,7 +46,7 @@ Recit.displayStoriesMenu = function() {
 Recit.openStory = function(id) {
 	if(id == 0 || id == 1) {
 		if(id == 0)
-			var json='{"story":{"type":"classic", "title":{"word":"test", "police":"coupable_haut"} ,"sentences":[[ {"police":"coupable_haut","word":"coucou"}], [{"police":"coupable_haut","word":"avant","next_value":"apres","code":"LLIILI"},{"police":"coupable_haut","word":"lol"}]]}}';
+			var json='{"type":"classic", "title": [{"word":"test", "police":0}] ,"sentences":[[ {"police":0,"word":"coucou"}], [{"police":0,"word":"avant","next_value":"apres","code":"LLIILI"},{"police":0,"word":"lol"}]]}';
 			//var file = 'separation';
 		if(id == 1)
 			var file = 'quotidien';
