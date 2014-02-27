@@ -10,9 +10,18 @@ function RecitType_classic(json_def) {
 	this.type = 'classic';
 	if (json_def != undefined) {
 		this.setFromJson(json_def);
+		/*
+		line = new Line();
+		line.add(new Word('Demi tour'));
+		this.addLine(line);
+		line = new Line();
+		line.add(new Word('marche', 'arriere', 1, 'IIIIIIILIIL').setZoom(2));
+		this.addLine(line);
+		*/
 	}
-	this.y_size = 0;
-	this.generate(H, W/2,H/2);
+	this.setYsize(H);
+	this.setCenterXY(W/2,H/3);
+	this.generate();
 	console.log(JSON.stringify(this.getJson()));
 }
 
@@ -33,21 +42,43 @@ RecitType_classic.prototype.getJson = function() {
 }
 
 //Generation des phrases
-RecitType_classic.prototype.generate = function(y_size, x_offset, y_offset) {
-	var num_line = 0;
-	if (x_offset == undefined)
-		x_offset = 0;
-	if (y_offset == undefined)
-		y_offset = 0;
-	this.y_size = y_size;
-	this.x = x_offset;
-	this.y = y_offset;
+RecitType_classic.prototype.generate = function() {
 	for (var i=0; i<this.nb; i++) {
-		//On place la phrase
-		this.lines[i].setCenter(true);
-		var step = ((i+1) / (this.nb+1))*this.y_size;
-		this.lines[i].generate(this.x, -this.y_size/2 + step + this.y);
+		this.lines[i].generate();
 	}
 }
+
+RecitType_classic.prototype.setXY = function(x, y) {
+	this.x = x;
+	this.y = y;
+	for (var i=0; i<this.nb; i++) {
+		var step = ((i+1) / (this.nb+1))*this.y_size;
+		this.lines[i].setCenterX(this.x + this.getWidth()/2); 
+		this.lines[i].setCenterY(this.y + step);
+	}
+}
+
+RecitType_classic.prototype.setCenterXY = function(x, y) {
+	x = x - this.getWidth()/2;
+	y = y - this.y_size/2;
+	this.setXY(x, y);
+}
+
+RecitType_classic.prototype.getWidth = function() {
+	var width = 0;
+	for (var i=0; i<this.nb; i++) {
+		if (width < this.lines[i].getWidth()) {
+			width = this.lines[i].getWidth();
+		}
+	}
+	return width;
+}
+
+RecitType_classic.prototype.setYsize = function(y_size) { this.y_size = y_size; }
+RecitType_classic.prototype.getX = function() { return this.x; }
+RecitType_classic.prototype.getY = function() { return this.y; }
+RecitType_classic.prototype.getCenterX = function() { return this.getX() + this.getWidth() / 2; }
+RecitType_classic.prototype.getCenterY = function() { return this.getY() + this.getHeight() / 2; }
+RecitType_classic.prototype.getYsize = function() { return this.y_size; }
 
 scriptLoaded('src/recit/type/classic.js');

@@ -4,9 +4,8 @@
 function Line() {
 	this.words = new Array(); // Tableau des mots
 	this.nb = 0; // Nombre de mots
-	this.center = true; // Booléen pour savoir d'ou on va generer la ligne
-	this.x = 0;
-	this.y = 0; // Distance y à laquelle la ligne sera affichée
+	this.setX(0);
+	this.setY(0);
 }
 
 
@@ -16,6 +15,9 @@ function Line() {
 Line.prototype.fromJson = function(json) {
 	//Ajout des mots à la ligne
 	for (var i=0; i < json.words.length; i++) {
+		if (i > 0) {
+			this.addSpace();
+		}
 		var json_word = json.words[i];
 		var word = new Word(json_word.value, json_word.next_value, json_word.police, json_word.code);
 		if (json_word.zoom == undefined) {
@@ -36,7 +38,7 @@ Line.prototype.getJson = function() {
 		line.words[i] = new Object();
 		line.words[i].value = this.words[i].value;
 		line.words[i].police = this.words[i].police;
-		line.words[i].new_value = this.words[i].new_value;
+		line.words[i].next_value = this.words[i].next_value;
 		line.words[i].code = this.words[i].code;
 		line.words[i].zoom = this.words[i].getZoom();
 	}
@@ -96,32 +98,37 @@ Line.prototype.addTab = function(police) {
 }
 
 /*
- * Permet de savoir si on genere par rapport au bord haut-gauche ou center
- */
-Line.prototype.setCenter = function(bool) {
-	this.center = bool;
-}
-
-/*
 	Génère la ligne en générant tous les mots et en centrant la ligne si demandé
 */
-Line.prototype.generate = function(x_offset, y_offset) {
-	if (x_offset == undefined)
-		x_offset = 0;
-	if (y_offset == undefined)
-		y_offset = 0;
-	this.x = this.center ? -this.getWidth() / 2 : 0;
-	this.y = this.center ? -this.getHeight() / 2 : 0;
-	this.x += x_offset;
-	this.y += y_offset;
+Line.prototype.generate = function() {
+	for(var i = 0; i < this.nb; i++) {
+		this.words[i].activeOnTap();
+	}
+}
 
-	var x = this.x;
+Line.prototype.setX = function(x) {
+	this.x = x;
 	for(var i = 0; i < this.nb; i++) {
 		this.words[i].setX(x);
-		this.words[i].setY(this.y);
-		this.words[i].activeOnTap();
 		x += this.words[i].getWidth();
 	}
+}
+
+Line.prototype.setY = function(y) {
+	this.y = y;
+	for(var i = 0; i < this.nb; i++) {
+		this.words[i].setY(this.y);
+	}
+}
+
+Line.prototype.setCenterX = function(x) {
+	x -= this.getWidth()/2;
+	this.setX(x);
+}
+
+Line.prototype.setCenterY = function(y) {
+	y -= this.getHeight()/2;
+	this.setY(y)
 }
 
 /*
@@ -137,5 +144,10 @@ Line.prototype.destroy = function() {
 	Destroy.arrayObjet(this.words);
 	this.nb = 0;
 }
+
+Line.prototype.getX = function() { return this.x; }
+Line.prototype.getY = function() { return this.y; }
+Line.prototype.getCenterX = function() { return this.getX() + this.getWidth() / 2; }
+Line.prototype.getCenterY = function() { return this.getY() + this.getHeight() / 2; }
 
 scriptLoaded('src/recit/line.js');
