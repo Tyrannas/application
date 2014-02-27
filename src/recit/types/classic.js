@@ -13,6 +13,7 @@ function RecitType_classic(json_def) {
 	}
 	this.y_size = 0;
 	this.generate(H, W/2,H/2);
+	console.log(JSON.stringify(this.getJson()));
 }
 
 RecitType_classic.prototype = new RecitCommon(); //Heritage partie 2
@@ -26,7 +27,7 @@ RecitType_classic.prototype.setFromJson = function(json) {
 
 //Retourne un objet json
 RecitType_classic.prototype.getJson = function() {
-	var json = RecitCommon.getJson.apply(this);
+	var json = RecitCommon.prototype.getJson.apply(this);
 	json.type = this.type;
 	return json;
 }

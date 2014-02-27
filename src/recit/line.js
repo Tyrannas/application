@@ -33,6 +33,7 @@ Line.prototype.getJson = function() {
 	var line = new Object();
 	line.words = new Array();
 	for (var i=0; i<this.nb; i++) {
+		line.words[i] = new Object();
 		line.words[i].value = this.words[i].value;
 		line.words[i].police = this.words[i].police;
 		line.words[i].new_value = this.words[i].new_value;
