@@ -206,7 +206,7 @@ Word.prototype.setCode = function(data) { this.code = data; }
 Word.prototype.setPolice = function(data) { this.police = data; }
 Word.prototype.setZoomOnActive = function(data) { this.zoomOnActive = data; }
 Word.prototype.setAlpha = function(data) { this.alpha = data; }
-Word.prototype.setZoom = function(data) { this.zoom = data;}
+Word.prototype.setZoom = function(data) { this.zoom = data; return this;}
 Word.prototype.setDone = function(fct_done, handler) { this.list_done[fct_done] = handler; }
 Word.prototype.removeDone = function(fct_done) { this.list_done[fct_done] = function(){}; }
 
