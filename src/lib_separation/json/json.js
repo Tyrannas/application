@@ -8,7 +8,7 @@ var JsonHandler = new Object();
  * Cree une ligne à partir d'un objet JSON parsé
  */
 JsonHandler.lineFromJson = function(json) {
-	line = new Line();
+	var line = new Line();
 	//Ajout des mots à la ligne
 	for (var i=0; i < json.words.length; i++) {
 		if (i > 0) {
@@ -42,10 +42,10 @@ JsonHandler.jsonFromLine = function(line) {
 	return json_line;
 }
 
-//initialise un recit à partir d'un objet json
-JsonHandler.recitPageFromJson = function(json, page) {
+//initialise une page à partir d'un objet json
+JsonHandler.pageFromJson = function(json, page) {
 	if (page == undefined) {
-		page = new RecitCommon();
+		page = new Page();
 	}
 	for (var i=0; i<json.lines.length; i++) {
 		page.addLine(this.lineFromJson(json.lines[i]));
@@ -56,8 +56,8 @@ JsonHandler.recitPageFromJson = function(json, page) {
 /*
  * Renvoit un objet json avec les attributs de la page
  */
-JsonHandler.jsonFromRecitPage = function(page) {
-	json = new Object();
+JsonHandler.jsonFromPage = function(page) {
+	var json = new Object();
 	json.lines = new Array();
 	for (var i=0; i<page.nb; i++) {
 		json.lines[i] = JsonHandler.jsonFromLine(page.lines[i]);
@@ -68,23 +68,37 @@ JsonHandler.jsonFromRecitPage = function(page) {
 /*
  * Genere une story à partir de json
  */
-JsonHandler.recitStoryFromJson = function(json, story) {
+JsonHandler.storyFromJson = function(json, story) {
 	if (story == undefined) {
-		story = new RecitCommon();
+		switch (json.type) {
+			case 'one_page':
+				story = new StoryOnePage(json);
+				break;
+			default:
+				return undefined
+		}
 	}
-	for (var i=0; i<json.pages.length; i++) {
-		story.addPage(this.storyPageFromJson(json.lines[i]));
+	else if (story.type == json.type) {
+		story.destroy();
+		for (var i=0; i<json.pages.length; i++) {
+			story.addPage(this.storyPageFromJson(json.lines[i]));
+		}
+	}
+	else {
+		story.destroy();
+		story = this.storyFromJson(json);
 	}
 	return story;
 }
 
-//initialise une story à partir d'un objet json
-JsonHandler.jsonFromRecitStory = function(story) {
-	json = new Object();
+//Genere le json d'un story
+JsonHandler.jsonFromStory = function(story) {
+	var json = new Object();
 	json.pages = new Array();
 	for (var i=0; i<story.nb; i++) {
-		json.pages[i] = JsonHandler.jsonFromRecitPage(story.pages[i]);
+		json.pages[i] = JsonHandler.jsonFromPage(story.pages[i]);
 	}
+	json.type = story.type;
 	return json;
 }
 
