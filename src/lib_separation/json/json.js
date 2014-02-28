@@ -54,7 +54,7 @@ JsonHandler.recitPageFromJson = function(json, page) {
 }
 
 /*
- * Renvoit un objet json avec les attributs de la classe mere
+ * Renvoit un objet json avec les attributs de la page
  */
 JsonHandler.jsonFromRecitPage = function(page) {
 	json = new Object();
@@ -64,4 +64,28 @@ JsonHandler.jsonFromRecitPage = function(page) {
 	}
 	return json;
 }
+
+/*
+ * Genere une story à partir de json
+ */
+JsonHandler.recitStoryFromJson = function(json, story) {
+	if (story == undefined) {
+		story = new RecitCommon();
+	}
+	for (var i=0; i<json.pages.length; i++) {
+		story.addPage(this.storyPageFromJson(json.lines[i]));
+	}
+	return story;
+}
+
+//initialise une story à partir d'un objet json
+JsonHandler.jsonFromRecitStory = function(story) {
+	json = new Object();
+	json.pages = new Array();
+	for (var i=0; i<story.nb; i++) {
+		json.pages[i] = JsonHandler.jsonFromRecitPage(story.pages[i]);
+	}
+	return json;
+}
+
 scriptLoaded('src/lib_separation/json/json.js');
