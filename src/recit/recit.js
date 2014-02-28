@@ -59,7 +59,7 @@ Recit.openStory = function(id) {
 		story.generate(Recit.cst.margin.up);
 		story.display();
 		*/
-		story = new RecitType_classic(JSON.parse(json));
+		story = new RecitCommon(JSON.parse(json));
 		story.display();
 	}
 }
