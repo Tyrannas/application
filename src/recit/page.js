@@ -69,9 +69,7 @@ RecitPage.prototype.destroyLine = function(line_nbr) {
 
 //Destructeur
 RecitPage.prototype.destroy = function() {
-	for (var i=0; i<this.nb; i++){
-		Destroy.arrayObjet(this.lines);
-	}
+	Destroy.arrayObjet(this.lines);
 	this.nb = 0;
 }
 
@@ -112,4 +110,4 @@ RecitPage.prototype.getCenterX = function() { return this.getX() + this.getWidth
 RecitPage.prototype.getCenterY = function() { return this.getY() + this.getHeight() / 2; }
 RecitPage.prototype.getYsize = function() { return this.y_size; }
 
-scriptLoaded('src/recit/types/common.js');
+scriptLoaded('src/recit/page.js');
