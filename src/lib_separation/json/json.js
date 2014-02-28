@@ -60,8 +60,8 @@ JsonHandler.recitPageFromJson = function(json, page) {
 JsonHandler.jsonFromRecitPage = function(page) {
 	json = new Object();
 	json.lines = new Array();
-	for (var i=0; i<this.nb; i++) {
-		json.lines[i] = page.lines[i].getJson();
+	for (var i=0; i<page.nb; i++) {
+		json.lines[i] = JsonHandler.jsonFromLine(page.lines[i]);
 	}
 	json.type = page.type;
 	return json;
