@@ -1,12 +1,12 @@
 /** 
- *	Classe RecitCommon
+ *	Classe RecitPage
  */
-function RecitCommon(json_def) {
+function RecitPage(json_def) {
 	this.lines = new Array();
 	this.nb = 0;
 	this.type = 'none';
 	if (json_def != undefined) {
-		JsonHandler.recitFromJson(json_def, this);
+		JsonHandler.recitPageFromJson(json_def, this);
 		/*
 		line = new Line();
 		line.add(new Word('Demi tour'));
@@ -19,18 +19,18 @@ function RecitCommon(json_def) {
 	this.setYsize(H);
 	this.setCenterXY(W/2,H/3);
 	this.generate();
-	console.log(JSON.stringify(JsonHandler.jsonFromRecit(this)));
+	console.log(JSON.stringify(JsonHandler.jsonFromRecitPage(this)));
 }
 
 //Ajout d'une line
-RecitCommon.prototype.addLine = function(new_line) {
+RecitPage.prototype.addLine = function(new_line) {
 	this.lines[this.nb] = new_line;
 	this.nb++;
 }
 
 //Modif d'une line
 //Retourne true si la modif a eu lieu
-RecitCommon.prototype.changeLine = function(new_line, line_nbr) {
+RecitPage.prototype.changeLine = function(new_line, line_nbr) {
 	if (line_nbr < this.nb) {
 		this.lines[line_nbr].destroy();
 		this.lines[line_nbr] = new_line;
@@ -41,7 +41,7 @@ RecitCommon.prototype.changeLine = function(new_line, line_nbr) {
 }
 
 //Generation des phrases
-RecitCommon.prototype.generate = function() {
+RecitPage.prototype.generate = function() {
 	for (var i=0; i<this.nb; i++) {
 		this.lines[i].generate();
 	}
@@ -49,7 +49,7 @@ RecitCommon.prototype.generate = function() {
 
 
 //Affichage des lignes
-RecitCommon.prototype.display = function() {
+RecitPage.prototype.display = function() {
 	for (var i=0; i<this.nb; i++){
 		this.lines[i].display();
 	}
@@ -57,7 +57,7 @@ RecitCommon.prototype.display = function() {
 
 
 //Detruit une ligne
-RecitCommon.prototype.destroyLine = function(line_nbr) {
+RecitPage.prototype.destroyLine = function(line_nbr) {
 	if (line_nbr < this.nb) {
 		this.lines[line_nbr].destroy();
 		this.lines.splice(line_nbr, 1);
@@ -69,7 +69,7 @@ RecitCommon.prototype.destroyLine = function(line_nbr) {
 }
 
 //Destructeur
-RecitCommon.prototype.destroy = function() {
+RecitPage.prototype.destroy = function() {
 	for (var i=0; i<this.nb; i++){
 		Destroy.arrayObjet(this.lines);
 	}
@@ -79,7 +79,7 @@ RecitCommon.prototype.destroy = function() {
 /*
  * SETTER/GETTER
  */
-RecitCommon.prototype.setXY = function(x, y) {
+RecitPage.prototype.setXY = function(x, y) {
 	this.x = x;
 	this.y = y;
 	for (var i=0; i<this.nb; i++) {
@@ -89,14 +89,14 @@ RecitCommon.prototype.setXY = function(x, y) {
 	}
 }
 
-RecitCommon.prototype.setCenterXY = function(x, y) {
+RecitPage.prototype.setCenterXY = function(x, y) {
 	x = x - this.getWidth()/2;
 	y = y - this.y_size/2;
 	this.setXY(x, y);
 }
 
 
-RecitCommon.prototype.getWidth = function() {
+RecitPage.prototype.getWidth = function() {
 	var width = 0;
 	for (var i=0; i<this.nb; i++) {
 		if (width < this.lines[i].getWidth()) {
@@ -106,11 +106,11 @@ RecitCommon.prototype.getWidth = function() {
 	return width;
 }
 
-RecitCommon.prototype.setYsize = function(y_size) { this.y_size = y_size; }
-RecitCommon.prototype.getX = function() { return this.x; }
-RecitCommon.prototype.getY = function() { return this.y; }
-RecitCommon.prototype.getCenterX = function() { return this.getX() + this.getWidth() / 2; }
-RecitCommon.prototype.getCenterY = function() { return this.getY() + this.getHeight() / 2; }
-RecitCommon.prototype.getYsize = function() { return this.y_size; }
+RecitPage.prototype.setYsize = function(y_size) { this.y_size = y_size; }
+RecitPage.prototype.getX = function() { return this.x; }
+RecitPage.prototype.getY = function() { return this.y; }
+RecitPage.prototype.getCenterX = function() { return this.getX() + this.getWidth() / 2; }
+RecitPage.prototype.getCenterY = function() { return this.getY() + this.getHeight() / 2; }
+RecitPage.prototype.getYsize = function() { return this.y_size; }
 
 scriptLoaded('src/recit/types/common.js');

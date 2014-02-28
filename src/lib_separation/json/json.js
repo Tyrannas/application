@@ -43,27 +43,27 @@ JsonHandler.jsonFromLine = function(line) {
 }
 
 //initialise un recit à partir d'un objet json
-JsonHandler.recitFromJson = function(json, recit) {
-	if (recit == undefined) {
-		recit = new RecitCommon();
+JsonHandler.recitPageFromJson = function(json, page) {
+	if (page == undefined) {
+		page = new RecitCommon();
 	}
 	for (var i=0; i<json.lines.length; i++) {
-		recit.addLine(this.lineFromJson(json.lines[i]));
+		page.addLine(this.lineFromJson(json.lines[i]));
 	}
-	recit.type = json.type;
-	return recit;
+	page.type = json.type;
+	return page;
 }
 
 /*
  * Renvoit un objet json avec les attributs de la classe mere
  */
-JsonHandler.jsonFromRecit = function(recit) {
+JsonHandler.jsonFromRecitPage = function(page) {
 	json = new Object();
 	json.lines = new Array();
 	for (var i=0; i<this.nb; i++) {
-		json.lines[i] = recit.lines[i].getJson();
+		json.lines[i] = page.lines[i].getJson();
 	}
-	json.type = recit.type;
+	json.type = page.type;
 	return json;
 }
 scriptLoaded('src/lib_separation/json/json.js');
