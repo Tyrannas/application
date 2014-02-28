@@ -15,7 +15,7 @@ function StoryOnePage(json_def) {
 		this.name = json_def.name;
 	}
 	this.pages[0].setYsize(H);
-	this.pages[0].setCenterXY(W/2,H/3);
+	this.pages[0].setCenterXY(W/2,H/2);
 	this.generate();
 }
 StoryOnePage.prototype = new Story(); //Heritage partie 2
