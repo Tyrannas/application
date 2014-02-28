@@ -40,7 +40,7 @@ Rooter.preloadAll = function(handler) {
 			{src:"story/quotidien.xml", id:"story_quotidien"},
     ];
 	
-	preload = new createjs.LoadQueue(true, "res/");
+	preload = new createjs.LoadQueue(false, "res/");
 	preload.on("complete", function() { initAllSS(); handler(); });
 	preload.loadManifest(manifest);
 }

@@ -70,14 +70,12 @@ Labo.generateRecherche = function(word_searched, police) {
 	recherche.addCentralWord(new Word(word_searched));
 
 	setTimeout(function(){
-		// cloud.setPossibilities(Xml.importLabRequest(word_searched));
-		var p = Db.wordPossibilities(word_searched);
-		log(police);
+		// var p = Db.wordPossibilities(word_searched); // bdd interne (REMOVED TEMP)
+		var p = Xml.importLabRequest(word_searched); // bdd externe
 		var p2 = new Array();
 		for(var i = 0; i < p.length; i++) {
 			if(inArray(police, p[i].getPolice())) {
 				p2.push(p[i]);
-				log(p[i]);
 			}
 		}
 		
