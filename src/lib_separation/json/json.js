@@ -11,9 +11,6 @@ JsonHandler.lineFromJson = function(json) {
 	var line = new Line();
 	//Ajout des mots à la ligne
 	for (var i=0; i < json.words.length; i++) {
-		if (i > 0) {
-			line.addSpace();
-		}
 		var json_word = json.words[i];
 		var word = new Word(json_word.value, json_word.next_value, json_word.police, json_word.code);
 		if (json_word.zoom == undefined) {
