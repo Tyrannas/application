@@ -50,7 +50,6 @@ JsonHandler.recitPageFromJson = function(json, page) {
 	for (var i=0; i<json.lines.length; i++) {
 		page.addLine(this.lineFromJson(json.lines[i]));
 	}
-	page.type = json.type;
 	return page;
 }
 
@@ -63,7 +62,6 @@ JsonHandler.jsonFromRecitPage = function(page) {
 	for (var i=0; i<page.nb; i++) {
 		json.lines[i] = JsonHandler.jsonFromLine(page.lines[i]);
 	}
-	json.type = page.type;
 	return json;
 }
 scriptLoaded('src/lib_separation/json/json.js');

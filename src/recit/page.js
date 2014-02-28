@@ -4,7 +4,6 @@
 function RecitPage(json_def) {
 	this.lines = new Array();
 	this.nb = 0;
-	this.type = 'none';
 	if (json_def != undefined) {
 		JsonHandler.recitPageFromJson(json_def, this);
 		/*
