@@ -8,43 +8,6 @@ function Line() {
 	this.setY(0);
 }
 
-
-/*
- * Ajoute une ligne à partir d'un objet JSON parsé
- */
-Line.prototype.fromJson = function(json) {
-	//Ajout des mots à la ligne
-	for (var i=0; i < json.words.length; i++) {
-		if (i > 0) {
-			this.addSpace();
-		}
-		var json_word = json.words[i];
-		var word = new Word(json_word.value, json_word.next_value, json_word.police, json_word.code);
-		if (json_word.zoom == undefined) {
-			json_word.zoom = 1;
-		}
-		word.setZoom(json_word.zoom);
-		this.add(word);
-	}
-}
-
-/*
- * Retourne le Json d'une ligne
- */
-Line.prototype.getJson = function() {
-	var line = new Object();
-	line.words = new Array();
-	for (var i=0; i<this.nb; i++) {
-		line.words[i] = new Object();
-		line.words[i].value = this.words[i].value;
-		line.words[i].police = this.words[i].police;
-		line.words[i].next_value = this.words[i].next_value;
-		line.words[i].code = this.words[i].code;
-		line.words[i].zoom = this.words[i].getZoom();
-	}
-	return line;
-}
-
 /*
  *	Retourne la largeur de la ligne
  */

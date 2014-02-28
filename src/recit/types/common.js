@@ -6,7 +6,7 @@ function RecitCommon(json_def) {
 	this.nb = 0;
 	this.type = 'none';
 	if (json_def != undefined) {
-		this.setFromJson(json_def);
+		JsonHandler.recitFromJson(json_def, this);
 		/*
 		line = new Line();
 		line.add(new Word('Demi tour'));
@@ -19,7 +19,7 @@ function RecitCommon(json_def) {
 	this.setYsize(H);
 	this.setCenterXY(W/2,H/3);
 	this.generate();
-	console.log(JSON.stringify(this.getJson()));
+	console.log(JSON.stringify(JsonHandler.jsonFromRecit(this)));
 }
 
 //Ajout d'une line
@@ -38,54 +38,6 @@ RecitCommon.prototype.changeLine = function(new_line, line_nbr) {
 	}
 	else
 		return false
-}
-
-//Ajout d'une line en JSON (liste de words)
-RecitCommon.prototype.addJsonLine = function(json) {
-	//Creation d'une nouvelle ligne
-	var new_line = new Line();
-	new_line.fromJson(json);
-	//Ajout de la ligne
-	this.lines[this.nb] = new_line;
-	this.nb++;
-}
-
-//Modif d'une line en JSON (liste de words)
-//Retourne true si la modif a eu lieu
-RecitCommon.prototype.changeJsonLine = function(json, line_nbr) {
-	if (line_nbr < this.nb) {
-		//Destruction de la ligne
-		this.lines[line_nbr].destroy();
-		//Construction d'une nouvelle
-		var new_line = new Line();
-		new_line.fromJson(json);
-		//Remplacement
-		this.lines[line_nbr] = new_line;
-		return true
-	}
-	else
-		return false
-}
-
-//Intialise le recit à partir d'un objet json
-RecitCommon.prototype.setFromJson = function(json) {
-	for (var i=0; i<json.lines.length; i++) {
-		this.addJsonLine(json.lines[i]);
-	}
-	this.type = json.type;
-}
-
-/*
- * Renvoit un objet json avec les attributs de la classe mere
- */
-RecitCommon.prototype.getJson = function() {
-	json = new Object();
-	json.lines = new Array();
-	for (var i=0; i<this.nb; i++) {
-		json.lines[i] = this.lines[i].getJson();
-	}
-	json.type = this.type;
-	return json;
 }
 
 //Generation des phrases
