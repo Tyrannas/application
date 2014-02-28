@@ -7,8 +7,13 @@
 
 function Story() {
 	this.type = 'none';
+	this.name = 'none';
 	this.pages = new Array();
 	this.nb = 0;
+}
+
+Story.prototype.setName = function(name) {
+	this.name = name;
 }
 
 Story.prototype.addPage = function(page) {

@@ -12,11 +12,11 @@ function StoryOnePage(json_def) {
 	this.type='one_page';
 	if (json_def != undefined) {
 		this.addPage(new Page(json_def.pages[0]));
+		this.name = json_def.name;
 	}
 	this.pages[0].setYsize(H);
 	this.pages[0].setCenterXY(W/2,H/3);
 	this.generate();
-	console.log('json story = ' + JSON.stringify(JsonHandler.jsonFromStory(this)));
 }
 StoryOnePage.prototype = new Story(); //Heritage partie 2
 

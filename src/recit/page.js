@@ -18,7 +18,6 @@ function Page(json_def) {
 	this.setYsize(H);
 	this.setCenterXY(W/2,H/3);
 	this.generate();
-	console.log('json page = ' + JSON.stringify(JsonHandler.jsonFromPage(this)));
 }
 
 //Ajout d'une line

@@ -78,12 +78,6 @@ JsonHandler.storyFromJson = function(json, story) {
 				return undefined
 		}
 	}
-	else if (story.type == json.type) {
-		story.destroy();
-		for (var i=0; i<json.pages.length; i++) {
-			story.addPage(this.storyPageFromJson(json.lines[i]));
-		}
-	}
 	else {
 		story.destroy();
 		story = this.storyFromJson(json);
@@ -99,6 +93,7 @@ JsonHandler.jsonFromStory = function(story) {
 		json.pages[i] = JsonHandler.jsonFromPage(story.pages[i]);
 	}
 	json.type = story.type;
+	json.name = story.name;
 	return json;
 }
 
