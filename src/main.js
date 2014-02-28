@@ -57,20 +57,7 @@ App.init = function() {
 	Destroy.all();
 }
 
-// var old_t_calcul_FPS = getTime(); // Timestamp du dernier calcul du FPS
 App.mainLoop = function() {
-	/* 
-	var t = getTime();
-	
-	// Affichage des FPS toutes les MS_AFF_FPS
-	if(t - old_t_calcul_FPS > MS_AFF_FPS) {
-		// TODO Affichage en mode DEBUG
-		debug('FPS = ' + Math.round(createjs.Ticker.getMeasuredFPS()));
-		old_t_calcul_FPS = t;
-	}
-
-	// Mise à jour du stage
-	*/
 	stage.update();
 	GUIstage.update();
 }
