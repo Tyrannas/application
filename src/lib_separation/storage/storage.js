@@ -30,14 +30,9 @@ MyStorage.clear = function() {
 }
 
 MyStorage.loadAllStories = function() {
-	for (var i=0; i<this.stories.length; i++) {
-		this.addStory(this.stories[i]);
+	for (var i=0; i<StoriesDb.stories.length; i++) {
+		this.addStory(StoriesDb.stories[i]);
 	}
 }	
-
-MyStorage.stories = [
-	'{"name":"Demi tour", "type":"one_page", "pages":[{"lines":[{"words":[{"value":"Demi tour", "zoom":1}]}, {"words":[{"value":"marche", "next_value":"arriere", "police":1, "code":"IIIIIIILIIL", "zoom":2}]}]}]}',
-	'{"name":"Test", "type":"one_page", "pages":[{"lines":[{"words":[{"value":"Test"}]}]}]}'
-	];
 
 scriptLoaded('src/lib_separation/storage/storage.js');
