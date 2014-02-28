@@ -1,3 +1,6 @@
+/** 
+ *	Classe RecitCommon
+ */
 function RecitCommon(json_def) {
 	this.lines = new Array();
 	this.nb = 0;
