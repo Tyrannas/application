@@ -82,13 +82,13 @@ App.start = function() {
 
 // Démarrage de l'application
 function main() {
-	Rooter.preloadAll(function(){
-		App.init();
-		
-		createjs.Ticker.addEventListener("tick", function() {
-			App.mainLoop();
-		});
-		
+	App.init();
+	
+	createjs.Ticker.addEventListener("tick", function() {
+		App.mainLoop();
+	});
+
+	Rooter.preloadAll(function(){	
 		App.start();
 	});
 }
