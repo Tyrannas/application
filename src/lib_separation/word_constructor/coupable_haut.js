@@ -1,8 +1,18 @@
 function Word_coupable_haut(data) {
-	this.up = new WordLetters(data.code, data.police, 'demihauth').getBmp();
-	this.down = new WordLetters(data.value, data.police, 'demihautb').getBmp();
-	this.next_down = new WordLetters(data.next_value, data.police, 'demihautb').getBmp();
-	
+	//// CUSTOM BITMAP TEXT
+	// this.up = new WordLetters(data.code, data.police, 'demihauth').getBmp();
+	// this.down = new WordLetters(data.value, data.police, 'demihautb').getBmp();
+	// this.next_down = new WordLetters(data.next_value, data.police, 'demihautb').getBmp();
+
+	//// EASELJS BITMAP TEXT
+	this.up = new createjs.BitmapText(data.code, SS['demihauth']);
+	this.down = new createjs.BitmapText(data.value, SS['demihautb']);
+	this.next_down = new createjs.BitmapText(data.next_value, SS['demihautb']);
+
+	this.up.y = fontConst.police[data.police].offsetY['demihauth'];
+	this.down.y = fontConst.police[data.police].offsetY['demihautb'];
+	this.next_down.y = fontConst.police[data.police].offsetY['demihautb'];
+
 	this.next_down.alpha = 0;
 
 	this.container = new createjs.Container();
