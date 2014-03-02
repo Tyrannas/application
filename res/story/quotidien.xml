@@ -5,7 +5,7 @@
 	</sentence>
 	<sentence></sentence>
 	<sentence>
-		<word police="coupable_bas" next_value="EVE" code="EOE" >LUC</word>
+		<word police="coupable_bas" next_value="LOU" code="EOO" >LUC</word>
 		<word police="coupable_bas" next_value="DEGUSTE">DECOUPE</word>
 		<word police="coupable_haut" >DU</word>
 		<word police="coupable_haut" next_value="SANG" code="AAAA" >PORC</word>
