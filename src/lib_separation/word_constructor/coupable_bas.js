@@ -1,8 +1,17 @@
 function Word_coupable_bas(data) {
+	//// CUSTOM BITMAP TEXT
+	// this.up = new WordLetters(data.value, data.police, 'demibash').getBmp();
+	// this.down = new WordLetters(data.code, data.police, 'demibasb').getBmp();
+	// this.next_up = new WordLetters(data.next_value, data.police, 'demibash').getBmp();
 
-	this.up = new WordLetters(data.value, data.police, 'demibash').getBmp();
-	this.down = new WordLetters(data.code, data.police, 'demibasb').getBmp();
-	this.next_up = new WordLetters(data.next_value, data.police, 'demibash').getBmp();
+	//// EASELJS BITMAP TEXT
+	this.up = new createjs.BitmapText(data.value, SS['demibash']);
+	this.down = new createjs.BitmapText(data.code, SS['demibasb']);
+	this.next_up = new createjs.BitmapText(data.next_value, SS['demibash']);
+
+	this.up.y = fontConst.police[data.police].offsetY['demibash'];
+	this.down.y = fontConst.police[data.police].offsetY['demibasb'];
+	this.next_up.y = fontConst.police[data.police].offsetY['demibash'];
 
 	this.next_up.alpha = 0;
 
