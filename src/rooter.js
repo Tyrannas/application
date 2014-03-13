@@ -33,11 +33,6 @@ Rooter.preloadAll = function(handler) {
 			{src:"img/menu_labo/checkbox_valid.png", id:"menu_labo_checkbox_valid"},
 			// Menu recit
 			{src:"img/menu_recit/vignette.png", id:"menu_recit_vignette"},
-		
-		// XML
-			// Story
-			{src:"story/separation.xml", id:"story_separation"},
-			{src:"story/quotidien.xml", id:"story_quotidien"},
     ];
 	
 	preload = new createjs.LoadQueue(false, "res/");

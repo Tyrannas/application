@@ -18,6 +18,7 @@ var xmlList = ["separation", "email"];
 */
 Recit.start = function() {
 	story_page = 1;
+	MyStorage.loadAllStories()
 	Recit.computeSizes();
 
 	Recit.displayStoriesMenu();
@@ -36,25 +37,22 @@ Recit.displayStoriesMenu = function() {
 	Destroy.all();
 	gui.Recit_menu_displayAll();
 	
-	recit_menu = new Recit_Menu(new Array(
-		'Separation', 'Quotidien', 'Antarfrique', 'Derisoire', 'Poste', 'Neige',
-		'Infini', 'Paysage', 'Amant', 'Decision', 'Horloge', 'Epluchage'
-	));
+
+	console.log();
+	recit_menu = new Recit_Menu(MyStorage.listStories().concat(['Clean']));
 	recit_menu.generate();
 }
 
-Recit.openStory = function(id) {
-	if(id == 0 || id == 1) {
-		if(id == 0)
-			var file = 'separation';
-		if(id == 1)
-			var file = 'quotidien';
-		
+Recit.openStory = function(story_name) {
+	console.log('Ouverture de ' + story_name);
+	if (story_name == 'Clean') {
+		MyStorage.clear();
+	}
+	else {
 		Destroy.all();
 		gui.Recit_displayAll();
-
-		story = Xml.importStory(res('story_' + file));
-		story.generate(Recit.cst.margin.up);
+	
+		story = JsonHandler.storyFromJson(JSON.parse(MyStorage.getStory(story_name)));
 		story.display();
 	}
 }

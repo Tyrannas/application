@@ -1,46 +1,50 @@
-/**
-	Class Story
-*/
-function Story() {
-	this.sentences = new Array(); // Tableau des phrases du récit
-	this.nb_sentences = 0; // Nombre de phrases
-	//StoryConstruct(this);
-}
 /*
-function StoryConstruct(story) {
+ * CLass Story
+ * 
+ * Une Story est un ensemble de pages
+ *
+ */
+
+function Story() {
+	this.type = 'none';
+	this.name = 'none';
+	this.pages = new Array();
+	this.nb = 0;
+}
+
+Story.prototype.setName = function(name) {
+	this.name = name;
+}
+
+Story.prototype.addPage = function(page) {
+	this.pages[this.nb] = page;
+	this.nb++;
+}
+
+Story.prototype.changePage = function(page, page_nb) {
+	if (page_nb < this.nb) {
+		this.pages[page_nb].destroy();
+		this.pages[page_nb] = page;
+		return true;
+	}
+	else
+		return false;
+}
+
+Story.prototype.destroyPage = function(page_nb) {
+	if (page_nb < this.nb) {
+		this.pages[page_nb].destroy();
+		this.nb--;
+		this.pages.splice(line_nbr, 1);
+		return true;
+	}
+	else
+		return false;
+}
 	
-}
-*/
-/*
-	Ajoute une phrase (objet Sentence) à la phrase
-*/
-Story.prototype.add = function(sentence) {
-	this.sentences[this.nb_sentences] = sentence;
-	this.nb_sentences++;
-}
-
-/*
-	Génère le récit en générant toutes les lignes
-*/
-Story.prototype.generate = function(offsetY) {
-	var nb_lines = 0;
-	for(var i = 0; i < this.nb_sentences; i++) {
-		this.sentences[i].generate(offsetY + nb_lines * Recit.cst.line.height);
-		nb_lines += this.sentences[i].getNbLines();
-	}
-}
-
-/*
-	Affiche la phrase en affichant toutes les lignes
-*/
-Story.prototype.display = function() {
-	for(var i = 0; i < this.nb_sentences; i++) {
-		this.sentences[i].display();
-	}
-}
-
-Story.prototype.destroy = function() {
-	Destroy.arrayObjet(this.sentences);
+Story.prototype.destroy = function() {
+	Destroy.arrayObjet(this.pages);
+	this.nb = 0;
 }
 
 scriptLoaded('src/recit/story.js');

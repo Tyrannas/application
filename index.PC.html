@@ -7,7 +7,7 @@
 		
 		<script type="text/javascript">
 			var loaded_scripts = 0;
-			var n_scripts = 47;
+			var n_scripts = 51;
 			function scriptLoaded(script_path) {
 				loaded_scripts++;
 				console.debug(loaded_scripts + '/' + n_scripts + " : " + script_path);
@@ -31,10 +31,11 @@
 			<script type="text/javascript" src="src/menu/menu.js"></script>
 			<!-- Salon -->
 			<script type="text/javascript" src="src/recit/recit.js"></script>
-			<script type="text/javascript" src="src/recit/story.js"></script>
-			<script type="text/javascript" src="src/recit/sentence.js"></script>
 			<script type="text/javascript" src="src/recit/line.js"></script>
 			<script type="text/javascript" src="src/recit/menu.js"></script>
+			<script type="text/javascript" src="src/recit/page.js"></script>
+			<script type="text/javascript" src="src/recit/story.js"></script>
+			<script type="text/javascript" src="src/recit/story_types/story_one_page.js"></script>
 			<!-- Labo -->
 			<script type="text/javascript" src="src/labo/possibility.js"></script>
 			<script type="text/javascript" src="src/labo/laboratory.js"></script>
@@ -42,7 +43,9 @@
 			<script type="text/javascript" src="src/labo/recherche.js"></script>
 			<script type="text/javascript" src="src/labo/menu.js"></script>
 			<!-- Database --
-			<script type="text/javascript" src="res/db/local_db.js" ></script>
+			<script type="text/javascript" src="res/db/local_db.js"></script>
+			<!-- StoriesDb -->
+			<script type="text/javascript" src="res/story/stories.js"></script>
 			
 			<!-- lib_separation -->
 				<!-- Logo -->
@@ -86,12 +89,15 @@
 				<script type="text/javascript" src="src/lib_separation/image/image.js"></script>
 				<!-- GUI -->
 				<script type="text/javascript" src="src/lib_separation/gui/gui.js"></script>
+				<!-- Json -->
+				<script type="text/javascript" src="src/lib_separation/json/json.js"></script>
+				<!-- STorage -->
+				<script type="text/javascript" src="src/lib_separation/storage/storage.js"></script>
 	<style>
 		* { margin:0; padding: 0; }
 		body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
 		canvas { position: absolute; top: 0; left: 0; }
 	</style>
-
 	</head>
 	<body></body>
 	<script>

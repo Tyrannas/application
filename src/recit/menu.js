@@ -69,7 +69,8 @@ Recit_Menu.prototype.generate = function() {
 				this.titles[i][j].display();
 				
 				// Evènements
-				Event.onTap('vignettes_'+k, this.vignettes[i][j], function(k) { return function() { Recit.openStory(k); }}(k), true);
+				var name = this.titles_value[k];
+				Event.onTap('vignettes_'+k, this.vignettes[i][j], function(name) { return function() { Recit.openStory(name); }}(name), true);
 			}
 			k++;
 		}
