@@ -45,7 +45,7 @@ Recit.displayStoriesMenu = function() {
 
 Recit.openStory = function(story_name) {
 	console.log('Ouverture de ' + story_name);
-	if (story_name == 'Clean') {
+	if (story_name == 'Clean') {
 		MyStorage.clear();
 	}
 	else {

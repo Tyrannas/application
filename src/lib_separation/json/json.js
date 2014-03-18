@@ -7,13 +7,13 @@ var JsonHandler = new Object();
 /*
  * Cree une ligne à partir d'un objet JSON parsé
  */
-JsonHandler.lineFromJson = function(json) {
+JsonHandler.lineFromJson = function(json) {
 	var line = new Line();
 	//Ajout des mots à la ligne
 	for (var i=0; i < json.words.length; i++) {
 		var json_word = json.words[i];
 		var word = new Word(json_word.value, json_word.next_value, json_word.police, json_word.code);
-		if (json_word.zoom == undefined) {
+		if (json_word.zoom == undefined) {
 			json_word.zoom = 1;
 		}
 		word.setZoom(json_word.zoom);
@@ -25,10 +25,10 @@ JsonHandler.lineFromJson = function(json) {
 /*
  * Retourne le Json d'une ligne
  */
-JsonHandler.jsonFromLine = function(line) {
+JsonHandler.jsonFromLine = function(line) {
 	var json_line = new Object();
 	json_line.words = new Array();
-	for (var i=0; i<line.nb; i++) {
+	for (var i=0; i<line.nb; i++) {
 		json_line.words[i] = new Object();
 		json_line.words[i].value = line.words[i].value;
 		json_line.words[i].police = line.words[i].police;
@@ -40,11 +40,11 @@ JsonHandler.jsonFromLine = function(line) {
 }
 
 //initialise une page à partir d'un objet json
-JsonHandler.pageFromJson = function(json, page) {
+JsonHandler.pageFromJson = function(json, page) {
 	if (page == undefined) {
 		page = new Page();
 	}
-	for (var i=0; i<json.lines.length; i++) {
+	for (var i=0; i<json.lines.length; i++) {
 		page.addLine(this.lineFromJson(json.lines[i]));
 	}
 	return page;
@@ -56,7 +56,7 @@ JsonHandler.pageFromJson = function(json, page) {
 JsonHandler.jsonFromPage = function(page) {
 	var json = new Object();
 	json.lines = new Array();
-	for (var i=0; i<page.nb; i++) {
+	for (var i=0; i<page.nb; i++) {
 		json.lines[i] = JsonHandler.jsonFromLine(page.lines[i]);
 	}
 	return json;
@@ -65,7 +65,7 @@ JsonHandler.jsonFromPage = function(page) {
 /*
  * Genere une story à partir de json
  */
-JsonHandler.storyFromJson = function(json, story) {
+JsonHandler.storyFromJson = function(json, story) {
 	if (story == undefined) {
 		switch (json.type) {
 			case 'one_page':
@@ -75,7 +75,7 @@ JsonHandler.storyFromJson = function(json, story) {
 				return undefined
 		}
 	}
-	else {
+	else {
 		story.destroy();
 		story = this.storyFromJson(json);
 	}
@@ -86,7 +86,7 @@ JsonHandler.storyFromJson = function(json, story) {
 JsonHandler.jsonFromStory = function(story) {
 	var json = new Object();
 	json.pages = new Array();
-	for (var i=0; i<story.nb; i++) {
+	for (var i=0; i<story.nb; i++) {
 		json.pages[i] = JsonHandler.jsonFromPage(story.pages[i]);
 	}
 	json.type = story.type;

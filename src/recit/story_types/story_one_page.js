@@ -6,7 +6,7 @@
 
 function StoryOnePage(json_def) {
 	Story.apply(this); //Heritage partie 1
-	if (json_def.type != 'one_page') {
+	if (json_def.type != 'one_page') {
 		return undefined;
 	}
 	this.type='one_page';
@@ -20,7 +20,7 @@ function StoryOnePage(json_def) {
 }
 StoryOnePage.prototype = new Story(); //Heritage partie 2
 
-StoryOnePage.prototype.generate = function() {
+StoryOnePage.prototype.generate = function() {
 	this.pages[0].generate();
 }
 

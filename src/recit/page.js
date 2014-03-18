@@ -94,15 +94,15 @@ Page.prototype.setCenterXY = function(x, y) {
 
 Page.prototype.getWidth = function() {
 	var width = 0;
-	for (var i=0; i<this.nb; i++) {
-		if (width < this.lines[i].getWidth()) {
+	for (var i=0; i<this.nb; i++) {
+		if (width < this.lines[i].getWidth()) {
 			width = this.lines[i].getWidth();
 		}
 	}
 	return width;
 }
 
-Page.prototype.setYsize = function(y_size) { this.y_size = y_size; }
+Page.prototype.setYsize = function(y_size) { this.y_size = y_size; }
 Page.prototype.getX = function() { return this.x; }
 Page.prototype.getY = function() { return this.y; }
 Page.prototype.getCenterX = function() { return this.getX() + this.getWidth() / 2; }

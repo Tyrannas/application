@@ -69,7 +69,7 @@ Line.prototype.generate = function() {
 	}
 }
 
-Line.prototype.setX = function(x) {
+Line.prototype.setX = function(x) {
 	this.x = x;
 	for(var i = 0; i < this.nb; i++) {
 		this.words[i].setX(x);
@@ -77,19 +77,19 @@ Line.prototype.setX = function(x) {
 	}
 }
 
-Line.prototype.setY = function(y) {
+Line.prototype.setY = function(y) {
 	this.y = y;
 	for(var i = 0; i < this.nb; i++) {
 		this.words[i].setY(this.y);
 	}
 }
 
-Line.prototype.setCenterX = function(x) {
+Line.prototype.setCenterX = function(x) {
 	x -= this.getWidth()/2;
 	this.setX(x);
 }
 
-Line.prototype.setCenterY = function(y) {
+Line.prototype.setCenterY = function(y) {
 	y -= this.getHeight()/2;
 	this.setY(y)
 }
