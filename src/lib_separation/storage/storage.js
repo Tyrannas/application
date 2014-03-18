@@ -16,7 +16,7 @@ MyStorage.addStory = function(story) {
 	return name;
 }
 
-MyStorage.getStory = function(name) {
+MyStorage.getStory = function(name) {
 	return localStorage.getItem(name);
 }
 
@@ -24,7 +24,7 @@ MyStorage.removeStory = function(name) {
 	localStorage.removeItem(name);
 }
 
-MyStorage.clear = function() {
+MyStorage.clear = function() {
 	console.log('Deleting localStorage');
 	localStorage.clear();
 }

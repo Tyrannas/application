@@ -5,7 +5,7 @@
  *
  */
 
-function Story() {
+function Story() {
 	this.type = 'none';
 	this.name = 'none';
 	this.pages = new Array();
@@ -16,12 +16,12 @@ Story.prototype.setName = function(name) {
 	this.name = name;
 }
 
-Story.prototype.addPage = function(page) {
+Story.prototype.addPage = function(page) {
 	this.pages[this.nb] = page;
 	this.nb++;
 }
 
-Story.prototype.changePage = function(page, page_nb) {
+Story.prototype.changePage = function(page, page_nb) {
 	if (page_nb < this.nb) {
 		this.pages[page_nb].destroy();
 		this.pages[page_nb] = page;
@@ -42,7 +42,7 @@ Story.prototype.destroyPage = function(page_nb) {
 		return false;
 }
 	
-Story.prototype.destroy = function() {
+Story.prototype.destroy = function() {
 	Destroy.arrayObjet(this.pages);
 	this.nb = 0;
 }
