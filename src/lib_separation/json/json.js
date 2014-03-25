@@ -11,11 +11,11 @@ JsonHandler.wordFromJson = function(json) {
 
 JsonHandler.jsonFromWord = function(word) {
 	var json_word = new Object();
-	json_word.value = line.words[i].value;
-	json_word.police = line.words[i].police;
-	json_word.next_value = line.words[i].next_value;
-	json_word.code = line.words[i].code;
-	json_word.zoom = line.words[i].getZoom();
+	json_word.value = word.value;
+	json_word.police = word.police;
+	json_word.next_value = word.next_value;
+	json_word.code = word.code;
+	json_word.zoom = word.getZoom();
 	return json_word;
 }
 

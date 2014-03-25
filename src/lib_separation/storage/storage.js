@@ -10,21 +10,32 @@ MyStorage.clear = function() {
 ////	STORIES /////
 /////////////////////
 
-MyStorage.listStories = function() {
+MyStorage.clearStories = function() {
+	console.log('Deleting stories');
 	var i = 0;
-	var keys = new Array();
-	while (localStorage.key(i) != null) {
-		if (localStorage.key(i).substring(0,6) == "story_") { 
-			keys[i] = localStorage.key(i).substring(6);
+	for (var key in localStorage){
+		if (key.substring(0,6) == "story_") { 
+			localStorage.removeItem(key);
 		}
-		i++;
+	}
+}
+
+MyStorage.listStories = function() {
+	var j = 0;
+	var keys = new Array();
+	for (var key in localStorage){
+		if (key.substring(0,6) == "story_") { 
+			keys[j] = key.substring(6);
+			j++;
+		}
 	}
 	return keys;
 }
 
 MyStorage.addStory = function(story) {
-	var name = "story_"+JSON.parse(story).name;
-	localStorage.setItem(name, story);
+	var name = "story_"+story.name;
+	json_story = JSON.stringify(JsonHandler.storyFromJson(story));
+	localStorage.setItem(name, json_story);
 	return name;
 }
 
@@ -38,19 +49,32 @@ MyStorage.removeStory = function(name) {
 
 MyStorage.loadAllStories = function() {
 	for (var i=0; i<StoriesDb.stories.length; i++) {
-		this.addStory(StoriesDb.stories[i]);
+		story = StoriesDb.stories[i];
+		localStorage.setItem("story_"+JSON.parse(story).name, story);
 	}
 }	
 /////////////////////
 ////	WORDS	/////
 /////////////////////
 
-MyStorage.listWords = function() {
+MyStorage.clearWords = function() {
+	console.log('Deleting words');
 	var i = 0;
 	var keys = new Array();
-	while (localStorage.key(i) != null) {
-		if (localStorage.key(i).substring(0,6) == "words_") { 
-			keys[i] = localStorage.key(i).substring(6);
+	for (var key in localStorage){
+		if (key.substring(0,6) == "words_") { 
+			localStorage.removeItem(key);
+		}
+	}
+}
+
+MyStorage.listWords = function() {
+	var i = 0, j = 0;
+	var keys = new Array();
+	for (var key in localStorage){
+		if (key.substring(0,6) == "words_") { 
+			keys[j] = key.substring(6);
+			j++;
 		}
 		i++;
 	}
@@ -58,17 +82,19 @@ MyStorage.listWords = function() {
 }
 
 MyStorage.addWord = function(word) {
-	var name = "words_"+JSON.parse(word).value;
-	localStorage.setItem(name, word);
+	var name = "words_"+word.value+"_"+word.next_value;
+	json_word = JSON.stringify(JsonHandler.jsonFromWord(word));
+	localStorage.setItem(name, json_word);
 	return name;
 }
 
-MyStorage.getWord = function(word) {
-	return localStorage.getItem("words_"+word);
+//Key est 'value_nextvalue'
+MyStorage.getWord = function(key) {
+	return localStorage.getItem("words_"+key);
 }
 
-MyStorage.removeWord = function(word) {
-	localStorage.removeItem("words_"+word);
+MyStorage.removeWord = function(key) {
+	localStorage.removeItem("words_"+key);
 }
 
 scriptLoaded('src/lib_separation/storage/storage.js');

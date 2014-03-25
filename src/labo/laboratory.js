@@ -145,8 +145,12 @@ Labo.transform = function() {
 }
 
 Labo.saveWord = function() {
-	MyStorage.addWord(this.words[this.nb_side]);
-	console.log(MyStorage.listWords());
+	word = new Word(recherche.central_word.getValue());
+	word.setNextValue(recherche.words[recherche.nb_side].getValue());
+	word.setPolice(recherche.words[recherche.nb_side].getPolice());
+	word.setCode(recherche.words[recherche.nb_side].getCode());
+	MyStorage.addWord(word);
+	console.log("Saved word, new list : " +MyStorage.listWords());
 }
 
 Labo.destroy = function() {

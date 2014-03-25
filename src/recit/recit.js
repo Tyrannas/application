@@ -38,23 +38,19 @@ Recit.displayStoriesMenu = function() {
 	gui.Recit_menu_displayAll();
 	
 
-	console.log();
-	recit_menu = new Recit_Menu(MyStorage.listStories().concat(['Clean']));
+	stories = MyStorage.listStories();
+	recit_menu = new Recit_Menu(stories);
+	console.log("Chargement des stories : "+stories);
 	recit_menu.generate();
 }
 
 Recit.openStory = function(story_name) {
 	console.log('Ouverture de ' + story_name);
-	if (story_name == 'Clean') {
-		MyStorage.clear();
-	}
-	else {
-		Destroy.all();
-		gui.Recit_displayAll();
-	
-		story = JsonHandler.storyFromJson(JSON.parse(MyStorage.getStory(story_name)));
-		story.display();
-	}
+	Destroy.all();
+	gui.Recit_displayAll();
+
+	story = JsonHandler.storyFromJson(JSON.parse(MyStorage.getStory(story_name)));
+	story.display();
 }
 
 /*
