@@ -120,10 +120,10 @@ Labo_Menu.prototype.valid = function() {
 		this.police_searched.push(0);
 		this.police_searched.push(1);
 	}
-	else if(this.choices[1]) { // Police central
+	if(this.choices[1]) { // Police central
 		this.police_searched.push(2);
 	}
-	else {
+	if(!this.choices[0] && ! this.choices[1]) {
 		this.police_searched.push(0);
 		this.police_searched.push(1);
 		this.police_searched.push(2);

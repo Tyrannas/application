@@ -22,6 +22,7 @@ Gui.prototype.Labo_displayAll = function() {
 	// this.menuButton();
 	this.Labo_button_up();
 	this.Labo_button_down();
+	this.Labo_button_save();
 	this.backButton(function() { Labo.start(); } );
 	// this.Labo_nextButton();
 	// this.Labo_previousButton();
@@ -85,6 +86,14 @@ Gui.prototype.Labo_button_down = function() {
 	this.labo_button_down.display();
 	
 	Event.onTap('labo_button_down', this.labo_button_down, function() { Labo.scrollDown(); }, true);
+}
+
+Gui.prototype.Labo_button_save = function() {
+	this.labo_button_save = new Image(res('gui_sauvegarde'));
+	this.labo_button_save.setXY(2*this.margin+50, H - this.labo_button_save.h - this.margin);
+	this.labo_button_save.display();
+	
+	Event.onTap('labo_button_save', this.labo_button_save, function() { Labo.saveWord(); }, true);
 }
 Gui.prototype.Labo_nextButtonHide = function() { this.labo_next_button.setAlpha(0); }
 Gui.prototype.Labo_previousButtonHide = function() { this.labo_previous_button.setAlpha(0); }

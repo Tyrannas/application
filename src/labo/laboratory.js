@@ -94,6 +94,7 @@ Labo.displayRecherche = function() {
 	recherche.display();
 }
 
+/* DEPRECATED
 Labo.nextPage = function() {
 	if(page < nb_pages) {
 		page++;
@@ -108,7 +109,7 @@ Labo.previousPage = function() {
 		Labo.displayCloud();
 	}
 }
-
+*/
 Labo.scrollUp = function() {
 	if(!recherche.inTransform) {
 		if(!recherche.inAnimation)
@@ -143,8 +144,10 @@ Labo.transform = function() {
 	recherche.transform();
 }
 
+Labo.saveWord = function() {}
+
 Labo.destroy = function() {
-	Destroy.objet(cloud);
+	//Destroy.objet(cloud);
 	Destroy.objet(recherche);
 }
 
