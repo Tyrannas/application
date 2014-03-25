@@ -4,6 +4,21 @@
 
 var JsonHandler = new Object();
 
+JsonHandler.wordFromJson = function(json) {
+	var word = new Word(json.value, json.next_value, json.police, json.code);
+	return word;
+}
+
+JsonHandler.jsonFromWord = function(word) {
+	var json_word = new Object();
+	json_word.value = word.value;
+	json_word.police = word.police;
+	json_word.next_value = word.next_value;
+	json_word.code = word.code;
+	json_word.zoom = word.getZoom();
+	return json_word;
+}
+
 /*
  * Cree une ligne à partir d'un objet JSON parsé
  */
@@ -12,7 +27,7 @@ JsonHandler.lineFromJson = function(json) {
 	//Ajout des mots à la ligne
 	for (var i=0; i < json.words.length; i++) {
 		var json_word = json.words[i];
-		var word = new Word(json_word.value, json_word.next_value, json_word.police, json_word.code);
+		var word = this.wordFromJson(json_word);
 		if (json_word.zoom == undefined) {
 			json_word.zoom = 1;
 		}
@@ -29,12 +44,7 @@ JsonHandler.jsonFromLine = function(line) {
 	var json_line = new Object();
 	json_line.words = new Array();
 	for (var i=0; i<line.nb; i++) {
-		json_line.words[i] = new Object();
-		json_line.words[i].value = line.words[i].value;
-		json_line.words[i].police = line.words[i].police;
-		json_line.words[i].next_value = line.words[i].next_value;
-		json_line.words[i].code = line.words[i].code;
-		json_line.words[i].zoom = line.words[i].getZoom();
+		json_line.words[i] = this.jsonFromWord(line.words[i]);
 	}
 	return json_line;
 }
@@ -72,7 +82,7 @@ JsonHandler.storyFromJson = function(json, story) {
 				story = new StoryOnePage(json);
 				break;
 			default:
-				return undefined
+				return undefined;
 		}
 	}
 	else {
