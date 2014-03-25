@@ -144,7 +144,10 @@ Labo.transform = function() {
 	recherche.transform();
 }
 
-Labo.saveWord = function() {}
+Labo.saveWord = function() {
+	MyStorage.addWord(this.words[this.nb_side]);
+	console.log(MyStorage.listWords());
+}
 
 Labo.destroy = function() {
 	//Destroy.objet(cloud);
