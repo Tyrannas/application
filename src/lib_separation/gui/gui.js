@@ -5,6 +5,10 @@ function Gui() {
 	this.margin = 10;
 }
 
+Gui.prototype.Editeur_displayAll = function() {
+	this.backButton(function() { Recit.start(); } );
+}
+
 Gui.prototype.Recit_displayAll = function() {
 	// this.menuButton();
 	this.backButton(function() { Recit.start(); } );

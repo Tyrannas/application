@@ -7,12 +7,6 @@ var story = null;
 var story_page = null;
 var recit_menu = null;
 
-var titles = new Array();
-
-//////////////////////////////////////
-var xmlList = ["separation", "email"];
-//////////////////////////////////////
-
 /*
         Point d'entrée du récit
 */
@@ -27,7 +21,6 @@ Recit.start = function() {
 Recit.destroy = function() {
 	clearStage();
 
-	Destroy.arrayObjet(titles);
 	Destroy.objet(story);
 	
 	word_active = false;
