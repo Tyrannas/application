@@ -5,8 +5,14 @@ function Gui() {
 	this.margin = 10;
 }
 
+Gui.prototype.Editeur_classic_displayRecherche = function() {
+	this.Editeur_classic_button_up();
+	this.Editeur_classic_button_down();
+	this.backButton(function() { Editeur.start(); } );
+}
+
 Gui.prototype.Editeur_displayAll = function() {
-	this.backButton(function() { Recit.start(); } );
+	this.backButton(function() { Editeur.start(); } );
 }
 
 Gui.prototype.Recit_displayAll = function() {
@@ -122,6 +128,27 @@ Gui.prototype.Labo_nextButtonHide = function() { this.labo_next_button.setAlpha(
 Gui.prototype.Labo_previousButtonHide = function() { this.labo_previous_button.setAlpha(0); }
 Gui.prototype.Labo_nextButtonShow = function() { this.labo_next_button.setAlpha(1); }
 Gui.prototype.Labo_previousButtonShow = function() { this.labo_previous_button.setAlpha(1); }
+
+
+// Editeur
+
+Gui.prototype.Editeur_classic_button_up = function() {
+	this.editeur_classic_button_up = new Image(res('gui_roll_up'));
+	this.editeur_classic_button_up.setX(W-this.editeur_classic_button_up.w-this.margin);
+	this.editeur_classic_button_up.setY(0);
+	this.editeur_classic_button_up.display();
+	
+	Event.onTap('editeur_classic_button_up', this.editeur_classic_button_up, function() { Editeur.scrollUp(); }, true);
+}
+
+Gui.prototype.Editeur_classic_button_down = function() {
+	this.editeur_classic_button_down = new Image(res('gui_roll_down'));
+	this.editeur_classic_button_down.setX(W-this.editeur_classic_button_down.w-this.margin);
+	this.editeur_classic_button_down.setY(H-this.editeur_classic_button_down.h);
+	this.editeur_classic_button_down.display();
+	
+	Event.onTap('editeur_classic_button_down', this.editeur_classic_button_down, function() { Editeur.scrollDown(); }, true);
+}
 
 /*
 // labo GUI
