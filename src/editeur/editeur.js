@@ -1,7 +1,6 @@
 var Editeur = new Object();
 var available_editions = ["classic"]
 
-var recherche = null;
 var ask_to_scroll_up = 0;
 var ask_to_scroll_down = 0;
 
@@ -20,7 +19,7 @@ Editeur.displayEdition = function(type) {
 	console.log('Ouverture d\'edition '+type);
 	Destroy.all();
 	gui.Editeur_displayAll();
-	Editeur[type+'_display']();
+	Editeur[type+'_init']();
 }
 
 Editeur.textInputTitle = function(x, y, z) {
@@ -41,17 +40,17 @@ Editeur.textInputTitle = function(x, y, z) {
 }
 
 Editeur.scrollUp = function() {
-	if(!recherche.inTransform) {
-		if(!recherche.inAnimation)
-			recherche.scrollUp();
+	if(!this.recherche.inTransform) {
+		if(!this.recherche.inAnimation)
+			this.recherche.scrollUp();
 		else
 			ask_to_scroll_up++;
 	}
 }
 Editeur.scrollDown = function() {
-	if(!recherche.inTransform) {
-		if(!recherche.inAnimation)
-			recherche.scrollDown();
+	if(!this.recherche.inTransform) {
+		if(!this.recherche.inAnimation)
+			this.recherche.scrollDown();
 		else
 			ask_to_scroll_down++;
 	}
@@ -70,4 +69,9 @@ Editeur.scrollFinish = function() {
 		Editeur.scrollDown();
 	}
 }
+
+Editeur.handle_recherche = function() {
+	this.recherche.callback();
+}
+
 scriptLoaded('src/editeur/editeur.js');

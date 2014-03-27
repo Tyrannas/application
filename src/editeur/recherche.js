@@ -1,7 +1,7 @@
 /**
 	Classe RechercheEditeur
 */
-function RechercheEditeur() {
+function RechercheEditeur(fct) {
 	this.possibilities = new Array(); // Tableau des mots possibles
 	this.words = new Array(); // Tableau des mots dans la liste déroualnte
 	this.nb_side = 5; // Nombre de mots de chaque côté du mot central
@@ -18,6 +18,8 @@ function RechercheEditeur() {
 	this.mot_act = 0; // Mot courant
 	this.inAnimation = false;
 	this.inTransform = false;
+
+	this.callback = function() { fct(this.central_word);};
 
 	RechercheEditeurConstruct(this);
 }
@@ -62,6 +64,7 @@ function RechercheEditeurConstruct(r) {
 	
 	r.coords_central_word = {'x': W/3, 'y': H/2,};
 	r.coords_word_try = {'x': W/3, 'y': H*3/4,};
+	this.callback = r.callback;
 }
 
 RechercheEditeur.prototype.resetWords = function() {
@@ -158,9 +161,16 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 	this.word_try = new Word('Selectionner', null, 0);
 	this.word_try.setZoom(0.6);
 	this.word_try.setCenterXY(this.coords_word_try.x, this.coords_word_try.y);
-	this.word_try.onTap(function() { /*TODO*/; });
+	this.word_try.onTap(function() {Editeur.handle_recherche();});
 
-	this.updateCentralWord();
+	this.central_word = new Word(this.words[this.nb_side].getValue());
+	this.central_word.setZoom(2);
+	this.central_word.setNextValue(this.words[this.nb_side].getNextValue());
+	this.central_word.setPolice(this.words[this.nb_side].getPolice());
+	this.central_word.setCode(this.words[this.nb_side].getCode());
+	this.central_word.setCenterXY(this.coords_central_word.x, this.coords_central_word.y);
+	this.central_word.generate();
+	this.central_word.addGesture();
 }
 
 RechercheEditeur.prototype.updateCentralWord = function() {
@@ -184,7 +194,7 @@ RechercheEditeur.prototype.display = function() {
 		this.words[i].display();
 	}
 	this.word_try.display();
-	this.central_word.display();
+	this.updateCentralWord();
 }
 
 RechercheEditeur.prototype.destroy = function() {
