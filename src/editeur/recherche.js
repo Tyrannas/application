@@ -8,6 +8,7 @@ function RechercheEditeur(fct) {
 	this.nb_max = this.nb_side * 2 + 1; // Nombre maximum de mots
 	
 	this.central_word = null; // Objet Word
+	this.central_word_copy = null; // Objet Word
 	this.central_word_value = null; // Objet Word
 	this.word_try = null; // Objet Word qui déclenche un test
 	
@@ -19,7 +20,7 @@ function RechercheEditeur(fct) {
 	this.inAnimation = false;
 	this.inTransform = false;
 
-	this.callback = function() { fct(this.central_word);};
+	this.callback = function() { fct(this.central_word_copy);};
 
 	RechercheEditeurConstruct(this);
 }
@@ -169,6 +170,7 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 	this.central_word.setPolice(this.words[this.nb_side].getPolice());
 	this.central_word.setCode(this.words[this.nb_side].getCode());
 	this.central_word.setCenterXY(this.coords_central_word.x, this.coords_central_word.y);
+	this.central_word_copy = new Word(this.central_word.getValue(), this.central_word.getNextValue(), this.central_word.getPolice(), this.central_word.getCode());
 	this.central_word.generate();
 	this.central_word.addGesture();
 }
@@ -181,6 +183,7 @@ RechercheEditeur.prototype.updateCentralWord = function() {
 	this.central_word.setPolice(this.words[this.nb_side].getPolice());
 	this.central_word.setCode(this.words[this.nb_side].getCode());
 	this.central_word.setCenterXY(this.coords_central_word.x, this.coords_central_word.y);
+	this.central_word_copy = new Word(this.central_word.getValue(), this.central_word.getNextValue(), this.central_word.getPolice(), this.central_word.getCode());
 	this.central_word.generate();
 	this.central_word.addGesture();
 	this.central_word.display();
