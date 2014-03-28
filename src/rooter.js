@@ -35,11 +35,21 @@ Rooter.preloadAll = function(handler) {
 			{src:"img/menu_labo/checkbox_valid.png", id:"menu_labo_checkbox_valid"},
 			// Menu recit
 			{src:"img/menu_recit/vignette.png", id:"menu_recit_vignette"},
+		// Audio
+			{src:"sound/cut.ogg", id:"audio_cut"},
+			{src:"sound/ambiant.ogg", id:"audio_ambiant"},
+			{src:"sound/rub1.ogg", id:"audio_rub1"},
+			{src:"sound/rub2.ogg", id:"audio_rub2"},
+			{src:"sound/tear1.ogg", id:"audio_tear1"},
+			{src:"sound/tear2.ogg", id:"audio_tear2"},
     ];
 	
+	createjs.Sound.registerPlugins([createjs.HTMLAudioPlugin, createjs.WebAudioPlugin, createjs.FlashPlugin]);
+	
 	preload = new createjs.LoadQueue(false, "res/");
-	preload.on("complete", function() { initAllSS(); handler(); });
+	preload.installPlugin(createjs.Sound);
 	preload.loadManifest(manifest);
+	preload.on("complete", function() { initAllSS(); handler(); });
 }
 
 function res(id) { return preload.getResult(id); }
