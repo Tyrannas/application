@@ -6,7 +6,7 @@
 
 function StoryOnePage(json_def) {
 	Story.apply(this); //Heritage partie 1
-	if (json_def.type != 'one_page') {
+	if (json_def == undefined || json_def.type != 'one_page') {
 		return undefined;
 	}
 	this.type='one_page';

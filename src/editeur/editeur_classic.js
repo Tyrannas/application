@@ -7,6 +7,7 @@ Editeur.classic_init = function() {
 	this.word_zoom = 2;
 	this.title = new Word('Titre');
 	this.classic_word = new Word('Changez moi');
+	this.classic_word_copy = null;
 	Editeur.classic_display();
 }
 
@@ -50,6 +51,24 @@ Editeur.classic_changeWord = function(x, y, z) {
 	this.recherche.generate(0);
 	gui.Editeur_classic_displayRecherche();
 	this.recherche.display();
+}
+
+Editeur.classic_getStory = function() {
+	story = new StoryOnePage();
+	page = new Page();
+	line = new Line();
+	line.add(this.title);
+	page.addLine(line);
+	line = new Line();
+	line.add(this.classic_word_copy);
+	page.addLine(line);
+	story.setName(this.title.getValue());
+	story.addPage(page);
+	return story;
+}
+
+Editeur.json = function() {
+	return JSON.stringify(JsonHandler.jsonFromStory(Editeur.classic_getStory()));
 }
 
 scriptLoaded('src/editeur/editeur_classic.js');

@@ -36,7 +36,7 @@ Menu.recit = function() {
 		}, Menu.anim_duration, Ease.sineOut);	
 	
 	Event.onTap('Menu.recit', Menu.words['recit'], function() {
-		Editeur.start();
+		Recit.start();
 	}, true);
 }
 
