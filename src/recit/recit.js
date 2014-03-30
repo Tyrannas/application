@@ -42,7 +42,7 @@ Recit.openStory = function(story_name) {
 	Destroy.all();
 	gui.Recit_displayAll();
 
-	story = JsonHandler.storyFromJson(JSON.parse(MyStorage.getStory(story_name)));
+	story = MyStorage.getStory(story_name);
 	story.display();
 }
 

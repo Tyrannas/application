@@ -67,8 +67,4 @@ Editeur.classic_getStory = function() {
 	return story;
 }
 
-Editeur.json = function() {
-	return JSON.stringify(JsonHandler.jsonFromStory(Editeur.classic_getStory()));
-}
-
 scriptLoaded('src/editeur/editeur_classic.js');

@@ -16,6 +16,7 @@ Editeur.displayMenu = function() {
 }
 
 Editeur.displayEdition = function(type) {
+	this.type = type;
 	console.log('Ouverture d\'edition '+type);
 	Destroy.all();
 	gui.Editeur_displayAll();
@@ -72,6 +73,12 @@ Editeur.scrollFinish = function() {
 
 Editeur.handle_recherche = function() {
 	this.recherche.callback();
+}
+
+Editeur.saveStory = function() {
+	story = Editeur[this.type+'_getStory']();
+	MyStorage.addStory(story);
+	console.log('Saved story');
 }
 
 scriptLoaded('src/editeur/editeur.js');
