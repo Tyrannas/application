@@ -19,7 +19,6 @@ Editeur.displayEdition = function(type) {
 	this.type = type;
 	console.log('Ouverture d\'edition '+type);
 	Destroy.all();
-	gui.Editeur_displayAll();
 	Editeur[type+'_init']();
 }
 

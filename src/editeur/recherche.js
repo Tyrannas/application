@@ -184,6 +184,7 @@ RechercheEditeur.prototype.updateCentralWord = function() {
 	this.central_word.setCode(this.words[this.nb_side].getCode());
 	this.central_word.setCenterXY(this.coords_central_word.x, this.coords_central_word.y);
 	this.central_word_copy = new Word(this.central_word.getValue(), this.central_word.getNextValue(), this.central_word.getPolice(), this.central_word.getCode());
+	this.central_word_copy.setZoom(this.central_word.getZoom());
 	this.central_word.generate();
 	this.central_word.addGesture();
 	this.central_word.display();

@@ -14,6 +14,7 @@ Editeur.classic_init = function() {
 Editeur.classic_recherche_result = function(word) {
 	Editeur.classic_word = word;
 	Editeur.classic_word_copy = new Word(word.getValue(), word.getNextValue(), word.getPolice(), word.getCode());
+	Editeur.classic_word_copy.setZoom(Editeur.classic_word.getZoom());
 	Editeur.classic_display();
 }
 
@@ -40,6 +41,7 @@ Editeur.classic_display = function() {
 		}, true);
 	}
 	this.classic_word.display();
+	gui.Editeur_displayAll();
 }
 
 Editeur.classic_changeWord = function(x, y, z) {
