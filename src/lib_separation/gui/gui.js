@@ -12,7 +12,7 @@ Gui.prototype.Editeur_classic_displayRecherche = function() {
 }
 
 Gui.prototype.Editeur_displayAll = function() {
-	this.menuButton();
+	this.backButton(function() { Labo.start(); } );
 	this.Editeur_button_save();
 }
 
