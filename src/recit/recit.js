@@ -7,12 +7,6 @@ var story = null;
 var story_page = null;
 var recit_menu = null;
 
-var titles = new Array();
-
-//////////////////////////////////////
-var xmlList = ["separation", "email"];
-//////////////////////////////////////
-
 /*
         Point d'entrée du récit
 */
@@ -27,7 +21,6 @@ Recit.start = function() {
 Recit.destroy = function() {
 	clearStage();
 
-	Destroy.arrayObjet(titles);
 	Destroy.objet(story);
 	
 	word_active = false;
@@ -49,7 +42,7 @@ Recit.openStory = function(story_name) {
 	Destroy.all();
 	gui.Recit_displayAll();
 
-	story = JsonHandler.storyFromJson(JSON.parse(MyStorage.getStory(story_name)));
+	story = MyStorage.getStory(story_name);
 	story.display();
 }
 

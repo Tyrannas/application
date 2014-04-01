@@ -29,6 +29,13 @@ Labo_Menu.prototype.generate = function() {
 	this.word_valid.display();
 	Event.onTap('word_valid', this.word_valid, function(r) { return function() { r.valid(); }}(this), true);
 	
+	// Bouton Editeur
+	this.start_edit = new Word('Editeur de recit');
+	this.start_edit.setX(W - this.start_edit.getWidth() - margin);
+	this.start_edit.setY(H-margin-this.start_edit.getHeight());
+	this.start_edit.display();
+	Event.onTap('start_edit', this.start_edit, function(r) { return function() { Editeur.start(); }}(this), true);
+
 	// Word choices
 	this.word_choices_ask = new Word('Choisissez un mode de transformation');
 	this.word_choices_ask.setZoom(getScale(this.word_choices_ask.getWidth(), W - 200));
