@@ -13,6 +13,7 @@ Gui.prototype.Editeur_classic_displayRecherche = function() {
 
 Gui.prototype.Editeur_displayAll = function() {
 	this.menuButton();
+	this.Editeur_button_save();
 }
 
 Gui.prototype.Recit_displayAll = function() {
@@ -133,11 +134,11 @@ Gui.prototype.Labo_previousButtonShow = function() { this.labo_previous_button.s
 // Editeur
 
 Gui.prototype.Editeur_button_save = function() {
-	this.labo_button_save = new Image(res('gui_sauvegarde'));
-	this.labo_button_save.setXY(2*this.margin+50, H - this.labo_button_save.h - this.margin);
-	this.labo_button_save.display();
+	this.editeur_button_save = new Image(res('gui_sauvegarde'));
+	this.editeur_button_save.setXY(2*this.margin+50, H - this.editeur_button_save.h - this.margin);
+	this.editeur_button_save.display();
 	
-	Event.onTap('editeur_button_save', this.Editeur_button_save, function() { Editeur.saveStory(); }, true);
+	Event.onTap('editeur_button_save', this.editeur_button_save, function() { Editeur.saveStory(); }, true);
 }
 Gui.prototype.Editeur_classic_button_up = function() {
 	this.editeur_classic_button_up = new Image(res('gui_scroll_up'));
