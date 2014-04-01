@@ -34,11 +34,9 @@ Editeur.classic_display = function() {
 	if (this.classic_word.getNextValue() != this.classic_word.getValue()) { //Animation possible
 		this.classic_word.addGesture();
 	}
-	else {
-		Event.onTap('Editeur.classic_word', this.classic_word, function() {
-			Editeur.classic_changeWord(this.word_x, this.word_y, this.word_zoom);
-		}, true);
-	}
+	Event.onTap('Editeur.classic_word', this.classic_word, function() {
+		Editeur.classic_changeWord(this.word_x, this.word_y, this.word_zoom);
+	}, true);
 	this.classic_word.display();
 	gui.Editeur_displayAll();
 }
