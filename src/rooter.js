@@ -18,8 +18,6 @@ Rooter.preloadAll = function(handler) {
 			{src:"img/gui/scroll_right.png", id:"gui_scroll_right"},
 			{src:"img/gui/roll_up.png", id:"gui_roll_up"},
 			{src:"img/gui/roll_down.png", id:"gui_roll_down"},
-			{src:"img/gui/roll_up_left.png", id:"gui_roll_up_left"},
-			{src:"img/gui/roll_down_left.png", id:"gui_roll_down_left"},
 			{src:"img/gui/sauvegarde.png", id:"gui_sauvegarde"},
 			{src:"img/gui/cross.png", id:"gui_clear"},
 			// Fonts

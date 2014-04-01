@@ -33,7 +33,6 @@ Editeur.classic_display = function() {
 	this.classic_word.setCenterXY(this.word_x, this.word_y);
 	if (this.classic_word.getNextValue() != this.classic_word.getValue()) { //Animation possible
 		this.classic_word.addGesture();
-		this.classic_word.setDone('animationFinished', function() { Editeur.classic_display(); });
 	}
 	else {
 		Event.onTap('Editeur.classic_word', this.classic_word, function() {

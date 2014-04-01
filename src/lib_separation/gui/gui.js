@@ -132,8 +132,15 @@ Gui.prototype.Labo_previousButtonShow = function() { this.labo_previous_button.s
 
 // Editeur
 
+Gui.prototype.Editeur_button_save = function() {
+	this.labo_button_save = new Image(res('gui_sauvegarde'));
+	this.labo_button_save.setXY(2*this.margin+50, H - this.labo_button_save.h - this.margin);
+	this.labo_button_save.display();
+	
+	Event.onTap('editeur_button_save', this.Editeur_button_save, function() { Editeur.saveStory(); }, true);
+}
 Gui.prototype.Editeur_classic_button_up = function() {
-	this.editeur_classic_button_up = new Image(res('gui_roll_up_left'));
+	this.editeur_classic_button_up = new Image(res('gui_scroll_up'));
 	this.editeur_classic_button_up.setX(this.editeur_classic_button_up.w+this.margin);
 	this.editeur_classic_button_up.setY(0);
 	this.editeur_classic_button_up.display();
@@ -142,7 +149,7 @@ Gui.prototype.Editeur_classic_button_up = function() {
 }
 
 Gui.prototype.Editeur_classic_button_down = function() {
-	this.editeur_classic_button_down = new Image(res('gui_roll_down_left'));
+	this.editeur_classic_button_down = new Image(res('gui_scroll_down'));
 	this.editeur_classic_button_down.setX(this.editeur_classic_button_down.w+this.margin);
 	this.editeur_classic_button_down.setY(H-this.editeur_classic_button_down.h-50-this.margin);
 	this.editeur_classic_button_down.display();

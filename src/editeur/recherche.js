@@ -8,19 +8,17 @@ function RechercheEditeur(fct) {
 	this.nb_max = this.nb_side * 2 + 1; // Nombre maximum de mots
 	
 	this.central_word = null; // Objet Word
-	this.central_word_copy = null; // Objet Word
 	this.central_word_value = null; // Objet Word
 	this.word_try = null; // Objet Word qui déclenche un test
 	
 	this.coords_word = new Array(); // Coordonnées centrées des mots dans la liste 
-	this.coords_central_word = {};
 	this.coords_word_try = {};
 	
 	this.mot_act = 0; // Mot courant
 	this.inAnimation = false;
 	this.inTransform = false;
 
-	this.callback = function() { fct(this.central_word_copy);};
+	this.callback = function() { fct(this.central_word);};
 
 	RechercheEditeurConstruct(this);
 }
@@ -51,20 +49,18 @@ function RechercheEditeurConstruct(r) {
 	var offsetAlpha = 1 / r.nb_side;
 	var offsetZoom = .2;
 	
-	var center = {'x': W/3, 'y': H/2 }
 	var radius = 2/3*W - new Word('motdelongueurmax').getWidth()/2;
 	
 	for(var i = -r.nb_side; i <= r.nb_side; i++) {
 		r.coords_word[r.nb_side+i] = {
-			'x': center.x + Math.cos(i * offsetAngle) * radius,
-			'y': center.y + Math.sin(i * offsetAngle) * radius,
+			'x': margin,
+			'y': H/2 + Math.sin(i * offsetAngle) * radius,
 			'alpha': 1 - Math.abs(i) * offsetAlpha,
 			'zoom': 1 - Math.abs(i) * offsetZoom,
 		};
 	}
 	
-	r.coords_central_word = {'x': W/3, 'y': H/2,};
-	r.coords_word_try = {'x': W/3, 'y': H*3/4,};
+	r.coords_word_try = {'x': 2*W/3, 'y': H*3/4,};
 	this.callback = r.callback;
 }
 
@@ -113,7 +109,8 @@ RechercheEditeur.prototype.scrollAnimation = function(duration) {
 	for(var i = 0; i < this.nb_max; i++) {
 		this.words[i].setAlpha(this.coords_word[i].alpha);
 		this.words[i].setZoom(this.coords_word[i].zoom);
-		this.words[i].setCenterXY(this.coords_word[i].x, this.coords_word[i].y);
+		this.words[i].setCenterY(this.coords_word[i].y);
+		this.words[i].setX(this.coords_word[i].x);
 		
 		createjs.Tween.get(this.words[i].getNode()).to({
 			'x': this.words[i].getX(),
@@ -154,14 +151,15 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 		this.words[j] = new Word(p.getValue(), p.getNextValue(), p.getPolice(), p.getCode());
 		this.words[j].setAlpha(this.coords_word[j].alpha);
 		this.words[j].setZoom(this.coords_word[j].zoom);
-		this.words[j].setCenterXY(this.coords_word[j].x, this.coords_word[j].y);
+		this.words[j].setCenterY(this.coords_word[j].y);
+		this.words[j].setX(this.coords_word[j].x);
 
 		j++;
 	}
 	
-	this.word_try = new Word('Selectionner', null, 0);
+	this.word_try = new Word('Valider', null, 0);
 	this.word_try.setZoom(0.6);
-	this.word_try.setCenterXY(this.coords_word_try.x, this.coords_word_try.y);
+	this.word_try.setCenterXY(W/2, H - this.word_try.getHeight());
 	this.word_try.onTap(function() {Editeur.handle_recherche();});
 
 	this.central_word = new Word(this.words[this.nb_side].getValue());
@@ -169,10 +167,6 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 	this.central_word.setNextValue(this.words[this.nb_side].getNextValue());
 	this.central_word.setPolice(this.words[this.nb_side].getPolice());
 	this.central_word.setCode(this.words[this.nb_side].getCode());
-	this.central_word.setCenterXY(this.coords_central_word.x, this.coords_central_word.y);
-	this.central_word_copy = new Word(this.central_word.getValue(), this.central_word.getNextValue(), this.central_word.getPolice(), this.central_word.getCode());
-	this.central_word.generate();
-	this.central_word.addGesture();
 }
 
 RechercheEditeur.prototype.updateCentralWord = function() {
@@ -182,12 +176,6 @@ RechercheEditeur.prototype.updateCentralWord = function() {
 	this.central_word.setNextValue(this.words[this.nb_side].getNextValue());
 	this.central_word.setPolice(this.words[this.nb_side].getPolice());
 	this.central_word.setCode(this.words[this.nb_side].getCode());
-	this.central_word.setCenterXY(this.coords_central_word.x, this.coords_central_word.y);
-	this.central_word_copy = new Word(this.central_word.getValue(), this.central_word.getNextValue(), this.central_word.getPolice(), this.central_word.getCode());
-	this.central_word_copy.setZoom(this.central_word.getZoom());
-	this.central_word.generate();
-	this.central_word.addGesture();
-	this.central_word.display();
 }
 
 /*

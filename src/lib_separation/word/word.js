@@ -25,6 +25,7 @@ function Word(value, next_value, police, code) {
 	this.animation = null; // Fonction de callback pour l'animation ('Animation.x')
 	this.animationOnChange = null; // Fonction de callback pour l'animation onChange ('Animation.xOnChange')
 	this.inAnimation = false; // Boolen pour savoir si le mot est entrain d'être animer
+	this.repeatAnimation = true;
 	
 	// this.eventOnAbort = null; // Fonction de callback pour l'évènement onAbort
 	// this.eventOnBegin = null; // Fonction de callback pour l'évènement onAbort
@@ -174,6 +175,7 @@ Word.prototype.disable = function() {
 }
 
 // Get
+Word.prototype.getRepeat = function() { return this.repeatAnimation; }
 Word.prototype.getX = function() { if(!this.active) return this.x; else return this.activeX; }
 Word.prototype.getY = function() { if(!this.active) return this.y; else return this.activeY; }
 Word.prototype.getCenterX = function() { return this.getX() - this.getWidth() / 2; }
@@ -193,6 +195,7 @@ Word.prototype.getNodeDown = function() { return this.font.down; } // Police cou
 Word.prototype.getId = function() { return this.id; }
 Word.prototype.getUniqId = function() { return 'word_"' + this.getValue() + '"_' + Math.random(); }
 // Set
+Word.prototype.setRepeat = function(data) { this.repeatAnimation = data; }
 Word.prototype.setX = function(data) { this.x = Math.ceil(data); }
 Word.prototype.setY = function(data) { this.y = Math.ceil(data); }
 Word.prototype.setXY = function(data, data2) { this.setX(data); this.setY(data2); }

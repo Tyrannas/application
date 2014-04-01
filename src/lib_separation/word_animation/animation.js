@@ -37,6 +37,9 @@ Word.prototype.animationFinished = function(event_finish) {
 				
 				this.generate();
 				this.display();
+				if (this.getRepeat()) {
+					this.addGesture();
+				}
 				} else {
 				this.removeGesture();
 			}
