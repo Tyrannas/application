@@ -5,6 +5,17 @@ function Gui() {
 	this.margin = 10;
 }
 
+Gui.prototype.Editeur_classic_displayRecherche = function() {
+	this.Editeur_classic_button_up();
+	this.Editeur_classic_button_down();
+	this.backButton(function() { Editeur.start(); } );
+}
+
+Gui.prototype.Editeur_displayAll = function() {
+	this.backButton(function() { Labo.start(); } );
+	this.Editeur_button_save();
+}
+
 Gui.prototype.Recit_displayAll = function() {
 	// this.menuButton();
 	this.backButton(function() { Recit.start(); } );
@@ -118,6 +129,34 @@ Gui.prototype.Labo_nextButtonHide = function() { this.labo_next_button.setAlpha(
 Gui.prototype.Labo_previousButtonHide = function() { this.labo_previous_button.setAlpha(0); }
 Gui.prototype.Labo_nextButtonShow = function() { this.labo_next_button.setAlpha(1); }
 Gui.prototype.Labo_previousButtonShow = function() { this.labo_previous_button.setAlpha(1); }
+
+
+// Editeur
+
+Gui.prototype.Editeur_button_save = function() {
+	this.editeur_button_save = new Image(res('gui_sauvegarde'));
+	this.editeur_button_save.setXY(2*this.margin+50, H - this.editeur_button_save.h - this.margin);
+	this.editeur_button_save.display();
+	
+	Event.onTap('editeur_button_save', this.editeur_button_save, function() { Editeur.saveStory(); }, true);
+}
+Gui.prototype.Editeur_classic_button_up = function() {
+	this.editeur_classic_button_up = new Image(res('gui_scroll_up'));
+	this.editeur_classic_button_up.setX(this.editeur_classic_button_up.w+this.margin);
+	this.editeur_classic_button_up.setY(0);
+	this.editeur_classic_button_up.display();
+	
+	Event.onTap('editeur_classic_button_up', this.editeur_classic_button_up, function() { Editeur.scrollUp(); }, true);
+}
+
+Gui.prototype.Editeur_classic_button_down = function() {
+	this.editeur_classic_button_down = new Image(res('gui_scroll_down'));
+	this.editeur_classic_button_down.setX(this.editeur_classic_button_down.w+this.margin);
+	this.editeur_classic_button_down.setY(H-this.editeur_classic_button_down.h-50-this.margin);
+	this.editeur_classic_button_down.display();
+	
+	Event.onTap('editeur_classic_button_down', this.editeur_classic_button_down, function() { Editeur.scrollDown(); }, true);
+}
 
 /*
 // labo GUI

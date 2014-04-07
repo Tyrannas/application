@@ -32,17 +32,20 @@ MyStorage.listStories = function() {
 	return keys;
 }
 
+//Prend un objet story en argument
 MyStorage.addStory = function(story) {
 	var name = "story_"+story.name;
-	json_story = JSON.stringify(JsonHandler.storyFromJson(story));
+	json_story = JSON.stringify(JsonHandler.jsonFromStory(story));
 	localStorage.setItem(name, json_story);
 	return name;
 }
 
+//Renvoit un objet story
 MyStorage.getStory = function(name) {
-	return localStorage.getItem("story_"+name);
+	return JsonHandler.storyFromJson(JSON.parse(localStorage.getItem("story_"+name)));
 }
 
+//Argment : nom de la story à supprimer
 MyStorage.removeStory = function(name) {
 	localStorage.removeItem("story_"+name);
 }
