@@ -14,6 +14,8 @@ Menu.start = function() {
 	Menu.aide();
 	Menu.editeur();
 	Menu.lang();
+
+	gui.MenuPrincipal();
 }
 
 Menu.destroy = function() {
