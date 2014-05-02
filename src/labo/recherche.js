@@ -189,6 +189,17 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	// Effacement du mot try
 	createjs.Tween.get(this.word_try.getNode()).to({'alpha': 0,}, 500);
 	
+	
+	// Bouton Editeur
+	this.start_edit = new Word('Editeur de recit');
+	this.start_edit.setCenterX(W/2);
+	this.start_edit.setY(H-margin-this.start_edit.getHeight());
+	this.start_edit.setAlpha(0);
+	this.start_edit.generate();
+	this.start_edit.display();
+	createjs.Tween.get(this.start_edit.getNode()).to({'alpha': 1,}, 500);
+	Event.onTap('start_edit', this.start_edit, function(r) { return function() { Editeur.start(); }}(this), true);
+
 	// Modification du mot central
 	this.central_word.setNextValue(this.words[this.nb_side].getValue());
 	this.central_word.setPolice(this.words[this.nb_side].getPolice());
@@ -202,6 +213,7 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 		.call(function(w){return function(){ w.addGesture(); }}(this.central_word));
 	this.central_word.setDone('eventFinished', function(r){ return function() { setTimeout(function(){ r.transformFinish(); }, 500); }}(this));
 }}
+
 Recherche.prototype.transformFinish = function() {
 	// Affichage de la roue
 	this.scrollAnimation(500);
@@ -209,6 +221,10 @@ Recherche.prototype.transformFinish = function() {
 	// Affichage du mot try
 	createjs.Tween.get(this.word_try.getNode()).to({'alpha': 1,}, 500);
 	
+	// Effacement du lein editeur de recit
+	createjs.Tween.get(this.start_edit.getNode()).to({'alpha': 0,}, 500)
+		.call(Event.onTap('start_edit', this.start_edit, function() {}, true));
+
 	// Affichage du mot centrale
 	this.central_word.setValue(this.central_word.getNextValue());
 	this.central_word.generate();

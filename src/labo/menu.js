@@ -23,18 +23,11 @@ function Labo_MenuConstruct(l) {
 
 Labo_Menu.prototype.generate = function() {
 	// Bouton Valider
-	this.word_valid = new Word('Rechercher');
+	this.word_valid = new Word('Chercher');
 	this.word_valid.setCenterX(W/2);
 	this.word_valid.setY(H-margin-this.word_valid.getHeight());
 	this.word_valid.display();
 	Event.onTap('word_valid', this.word_valid, function(r) { return function() { r.valid(); }}(this), true);
-	
-	// Bouton Editeur
-	this.start_edit = new Word('Editeur de recit');
-	this.start_edit.setX(W - this.start_edit.getWidth() - margin);
-	this.start_edit.setY(H-margin-this.start_edit.getHeight());
-	this.start_edit.display();
-	Event.onTap('start_edit', this.start_edit, function(r) { return function() { Editeur.start(); }}(this), true);
 
 	// Word choices
 	this.word_choices_ask = new Word('Choisissez un mode de transformation');
