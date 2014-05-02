@@ -99,10 +99,11 @@ Labo_Menu.prototype.changeCheckbox = function(i) {
 /* Text input */
 Labo_Menu.prototype.textInput = function() {
 	var lm = this;
-	CocoonJS.App.onTextDialogFinished.addEventListener(function(text){
+	CocoonJS.App.onTextDialogFinished.addEventListener(callback = function(text){
 		if (text != "" && text != null) {
 			lm.word_searched_value = text;
 			lm.textInputWord();
+			CocoonJS.App.onTextDialogFinished.removeEventListener(callback);
 		} else {
 			lm.textInput();
 		}
