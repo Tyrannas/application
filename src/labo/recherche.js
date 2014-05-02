@@ -210,8 +210,7 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	this.central_word.setCenterXY(W/2, H/2);
 	createjs.Tween.get(this.central_word.getNode())
 		.to({'x': this.central_word.getX(),'y': this.central_word.getY(),}, 500)
-		.call(function(w){return function(){ w.addGesture(); }}(this.central_word));
-	this.central_word.setDone('eventFinished', function(r){ return function() { setTimeout(function(){ r.transformFinish(); }, 500); }}(this));
+		.call(function(r){return function(){ r.central_word.addGesture(); Event.onTap('back_to_recherche', r.central_word, function() { r.transformFinish(); }, true); }}(this));
 }}
 
 Recherche.prototype.transformFinish = function() {
@@ -221,9 +220,9 @@ Recherche.prototype.transformFinish = function() {
 	// Affichage du mot try
 	createjs.Tween.get(this.word_try.getNode()).to({'alpha': 1,}, 500);
 	
-	// Effacement du lein editeur de recit
+	// Effacement du lien editeur de recit
 	createjs.Tween.get(this.start_edit.getNode()).to({'alpha': 0,}, 500)
-		.call(Event.onTap('start_edit', this.start_edit, function() {}, true));
+	Event.onTap('start_edit', this.start_edit, function() {}, true);
 
 	// Affichage du mot centrale
 	this.central_word.setValue(this.central_word.getNextValue());
