@@ -5,6 +5,10 @@ function Gui() {
 	this.margin = 10;
 }
 
+Gui.prototype.MenuPrincipal = function() {
+	this.menuButton(function() { Intro.start(); });
+}
+
 Gui.prototype.Editeur_classic_displayRecherche = function() {
 	this.Editeur_classic_button_up();
 	this.Editeur_classic_button_down();
@@ -12,7 +16,8 @@ Gui.prototype.Editeur_classic_displayRecherche = function() {
 }
 
 Gui.prototype.Editeur_displayAll = function() {
-	this.backButton(function() { Labo.start(); } );
+	this.menuButton();
+	//this.backButton(function() { Labo.start(); } );
 	this.Editeur_button_save();
 }
 
@@ -60,12 +65,16 @@ Gui.prototype.Recit_button_clear = function() {
 }
 
 // COMMUNS
-Gui.prototype.menuButton = function() {
+Gui.prototype.menuButton = function(handler) {
 	this.logo_min = new Image(res('gui_logo'));
 	this.logo_min.setXY(this.margin, H - this.logo_min.h - this.margin);
 	this.logo_min.display();
 	
-	Event.onTap('logo_min_to_menu', this.logo_min, function() { Menu.start(); }, false);
+	if (handler == undefined) {
+		Event.onTap('logo_min_to_menu', this.logo_min, function() { Menu.start(); }, false);
+	} else {
+		Event.onTap('logo_sep_generic', this.logo_min, handler, false);
+	}
 }
 Gui.prototype.backButton = function(handler) {
 	this.arrow_back = new Image(res('gui_arrow_back'));
