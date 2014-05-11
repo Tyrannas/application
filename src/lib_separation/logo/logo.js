@@ -78,9 +78,9 @@ Logo.prototype.animateIntro = function(handler) {
 	
 	function openLogo() {
 		Tween.get(logo.down)
-			.to({y: W}, anim_duration, Ease.sineIn);
+			.to({y: W/2, alpha: 0}, anim_duration, Ease.sineIn);
 		Tween.get(logo.up)
-			.to({y: -W}, anim_duration, Ease.sineIn);
+			.to({y: -W/2, alpha: 0}, anim_duration, Ease.sineIn);
 		Tween.get(logo.central)
 			.to({
 				scaleX: 0,
