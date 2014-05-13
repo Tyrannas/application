@@ -24,7 +24,7 @@ Editeur.displayEdition = function(type) {
 
 Editeur.textInputTitle = function(x, y, z) {
 	var lm = this;
-	CocoonJS.App.onTextDialogFinished.addEventListener(callback = function(text){
+	var callback = function(text){
 		if (text != "" && text != null) {
 			Destroy.objet(lm.title);
 			lm.title = new Word(text);
@@ -36,6 +36,10 @@ Editeur.textInputTitle = function(x, y, z) {
 		} else {
 			lm.textInputTitle();
 		}
+	}
+	CocoonJS.App.onTextDialogFinished.addEventListener(callback);
+	CocoonJS.App.onTextDialogCancelled.addEventListener( function() {
+			CocoonJS.App.onTextDialogFinished.removeEventListener(callback);
 	});
 	CocoonJS.App.showTextDialog("", "Tapez votre titre :", "");
 }
