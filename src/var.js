@@ -10,6 +10,9 @@ var H = window.innerHeight;	// Hauteur de l'écran
 var C_BACK = '#000'; // Color background
 var C_CONT = '#fff'; // Color content
 
+var TIMEOUT_AIDE1 = {'min':2000, 'max':4000};
+var TIMEOUT_AIDE2 = {'min':6000, 'max':12000};
+
 var Tween = createjs.Tween;
 var Ease = createjs.Ease;
 

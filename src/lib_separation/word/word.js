@@ -38,6 +38,7 @@ function Word(value, next_value, police, code) {
 	
 	this.gesture = null;
 	this.tween = new Array();
+	this.timeouts = new Array();
 	
 	this.list_done = new Array(); // Liste des fonctions à appeler quand une fonction est terminée
 	
@@ -122,6 +123,7 @@ Word.prototype.displayGUI = function() {
 }
 
 Word.prototype.destroy = function() {
+	this.destroyTimeouts();
 	Event.destroy(this.getId());
 	for(var i = 0; i < this.tween.length; i++) {
 		this.tween[i].pause();
@@ -129,6 +131,12 @@ Word.prototype.destroy = function() {
 	Destroy.listItem(this.tween);
 	Destroy.objet(this.font);
 	this.inAnimation = false;
+}
+Word.prototype.destroyTimeouts = function() {
+	for(var i = 0; i < this.timeouts.length; i++) {
+		clearTimeout(this.timeouts[i]);
+	}
+	this.timeouts = new Array();
 }
 
 // Fonctions de mise en avant

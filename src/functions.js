@@ -115,4 +115,9 @@ function getScale(c_obj, c) {
 	return c / c_obj;
 }
 
+function rand(min, max)
+{
+	return Math.floor((Math.random() * max) + min);
+}
+
 scriptLoaded('src/functions.js');

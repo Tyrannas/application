@@ -11,7 +11,7 @@ function Sound() {
 	];
 }
 
-Sound.prototype.play = function(sound_name) {
+Sound.prototype.play = function(sound_name) {/*
 	var i=0;
 	var found = false;
 	while (i < this.instances.length && found==false) {
@@ -21,7 +21,7 @@ Sound.prototype.play = function(sound_name) {
 		}
 		i++;
 	}
-}
+*/}
 
 Sound.prototype.stop = function(sound_name) {
 	var i=0;

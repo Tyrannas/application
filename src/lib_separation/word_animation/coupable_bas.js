@@ -47,4 +47,13 @@ Animation.onAbort.upCut = function(word) {
 	word.font.up.regX = 0;
 }
 
+// Aides visuelles
+// Voir coupable_haut.js pour les fonctions aide
+Animation.aide1UpCut = function(word) {
+	Animation.aide1Cut(word);
+}
+Animation.aide2UpCut = function(word) {
+	Animation.aide2Cut(word);
+}
+
 scriptLoaded('src/lib_separation/word_animation/coupable_bas.js');

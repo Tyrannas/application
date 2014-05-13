@@ -2,7 +2,7 @@
 	Word event
 */
 Word.prototype.addGesture = function() {
-	
+	this.removeGesture();
 	var word = this;
 	function onEvent(dir) {
 		// sound_police_end(word.getPolice());
@@ -32,11 +32,23 @@ Word.prototype.addGesture = function() {
 		3: 'onErase',
 		5: 'onCut',
 	};
-	
+
+	var aide1_prefixe = 'aide1';
+	var aide2_prefixe = 'aide2';
+	var aides_fct = {
+		0: 'DownCut',
+		1: 'UpCut',
+		2: 'Open',
+		3: 'Erase',
+		5: 'DownCut',
+	};
+
 	switch(this.police)
 	{
 		case 0: case 1: case 2: case 3: case 5:
 			Event[events_fct[this.police]](this.getId(), this, onEvent, onChange, onBegin, onAbort);
+			this.timeouts.push(setTimeout(function(){Animation[aide1_prefixe+aides_fct[word.police]](word); }, rand(TIMEOUT_AIDE1.min, TIMEOUT_AIDE1.max)));
+			this.timeouts.push(setTimeout(function(){Animation[aide2_prefixe+aides_fct[word.police]](word); }, rand(TIMEOUT_AIDE2.min, TIMEOUT_AIDE2.max)));
 		break;
 		default:
 			alert('Police inconnue : ' + this.police + ' dans la fonction Word.addGesture()');
@@ -62,6 +74,7 @@ Word.prototype.removeGesture = function() {
 			alert('Police inconnue : ' + this.police + ' dans la fonction Word.removeGesture()');
 		break;
 	}
+	this.destroyTimeouts();
 }
 
 Word.prototype.onTap = function(handler) {

@@ -47,4 +47,19 @@ Animation.onAbort.downCut = function(word) {
 	word.font.down.regX = 0;
 }
 
+// Aides visuelles
+Animation.aide1DownCut = function(word) {
+	Animation.aide1Cut(word);
+}
+Animation.aide2DownCut = function(word) {
+	Animation.aide2Cut(word);
+}
+
+Animation.aide1Cut = function(word) {
+	alert(word.getValue()+" : aide 1");
+}
+Animation.aide2Cut = function(word) {
+	alert(word.getValue()+" : aide 2");
+}
+
 scriptLoaded('src/lib_separation/word_animation/coupable_haut.js');
