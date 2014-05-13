@@ -30,7 +30,6 @@ Gui.prototype.Recit_displayAll = function() {
 }
 Gui.prototype.Recit_menu_displayAll = function() {
 	this.menuButton();
-	this.Recit_button_clear();
 	// Gui.Recit.storiesBtn();
 	// Gui.Recit.nextBtn();
 	// Gui.Recit.lastBtn();
@@ -53,14 +52,6 @@ Gui.prototype.Labo_menu_displayAll = function() {
 	// this.Labo_nextButton();
 	// this.Labo_previousButton();
 	// Gui.Labo.policeBtn();
-}
-
-Gui.prototype.Recit_button_clear = function() {
-	this.recit_button_clear = new Image(res('gui_clear'));
-	this.recit_button_clear.setXY(2*this.margin+50, H - this.recit_button_clear.h - this.margin);
-	this.recit_button_clear.display();
-	
-	Event.onTap('recit_button_clear', this.recit_button_clear, function() { MyStorage.clearStories(); }, true);
 }
 
 // COMMUNS
