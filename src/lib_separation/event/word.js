@@ -86,26 +86,6 @@ Word.prototype.onTap = function(handler) {
 	}}(this), true);
 }
 
-Word.prototype.removeGesture = function() {
-	switch(this.police)
-	{
-		case 0:
-		case 1:
-		case 5:
-			Event.destroy(this.getId(), 'cut');
-		break;
-		case 2:
-			Event.destroy(this.getId(), 'open');
-		break;
-		case 3:
-			Event.destroy(this.getId(), 'erase');
-		break;
-		default:
-			alert('Police inconnue : ' + this.police + ' dans la fonction Word.removeGesture()');
-		break;
-	}
-}
-
 Word.prototype.eventOnAbort = function() {
 	var events_fct = { 0: 'downCut', 1: 'upCut', 2: 'open', 3: 'erase', 5: 'downCut', 
 	};

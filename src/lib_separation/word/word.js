@@ -103,6 +103,10 @@ Word.prototype.generate = function() {
 	this.font.container.scaleX = fontConst.car.scale * this.getZoom();
 	this.font.container.scaleY = fontConst.car.scale * this.getZoom();
 	this.font.container.alpha = this.getAlpha();
+
+	if(this.value != this.next_value) {
+		this.addGesture();
+	}
 }
 
 Word.prototype.display = function() {

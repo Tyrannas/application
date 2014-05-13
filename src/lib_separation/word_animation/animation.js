@@ -11,6 +11,7 @@ Word.prototype.animate = function(dir) {
 		this.inAnimation = true;
 		this.animation(this, dir);
 		// this.disableDbltap();
+		this.destroyTimeouts();
 	}
 	
 	this.done('animate');
@@ -36,12 +37,10 @@ Word.prototype.animationFinished = function(event_finish) {
 				this.value = temp;
 				
 				this.generate();
-				this.display();
-				if (this.getRepeat()) {
-					this.addGesture();
+				if (!this.getRepeat()) {
+					this.removeGesture();
 				}
-				} else {
-				this.removeGesture();
+				this.display();
 			}
 			this.done('eventFinished');
 		}
