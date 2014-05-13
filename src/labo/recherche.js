@@ -189,16 +189,33 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	// Effacement du mot try
 	createjs.Tween.get(this.word_try.getNode()).to({'alpha': 0,}, 500);
 	
+	this.word_save = new Word('Sauver');
+	this.word_save.setCenterX(W/3);
+	this.word_save.setY(H-margin-this.word_save.getHeight());
+	this.word_save.generate();
+	this.word_save.display();
+	var w = this.word_save;
+	createjs.Tween.get(this.word_save.getNode()).to({'alpha': 1,}, 500);
+	Event.onTap('word_save', this.word_save, function() { 
+			Labo.saveWord(); 
+			w.destroy(); 
+			w = new Word('Sauve'); 
+			w.setCenterX(W/3);
+			w.setY(H-margin-w.getHeight());
+			w.generate(); 
+			w.display(); }, 
+		true);
+
 	
 	// Bouton Editeur
 	this.start_edit = new Word('Editeur de recit');
-	this.start_edit.setCenterX(W/2);
+	this.start_edit.setCenterX(2*W/3);
 	this.start_edit.setY(H-margin-this.start_edit.getHeight());
 	this.start_edit.setAlpha(0);
 	this.start_edit.generate();
 	this.start_edit.display();
 	createjs.Tween.get(this.start_edit.getNode()).to({'alpha': 1,}, 500);
-	Event.onTap('start_edit', this.start_edit, function(r) { return function() { Editeur.start(); }}(this), true);
+	Event.onTap('start_edit', this.start_edit, function() { return function() { Editeur.start(); }}(this), true);
 
 	// Modification du mot central
 	this.central_word.setNextValue(this.words[this.nb_side].getValue());
@@ -224,6 +241,8 @@ Recherche.prototype.transformFinish = function() {
 	createjs.Tween.get(this.start_edit.getNode()).to({'alpha': 0,}, 500)
 	Event.onTap('start_edit', this.start_edit, function() {}, true);
 
+	createjs.Tween.get(this.word_save.getNode()).to({'alpha': 0,}, 500)
+	Event.onTap('word_save', this.word_save, function() {}, true);
 	// Affichage du mot centrale
 	this.central_word.setValue(this.central_word.getNextValue());
 	this.central_word.generate();

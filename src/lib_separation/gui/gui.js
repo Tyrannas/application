@@ -39,7 +39,6 @@ Gui.prototype.Labo_displayAll = function() {
 	// this.menuButton();
 	this.Labo_button_up();
 	this.Labo_button_down();
-	this.Labo_button_save();
 	this.Labo_button_clear();
 	this.backButton(function() { Labo.start(); } );
 	// this.Labo_nextButton();
@@ -118,17 +117,9 @@ Gui.prototype.Labo_button_down = function() {
 	Event.onTap('labo_button_down', this.labo_button_down, function() { Labo.scrollDown(); }, true);
 }
 
-Gui.prototype.Labo_button_save = function() {
-	this.labo_button_save = new Image(res('gui_sauvegarde'));
-	this.labo_button_save.setXY(2*this.margin+50, H - this.labo_button_save.h - this.margin);
-	this.labo_button_save.display();
-	
-	Event.onTap('labo_button_save', this.labo_button_save, function() { Labo.saveWord(); }, true);
-}
-
 Gui.prototype.Labo_button_clear = function() {
 	this.labo_button_clear = new Image(res('gui_clear'));
-	this.labo_button_clear.setXY(3*this.margin+100, H - this.labo_button_clear.h - this.margin);
+	this.labo_button_clear.setXY(3*this.margin+50, H - this.labo_button_clear.h - this.margin);
 	this.labo_button_clear.display();
 	
 	Event.onTap('labo_button_clear', this.labo_button_clear, function() { MyStorage.clearWords(); }, true);
