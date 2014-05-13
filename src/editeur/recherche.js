@@ -219,17 +219,20 @@ RechercheEditeur.prototype.updateCentralWord = function() {
 
 	Destroy.objet(this.word_left);
 	Destroy.objet(this.word_right);
-	var zoom_display_word = W*0.3;
+	var zoom_h = H*0.2;
+	var zoom_w = W*0.3;
 	var offset_display = 30;
 	this.word_left = new Word(this.central_word.getValue(), this.central_word.getValue(), this.central_word.getPolice(), this.central_word.getCode());
-	this.word_left.setZoom(getScale(this.word_left.getWidth(), zoom_display_word));
+	var new_zoom = getScaleXY(this.word_left.getWidth(), this.word_left.getHeight(), zoom_w, zoom_h);
+	this.word_left.setZoom(Math.min(new_zoom.x, new_zoom.y));
 	this.word_left.setX(W/2 - this.word_left.getWidth() - offset_display);
 	this.word_left.setCenterY(H/5);
 	this.word_left.generate();
 	this.word_left.display();
 
 	this.word_right = new Word(this.central_word.getNextValue(), this.central_word.getNextValue(), this.central_word.getPolice(), this.central_word.getCode());
-	this.word_right.setZoom(getScale(this.word_right.getWidth(), zoom_display_word));
+	new_zoom = getScaleXY(this.word_right.getWidth(), this.word_right.getHeight(), zoom_w, zoom_h);
+	this.word_right.setZoom(Math.min(new_zoom.x, new_zoom.y));
 	this.word_right.setX(W/2 + offset_display);
 	this.word_right.setCenterY(H/5);
 	this.word_right.generate();
