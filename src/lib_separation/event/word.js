@@ -17,6 +17,7 @@ Word.prototype.addGesture = function() {
 		if(!word.inAnimation) {
 			sound_manager.police_begin(word.getPolice(), dir);
 		}
+		word.destroyTimeouts();
 	}
 	function onAbort(dir) {
 		if((dir != 0 || word.getPolice() == 3) && !word.inAnimation) {
@@ -47,8 +48,12 @@ Word.prototype.addGesture = function() {
 	{
 		case 0: case 1: case 2: case 3: case 5:
 			Event[events_fct[this.police]](this.getId(), this, onEvent, onChange, onBegin, onAbort);
-			this.timeouts.push(setTimeout(function(){Animation[aide1_prefixe+aides_fct[word.police]](word); }, rand(TIMEOUT_AIDE1.min, TIMEOUT_AIDE1.max)));
-			this.timeouts.push(setTimeout(function(){Animation[aide2_prefixe+aides_fct[word.police]](word); }, rand(TIMEOUT_AIDE2.min, TIMEOUT_AIDE2.max)));
+			var wait1 = rand(TIMEOUT_AIDE1.min, TIMEOUT_AIDE1.max);
+			var wait2 = wait1 + rand(TIMEOUT_AIDE1.min, TIMEOUT_AIDE1.max);
+			var wait3 = wait2 + rand(TIMEOUT_AIDE2.min, TIMEOUT_AIDE2.max);
+			this.timeouts.push(setTimeout(function(){Animation[aide1_prefixe+aides_fct[word.police]](word);}, wait1));
+			this.timeouts.push(setTimeout(function(){Animation[aide1_prefixe+aides_fct[word.police]](word);}, wait2));
+			this.timeouts.push(setTimeout(function(){Animation[aide2_prefixe+aides_fct[word.police]](word);}, wait3));
 		break;
 		default:
 			alert('Police inconnue : ' + this.police + ' dans la fonction Word.addGesture()');

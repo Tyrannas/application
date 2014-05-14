@@ -49,17 +49,37 @@ Animation.onAbort.downCut = function(word) {
 
 // Aides visuelles
 Animation.aide1DownCut = function(word) {
-	Animation.aide1Cut(word);
+	Animation.aide1Cut(word, 'down');
 }
 Animation.aide2DownCut = function(word) {
 	Animation.aide2Cut(word);
 }
 
-Animation.aide1Cut = function(word) {
-	alert(word.getValue()+" : aide 1");
+Animation.aide1Cut = function(word, attr) {
+	var speed = Word_cst.duration.aide1Cut;
+	var offset = 20;
+	if(randTrue()) offset = -offset;
+	function step1() {
+		Tween.get(word.font[attr]).to({
+			regX: -offset,
+		}, speed);//, Ease.sineOut);
+	}
+	function step2() {
+		Tween.get(word.font[attr]).to({
+			regX: offset,
+		}, speed*2);//, Ease.sineOut)
+	}
+	function step3() {
+		Tween.get(word.font[attr]).to({
+			regX: 0,
+		}, speed);//, Ease.sineOut)
+	}
+	step1();
+	word.timeouts.push(setTimeout(step2, speed));
+	word.timeouts.push(setTimeout(step3, speed*3));
 }
 Animation.aide2Cut = function(word) {
-	alert(word.getValue()+" : aide 2");
+	log(word.getValue()+" : aide 2");
 }
 
 scriptLoaded('src/lib_separation/word_animation/coupable_haut.js');

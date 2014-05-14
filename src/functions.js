@@ -119,5 +119,9 @@ function rand(min, max)
 {
 	return Math.floor((Math.random() * max) + min);
 }
+function randTrue()
+{
+	return Math.random() >= 0.5;
+}
 
 scriptLoaded('src/functions.js');

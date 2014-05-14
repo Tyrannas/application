@@ -50,7 +50,7 @@ Animation.onAbort.upCut = function(word) {
 // Aides visuelles
 // Voir coupable_haut.js pour les fonctions aide
 Animation.aide1UpCut = function(word) {
-	Animation.aide1Cut(word);
+	Animation.aide1Cut(word, 'up');
 }
 Animation.aide2UpCut = function(word) {
 	Animation.aide2Cut(word);
