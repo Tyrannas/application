@@ -6,7 +6,6 @@ var la_separation = null;
 var logo = null;
 
 Intro.start = function() {
-	createjs.Sound.play("audio_ambiant");
 	Intro.logo();
 }
 

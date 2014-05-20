@@ -15,12 +15,12 @@ Word.prototype.addGesture = function() {
 	}
 	function onBegin(dir) {
 		if(!word.inAnimation) {
-			Sound.police_begin(word.getPolice(), dir);
+			sound_manager.police_begin(word.getPolice(), dir);
 		}
 	}
 	function onAbort(dir) {
 		if((dir != 0 || word.getPolice() == 3) && !word.inAnimation) {
-			Sound.police_abort(word.getPolice(), dir);
+			sound_manager.police_abort(word.getPolice(), dir);
 			word.eventOnAbort();
 		}
 	}

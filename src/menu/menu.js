@@ -12,8 +12,10 @@ Menu.start = function() {
 	Menu.recit();
 	Menu.labo();
 	Menu.aide();
-	Menu.aPropos();
+	Menu.editeur();
 	Menu.lang();
+
+	gui.MenuPrincipal();
 }
 
 Menu.destroy = function() {
@@ -62,7 +64,7 @@ Menu.labo = function() {
 
 Menu.aide = function() {
 	Menu.words['aide'] = new Word('aide', null, 0);
-	Menu.words['aide'].setCenterXY(W / 2, H * 8/12);
+	Menu.words['aide'].setCenterXY(W / 2, H * 10/12);
 	Menu.words['aide'].getNode().alpha = 0;
 	Menu.words['aide'].display();
 
@@ -75,19 +77,17 @@ Menu.aide = function() {
 	}, true);
 }
 
-Menu.aPropos = function() {
-	Menu.words['a_propos'] = new Word('a propos', null, 0);
-	Menu.words['a_propos'].setCenterXY(W / 2, H * 10/12);
-	Menu.words['a_propos'].getNode().alpha = 0;
-	Menu.words['a_propos'].display();
+Menu.editeur = function() {
+	Menu.words['editeur'] = new Word('editeur', null, 0);
+	Menu.words['editeur'].setCenterXY(W / 2, H * 8/12);
+	Menu.words['editeur'].getNode().alpha = 0;
+	Menu.words['editeur'].display();
 	
-	Tween.get(Menu.words['a_propos'].getNode()).to({
+	Tween.get(Menu.words['editeur'].getNode()).to({
 			alpha: Menu.opacity,
 		}, Menu.anim_duration, Ease.sineIn);
 	
-	Event.onTap('Menu.a_propos', Menu.words['a_propos'], function() {
-		alert('A venir \n Soon');
-	}, true);
+	Event.onTap('Menu.editeur', Menu.words['editeur'], Editeur.start, true);
 }
 
 Menu.lang = function() {

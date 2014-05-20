@@ -24,7 +24,7 @@ Editeur.displayEdition = function(type) {
 
 Editeur.textInputTitle = function(x, y, z) {
 	var lm = this;
-	CocoonJS.App.onTextDialogFinished.addEventListener(function(text){
+	CocoonJS.App.onTextDialogFinished.addEventListener(callback = function(text){
 		if (text != "" && text != null) {
 			Destroy.objet(lm.title);
 			lm.title = new Word(text);
@@ -32,6 +32,7 @@ Editeur.textInputTitle = function(x, y, z) {
 			lm.title.setCenterY(y);
 			lm.title.setZoom(z);
 			lm.title.display();
+			CocoonJS.App.onTextDialogFinished.removeEventListener(callback);
 		} else {
 			lm.textInputTitle();
 		}
