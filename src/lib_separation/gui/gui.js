@@ -167,90 +167,19 @@ Gui.prototype.Editeur_classic_button_down = function() {
 	Event.onTap('editeur_classic_button_down', this.editeur_classic_button_down, function() { Editeur.scrollDown(); }, true);
 }
 
-/*
-// labo GUI
+// Aide visuelle
+Gui.prototype.Aide_hand = function(data) {
+	var hand = new Image(res('help_hand'));
+	hand.setXY(data.x0 - hand.getWidth(), data.y0);
+	hand.setScaleY(getScale(hand.getHeight(), data.h));
+	hand.display();
 
-
-
-
-Gui.Labo.policeBtn = function() {
-	var zoom = zoomCoef;
-	
-	var policeBtn = new Word(" P ",null,4);		policeBtn.setZoom(zoom);
-	policeBtn.setX(W - policeBtn.getWidth());
-	policeBtn.setY(H - policeBtn.getHeight() / 4);
-	policeBtn.display();
-	policeBtn.onTap(function(){Labo.menu()});
-}
-
-
-
-// Recit GUI
-
-Gui.Recit.menuNextBtn = function() {
-	var zoom = zoomCoef;
-	
-	var nextBtn = new Word(" > ", null, 4);		nextBtn.setZoom(zoom);
-	nextBtn.setX(W - nextBtn.getWidth());
-	nextBtn.setY(0);
-	nextBtn.display();
-	nextBtn.onTap(function(){
-		if(story_page<(xmlList.length/nb_recit_max)) {
-			Recit.displayStoriesMenu();
-		}
+	Tween.get(hand.bmp).to({ //TODO .bmp -> getNode()
+		'x': data.x1,
+		'y': data.x2,
+	}, data.speed).call(function(){
+		hand.destroy();
 	});
 }
-
-Gui.Recit.menuLastBtn = function() {
-	var zoom = zoomCoef;
-
-	var lastBtn = new Word(" < ", null, 4);		lastBtn.setZoom(zoom);
-	lastBtn.setX(0);
-	lastBtn.setY(0);
-	lastBtn.display();
-	lastBtn.onTap(function(){
-		if(story_page>1) {
-			story_page--;
-			Recit.displayStoriesMenu();
-		}
-	});
-}
-
-Gui.Recit.menuDisplayAll = function() {
-	Gui.homeBtn();
-	// Gui.Recit.menuNextBtn();
-	// Gui.Recit.menuLastBtn();
-}
-
-Gui.Recit.storiesBtn = function () {
-	var zoom = zoomCoef;
-	
-	var storiesBtn = new Word(" R", null, 4);	storiesBtn.setZoom(zoom);
-	storiesBtn.setX(W - storiesBtn.getWidth());
-	storiesBtn.setY(H - storiesBtn.getHeight() / 2);
-	storiesBtn.display();
-	storiesBtn.onTap(function(){Recit.start();});
-}
-
-Gui.Recit.nextBtn = function() {
-	var zoom = zoomCoef;
-	
-	var nextBtn = new Word(" > ", null, 4);		nextBtn.setZoom(zoom);
-	nextBtn.setX(W - nextBtn.getWidth());
-	nextBtn.setY(0);
-	nextBtn.display();
-	nextBtn.onTap(function(){}); // A COMPLETER !!!
-}
-
-Gui.Recit.lastBtn = function() {
-	var zoom = zoomCoef;
-	
-	var lastBtn = new Word(" < ", null, 0);		lastBtn.setZoom(zoom);
-	lastBtn.setX(0);
-	lastBtn.setY(0);
-	lastBtn.display();
-	lastBtn.onTap(function(){}); // A COMPLETER !!!
-}
-*/
 
 scriptLoaded('src/lib_separation/gui/gui.js');
