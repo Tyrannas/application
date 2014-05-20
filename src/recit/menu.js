@@ -88,7 +88,7 @@ Recit_Menu.prototype.generate = function() {
 				
 				if (((j+1) + i*(this.nb_w)) > StoriesDb.stories.length) {
 					//Affichage des crois d'effacement
-					this.erase[i][j] = new Image(res('menu_recit_erase'));
+					this.erase[i][j] = new Image(res('cross_erase'));
 					this.erase[i][j].setScaleXY(
 						getScale(this.erase[i][j].h, this.size_erase),
 						getScale(this.erase[i][j].w, this.size_erase)
