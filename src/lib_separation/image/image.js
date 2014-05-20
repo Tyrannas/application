@@ -50,5 +50,9 @@ Image.prototype.getX = function() { return this.x; }
 Image.prototype.getY = function() { return this.y; }
 Image.prototype.getWidth = function() { return this.w * this.scaleX; }
 Image.prototype.getHeight = function() { return this.h * this.scaleY; }
+Image.prototype.getNode = function() { return this.bmp; }
+Image.prototype.getAlpha = function() { return this.bmp.alpha; }
+Image.prototype.getScaleX = function() { return this.scaleX; }
+Image.prototype.getScaleY = function() { return this.scaleY; }
 
 scriptLoaded('src/lib_separation/image/image.js');

@@ -35,13 +35,13 @@ Editeur.classic_display = function() {
 		this.classic_word.addGesture();
 	}
 	Event.onTap('Editeur.classic_word', this.classic_word, function() {
-		Editeur.classic_changeWord(this.word_x, this.word_y, this.word_zoom);
+		Editeur.classic_changeWord();
 	}, true);
 	this.classic_word.display();
 	gui.Editeur_displayAll();
 }
 
-Editeur.classic_changeWord = function(x, y, z) {
+Editeur.classic_changeWord = function() {
 	this.recherche = new RechercheEditeur(this.classic_recherche_result);
 	Destroy.all();
 	console.log("Mots connus : "+MyStorage.listWords());

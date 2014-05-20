@@ -96,8 +96,16 @@ MyStorage.getWord = function(key) {
 	return localStorage.getItem("words_"+key);
 }
 
-MyStorage.removeWord = function(key) {
+MyStorage.removeWordKey = function(key) {
 	localStorage.removeItem("words_"+key);
+}
+
+MyStorage.removeWord = function(word) {
+	MyStorage.removeWordKey(MyStorage.getKey(word));
+}
+
+MyStorage.getKey = function(word) {
+	return word.getValue() + '_' + word.getNextValue();
 }
 
 scriptLoaded('src/lib_separation/storage/storage.js');
