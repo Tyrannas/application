@@ -13,45 +13,18 @@ var ask_to_scroll_up = 0;
 var ask_to_scroll_down = 0;
 
 Labo.start = function() {	
-	Destroy.all();
-	// page = 1;
-	
 	Labo.menu();
 }
 
 Labo.menu = function() {
+	Destroy.all();
+	
 	gui.Labo_menu_displayAll();
 	if(Labo_menu == null) Labo_menu = new Labo_Menu(); else Labo_menu.generate();
 	Labo_menu.onValid(function(word_searched, police) { 
 		Labo.generateRecherche(word_searched, police);
 	});
 };
-/*
-Labo.generateCloud = function() {
-	Destroy.all();
-	loadingImg();
-	
-	cloud = new Cloud();
-	cloud.addCentralWord(new Word(word_searched));
-
-	setTimeout(function(){
-		// cloud.setPossibilities(Xml.importLabRequest(word_searched));
-		cloud.setPossibilities(Db.wordPossibilities(word_searched));
-		nb_pages = Math.ceil(cloud.possibilities.length / cloud.nb_max);
-		Labo.displayCloud();
-	}, 100);
-}
-
-Labo.displayCloud = function() {
-	Destroy.all();
-	gui.Labo_displayAll();
-	if(page == 1) gui.Labo_previousButtonHide();
-	if(page == nb_pages) gui.Labo_nextButtonHide();
-	
-	cloud.generate(page);
-	cloud.display();
-}
-*/
 
 function inArray(array, p_val) {
     var l = array.length;
@@ -78,9 +51,16 @@ Labo.generateRecherche = function(word_searched, police) {
 				p2.push(p[i]);
 			}
 		}
-		
-		recherche.setPossibilities(p2);
-		Labo.displayRecherche();
+		if(p2.length > 0)
+		{
+			recherche.setPossibilities(p2);
+			Labo.displayRecherche();
+		}
+		else
+		{
+			alert("Aucune correspondance.");
+			Labo.menu();
+		}
 	}, 100);
 }
 
