@@ -79,7 +79,7 @@ Animation.aide1Cut = function(word, attr) {
 	word.timeouts.push(setTimeout(step3, speed*3));
 }
 Animation.aide2Cut = function(word) {
-	log(word.getValue()+" : aide 2");
+	log(word.getValue()+" : aide 2 (coupable)");
 }
 
 scriptLoaded('src/lib_separation/word_animation/coupable_haut.js');
