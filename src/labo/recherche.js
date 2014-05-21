@@ -194,16 +194,16 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	this.word_save.setY(H-margin-this.word_save.getHeight());
 	this.word_save.generate();
 	this.word_save.display();
-	var w = this.word_save;
 	createjs.Tween.get(this.word_save.getNode()).to({'alpha': 1,}, 500);
+	var o = this;
 	Event.onTap('word_save', this.word_save, function() { 
 			Labo.saveWord(); 
-			w.destroy(); 
-			w = new Word('Sauve'); 
-			w.setCenterX(W/3);
-			w.setY(H-margin-w.getHeight());
-			w.generate(); 
-			w.display(); }, 
+			o.word_save.destroy(); 
+			o.word_save = new Word('Sauve'); 
+			o.word_save.setCenterX(W/3);
+			o.word_save.setY(H-margin-o.word_save.getHeight());
+			o.word_save.generate(); 
+			o.word_save.display(); }, 
 		true);
 
 	
