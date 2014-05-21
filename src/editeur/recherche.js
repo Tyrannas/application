@@ -213,7 +213,7 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 	this.erase.setScaleXY(this.coords_erase.scaleX, this.coords_erase.scaleY);
 	this.erase.setCenterY(this.coords_erase.y);
 	this.erase.setX(this.coords_erase.x);
-	Event.onTap('erase_word', this.erase, function(o) { return function() { MyStorage.removeWord(o.words[o.nb_side]); Editeur.classic_changeWord() }}(this), true);
+	Event.onTap('erase_word', this.erase, function(o) { return function() { MyStorage.removeWord(o.words[o.nb_side]); Editeur.classic_changeWord(o.mot_act) }}(this), true);
 
 	this.word_try = new Word('Valider', null, 0);
 	this.word_try.setZoom(0.6);

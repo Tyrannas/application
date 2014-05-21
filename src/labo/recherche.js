@@ -227,7 +227,8 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	this.central_word.setCenterXY(W/2, H/2);
 	createjs.Tween.get(this.central_word.getNode())
 		.to({'x': this.central_word.getX(),'y': this.central_word.getY(),}, 500)
-		.call(function(r){return function(){ r.central_word.addGesture(); Event.onTap('back_to_recherche', r.central_word, function() { r.transformFinish(); }, true); }}(this));
+		.call(function(r){return function(){ r.central_word.addGesture(); 
+	Event.onTap('back_to_recherche', r.central_word, function() { r.transformFinish(); }, true); }}(this));
 }}
 
 Recherche.prototype.transformFinish = function() {

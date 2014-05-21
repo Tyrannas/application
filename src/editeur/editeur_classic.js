@@ -41,7 +41,10 @@ Editeur.classic_display = function() {
 	gui.Editeur_displayAll();
 }
 
-Editeur.classic_changeWord = function() {
+Editeur.classic_changeWord = function(offset) {
+	if (offset == undefined) {
+		offset = 0;
+	}
 	var known_words = MyStorage.listWords().map(function(x) {return JsonHandler.wordFromJson(JSON.parse(MyStorage.getWord(x)));});
 	if (known_words.length <= 0) {
 		alert('Aucun mot enregistré, allez dans le Labo !');
@@ -51,7 +54,8 @@ Editeur.classic_changeWord = function() {
 		Destroy.all();
 		console.log("Mots connus : "+MyStorage.listWords());
 		this.recherche.setPossibilities(known_words);
-		this.recherche.generate(0);
+		console.log(offset);
+		this.recherche.generate(offset);
 		gui.Editeur_classic_displayRecherche();
 		this.recherche.display();
 	}
