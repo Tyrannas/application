@@ -173,13 +173,27 @@ Gui.prototype.Aide_hand = function(data) {
 	hand.setXY(data.x0 - hand.getWidth(), data.y0);
 	hand.setScaleY(getScale(hand.getHeight(), data.h));
 	hand.display();
+	hand.setAlpha(0);
 
-	Tween.get(hand.bmp).to({ //TODO .bmp -> getNode()
-		'x': data.x1,
-		'y': data.x2,
-	}, data.speed).call(function(){
-		hand.destroy();
-	});
+	function step1() {
+		Tween.get(hand.bmp).to({ //TODO .bmp -> getNode() (3 fois)
+			'alpha': 1,
+		}, data.speed).call(step2);
+	}
+	function step2() {
+		Tween.get(hand.bmp).to({
+			'x': data.x1 - hand.getWidth()/2,
+			'y': data.x2,
+		}, data.speed * 2).call(step3);
+	}
+	function step3() {
+		Tween.get(hand.bmp).to({
+			'alpha': 0,
+		}, data.speed).call(function(){
+			hand.destroy();
+		});
+	}
+	step1();
 }
 
 scriptLoaded('src/lib_separation/gui/gui.js');
