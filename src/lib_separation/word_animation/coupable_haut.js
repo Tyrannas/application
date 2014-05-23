@@ -86,7 +86,7 @@ Animation.aide2Cut = function(word) {
 		'x1': word.getX() + word.getWidth(),
 		'y1': word.getY() + word.getHeight() / 2,
 		'h': word.getHeight(),
-		'speed': 1000,
+		'speed': 500,
 	});
 }
 

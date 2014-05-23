@@ -182,7 +182,7 @@ Gui.prototype.Aide_hand = function(data) {
 	}
 	function step2() {
 		Tween.get(hand.bmp).to({
-			'x': data.x1 - hand.getWidth()/2,
+			'x': data.x1 - hand.getWidth()/3,
 			'y': data.x2,
 		}, data.speed * 2).call(step3);
 	}
