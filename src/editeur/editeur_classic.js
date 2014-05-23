@@ -35,21 +35,30 @@ Editeur.classic_display = function() {
 		this.classic_word.addGesture();
 	}
 	Event.onTap('Editeur.classic_word', this.classic_word, function() {
-		Editeur.classic_changeWord(this.word_x, this.word_y, this.word_zoom);
+		Editeur.classic_changeWord();
 	}, true);
 	this.classic_word.display();
 	gui.Editeur_displayAll();
 }
 
-Editeur.classic_changeWord = function(x, y, z) {
-	this.recherche = new RechercheEditeur(this.classic_recherche_result);
-	Destroy.all();
-	console.log("Mots connus : "+MyStorage.listWords());
+Editeur.classic_changeWord = function(offset) {
+	if (offset == undefined) {
+		offset = 0;
+	}
 	var known_words = MyStorage.listWords().map(function(x) {return JsonHandler.wordFromJson(JSON.parse(MyStorage.getWord(x)));});
-	this.recherche.setPossibilities(known_words);
-	this.recherche.generate(0);
-	gui.Editeur_classic_displayRecherche();
-	this.recherche.display();
+	if (known_words.length <= 0) {
+		alert('Aucun mot enregistré, allez dans le Labo !');
+		Labo.start();
+	} else {
+		this.recherche = new RechercheEditeur(this.classic_recherche_result);
+		Destroy.all();
+		console.log("Mots connus : "+MyStorage.listWords());
+		this.recherche.setPossibilities(known_words);
+		console.log(offset);
+		this.recherche.generate(offset);
+		gui.Editeur_classic_displayRecherche();
+		this.recherche.display();
+	}
 }
 
 Editeur.classic_getStory = function() {

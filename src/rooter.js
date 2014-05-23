@@ -36,6 +36,7 @@ Rooter.preloadAll = function(handler) {
 			{src:"img/menu_labo/checkbox_valid.png", id:"menu_labo_checkbox_valid"},
 			// Menu recit
 			{src:"img/menu_recit/vignette.png", id:"menu_recit_vignette"},
+			{src:"img/menu_recit/erase.png", id:"cross_erase"},
 		// Audio
 			{src:"sound/cut.ogg", id:"audio_cut"},
 			{src:"sound/ambiant.ogg", id:"audio_ambiant"},
