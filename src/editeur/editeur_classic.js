@@ -7,6 +7,12 @@ Editeur.classic_init = function() {
 	this.word_zoom = 2;
 	this.title = new Word('Titre');
 	this.classic_word = new Word('Changez moi');
+	this.word_save = new Word('Sauver');
+	this.word_save.setCenterX(W/2);
+	this.word_save.setY(H-margin-this.word_save.getHeight());
+	this.word_save.generate();
+	createjs.Tween.get(this.word_save.getNode()).to({'alpha': 1,}, 500);
+	var o = this;
 	this.classic_word_copy = null;
 	Editeur.classic_display();
 }
@@ -38,6 +44,17 @@ Editeur.classic_display = function() {
 		Editeur.classic_changeWord();
 	}, true);
 	this.classic_word.display();
+	this.word_save.display();
+	var o = this;
+	Event.onTap('word_save', this.word_save, function() { 
+			Editeur.saveStory();
+			o.word_save.destroy(); 
+			o.word_save = new Word('Sauve'); 
+			o.word_save.setCenterX(W/2);
+			o.word_save.setY(H-margin-o.word_save.getHeight());
+			o.word_save.generate(); 
+			o.word_save.display(); }, 
+		true);
 	gui.Editeur_displayAll();
 }
 
