@@ -13,7 +13,8 @@ MyStorage.clear = function() {
 MyStorage.clearStories = function() {
 	console.log('Deleting stories');
 	var i = 0;
-	for (var key in localStorage){
+	for (var i = 0; i < localStorage.length; i++) {
+		key = localStorage.key(i);
 		if (key.substring(0,6) == "story_") { 
 			localStorage.removeItem(key);
 		}
@@ -23,7 +24,8 @@ MyStorage.clearStories = function() {
 MyStorage.listStories = function() {
 	var j = 0;
 	var keys = new Array();
-	for (var key in localStorage){
+	for (var i = 0; i < localStorage.length; i++) {
+		key = localStorage.key(i);
 		if (key.substring(0,6) == "story_") { 
 			keys[j] = key.substring(6);
 			j++;
@@ -64,7 +66,8 @@ MyStorage.clearWords = function() {
 	console.log('Deleting words');
 	var i = 0;
 	var keys = new Array();
-	for (var key in localStorage){
+	for (var i = 0; i < localStorage.length; i++) {
+		key = localStorage.key(i);
 		if (key.substring(0,6) == "words_") { 
 			localStorage.removeItem(key);
 		}
@@ -72,9 +75,13 @@ MyStorage.clearWords = function() {
 }
 
 MyStorage.listWords = function() {
+	/*debug('localStorage :');
+	debug(localStorage);
+*/
 	var i = 0, j = 0;
 	var keys = new Array();
-	for (var key in localStorage){
+	for (var i = 0; i < localStorage.length; i++) {
+		key = localStorage.key(i);
 		if (key.substring(0,6) == "words_") { 
 			keys[j] = key.substring(6);
 			j++;

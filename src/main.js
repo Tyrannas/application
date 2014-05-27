@@ -63,11 +63,24 @@ App.mainLoop = function() {
 }
 
 App.start = function() {
-	sound_manager = new Sound;
+	sound_manager = new Sound();
 	sound_manager.play("ambiant");
-	//ambiant_instance.play();
 	Intro.start();
 	// Menu.start();
+	/*
+	debug('#### localStorage ####');
+	debug(localStorage);
+	debug('#### for ####');
+	for (i=0; i<localStorage.length; i++) {
+		key = localStorage.key(i);
+		debug(key);
+	}
+	debug('#### JSON.parse #### ' + StoriesDb.stories.length);
+	for (var i=0; i<StoriesDb.stories.length; i++) {
+		story = StoriesDb.stories[i];
+		debug(JSON.parse(story));
+	}
+	*/
 }
 
 // Démarrage de l'application

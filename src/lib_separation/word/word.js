@@ -137,6 +137,7 @@ Word.prototype.destroy = function() {
 	this.inAnimation = false;
 }
 Word.prototype.destroyTimeouts = function() {
+	debug('Destroy timeouts ' + this.value + ' ; '+this.timeouts);
 	for(var i = 0; i < this.timeouts.length; i++) {
 		clearTimeout(this.timeouts[i]);
 	}

@@ -22,7 +22,6 @@ function Recit_MenuConstruct(r) {
 	var w = W - 200;
 	var offsetX = 100;
 	
-	
 	r.h_vignette = Math.ceil((H-(r.nb_h+1)*margin)/r.nb_h);
 	// r.nb_w = Math.floor(w / r.h_vignette);
 	r.w_vignette = Math.ceil((w-(r.nb_w+1)*margin)/r.nb_w);
