@@ -49,24 +49,35 @@ function RechercheEditeurConstruct(r) {
 	var offsetAngle = Math.PI / (4 * (r.nb_side+1));
 	var offsetY = Math.ceil(H/(2*r.nb_side));
 	var offsetAlpha = 1 / r.nb_side;
+	var offsetAlphaErase = 1;
 	var offsetZoom = .2;
 	
 	var radius = 2/3*W - new Word('motdelongueurmax').getWidth()/2;
 	var height_def = new Word('temp').getHeight();
+
+	r.size_erase = 50;
 	
 	for(var i = -r.nb_side; i <= r.nb_side; i++) {
 		r.coords_word[r.nb_side+i] = {
-			'x': margin,
+			'x': 2*margin + r.size_erase,
 			'y': H/2 + Math.sin(i * offsetAngle) * radius,
 			'alpha': 1 - Math.abs(i) * offsetAlpha,
 			'zoom': 1 - Math.abs(i) * offsetZoom,
 		};
 		r.coords_word_next[r.nb_side+i] = {
-			'x': margin + 30,
+			'x': 2*margin + r.size_erase,
 			'y': H/2 + Math.sin(i * offsetAngle) * radius + height_def*(0.6 - Math.abs(i) * offsetZoom),
 			'alpha': 0.7 - Math.abs(i) * offsetAlpha,
 			'zoom': 0.6 - Math.abs(i) * offsetZoom,
 		};
+	}
+	temp = new Image(res('cross_erase'));
+	r.coords_erase = {
+		'x': margin,
+		'y': (r.coords_word[r.nb_side].y + r.coords_word_next[r.nb_side].y) / 2,
+		'alpha': 1,
+		'scaleX': getScale(temp.getHeight(), r.size_erase),
+		'scaleY': getScale(temp.getWidth(), r.size_erase)
 	}
 	
 	r.coords_word_try = {'x': 2*W/3, 'y': H*3/4,};
@@ -121,6 +132,7 @@ RechercheEditeur.prototype.scrollUp = function() { if(!this.inAnimation) { this.
 	this.words_next.unshift(new Word(p.getNextValue(), p.getNextValue(), p.getPolice(), p.getCode()));
 	this.words_next[0].setAlpha(this.coords_word_next[0].alpha);
 	this.words_next[0].display();
+
 	
 	this.scrollAnimation(200);
 	this.updateCentralWord();
@@ -192,9 +204,17 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 		this.words_next[j].setZoom(this.coords_word_next[j].zoom);
 		this.words_next[j].setCenterY(this.coords_word_next[j].y);
 		this.words_next[j].setX(this.coords_word_next[j].x);
+
 		j++;
 	}
 	
+	this.erase = new Image(res('cross_erase'));
+	this.erase.setAlpha(this.coords_erase.alpha);
+	this.erase.setScaleXY(this.coords_erase.scaleX, this.coords_erase.scaleY);
+	this.erase.setCenterY(this.coords_erase.y);
+	this.erase.setX(this.coords_erase.x);
+	Event.onTap('erase_word', this.erase, function(o) { return function() { MyStorage.removeWord(o.words[o.nb_side]); Editeur.classic_changeWord(o.mot_act) }}(this), true);
+
 	this.word_try = new Word('Valider', null, 0);
 	this.word_try.setZoom(0.6);
 	this.word_try.setCenterXY(W/2, H - this.word_try.getHeight());
@@ -219,17 +239,20 @@ RechercheEditeur.prototype.updateCentralWord = function() {
 
 	Destroy.objet(this.word_left);
 	Destroy.objet(this.word_right);
-	var zoom_display_word = W*0.3;
+	var zoom_h = H*0.2;
+	var zoom_w = W*0.3;
 	var offset_display = 30;
 	this.word_left = new Word(this.central_word.getValue(), this.central_word.getValue(), this.central_word.getPolice(), this.central_word.getCode());
-	this.word_left.setZoom(getScale(this.word_left.getWidth(), zoom_display_word));
+	var new_zoom = getScaleXY(this.word_left.getWidth(), this.word_left.getHeight(), zoom_w, zoom_h);
+	this.word_left.setZoom(Math.min(new_zoom.x, new_zoom.y));
 	this.word_left.setX(W/2 - this.word_left.getWidth() - offset_display);
 	this.word_left.setCenterY(H/5);
 	this.word_left.generate();
 	this.word_left.display();
 
 	this.word_right = new Word(this.central_word.getNextValue(), this.central_word.getNextValue(), this.central_word.getPolice(), this.central_word.getCode());
-	this.word_right.setZoom(getScale(this.word_right.getWidth(), zoom_display_word));
+	new_zoom = getScaleXY(this.word_right.getWidth(), this.word_right.getHeight(), zoom_w, zoom_h);
+	this.word_right.setZoom(Math.min(new_zoom.x, new_zoom.y));
 	this.word_right.setX(W/2 + offset_display);
 	this.word_right.setCenterY(H/5);
 	this.word_right.generate();
@@ -244,6 +267,7 @@ RechercheEditeur.prototype.display = function() {
 		this.words[i].display();
 		this.words_next[i].display();
 	}
+	this.erase.display();
 	this.word_try.display();
 	this.updateCentralWord();
 }
@@ -251,6 +275,7 @@ RechercheEditeur.prototype.display = function() {
 RechercheEditeur.prototype.destroy = function() {
 	Destroy.arrayObjet(this.words);
 	Destroy.arrayObjet(this.words_next);
+	Destroy.Objet(this.erase);
 	Destroy.objet(this.central_word);
 	Destroy.objet(this.word_try);
 }

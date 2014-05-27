@@ -189,16 +189,33 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	// Effacement du mot try
 	createjs.Tween.get(this.word_try.getNode()).to({'alpha': 0,}, 500);
 	
+	this.word_save = new Word('Sauver');
+	this.word_save.setCenterX(W/3);
+	this.word_save.setY(H-margin-this.word_save.getHeight());
+	this.word_save.generate();
+	this.word_save.display();
+	createjs.Tween.get(this.word_save.getNode()).to({'alpha': 1,}, 500);
+	var o = this;
+	Event.onTap('word_save', this.word_save, function() { 
+			Labo.saveWord(); 
+			o.word_save.destroy(); 
+			o.word_save = new Word('Sauve'); 
+			o.word_save.setCenterX(W/3);
+			o.word_save.setY(H-margin-o.word_save.getHeight());
+			o.word_save.generate(); 
+			o.word_save.display(); }, 
+		true);
+
 	
 	// Bouton Editeur
 	this.start_edit = new Word('Editeur de recit');
-	this.start_edit.setCenterX(W/2);
+	this.start_edit.setCenterX(2*W/3);
 	this.start_edit.setY(H-margin-this.start_edit.getHeight());
 	this.start_edit.setAlpha(0);
 	this.start_edit.generate();
 	this.start_edit.display();
 	createjs.Tween.get(this.start_edit.getNode()).to({'alpha': 1,}, 500);
-	Event.onTap('start_edit', this.start_edit, function(r) { return function() { Editeur.start(); }}(this), true);
+	Event.onTap('start_edit', this.start_edit, function() { return function() { Editeur.start(); }}(this), true);
 
 	// Modification du mot central
 	this.central_word.setNextValue(this.words[this.nb_side].getValue());
@@ -210,7 +227,8 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	this.central_word.setCenterXY(W/2, H/2);
 	createjs.Tween.get(this.central_word.getNode())
 		.to({'x': this.central_word.getX(),'y': this.central_word.getY(),}, 500)
-		.call(function(r){return function(){ r.central_word.addGesture(); Event.onTap('back_to_recherche', r.central_word, function() { r.transformFinish(); }, true); }}(this));
+		.call(function(r){return function(){ r.central_word.addGesture(); 
+	Event.onTap('back_to_recherche', r.central_word, function() { r.transformFinish(); }, true); }}(this));
 }}
 
 Recherche.prototype.transformFinish = function() {
@@ -224,6 +242,8 @@ Recherche.prototype.transformFinish = function() {
 	createjs.Tween.get(this.start_edit.getNode()).to({'alpha': 0,}, 500)
 	Event.onTap('start_edit', this.start_edit, function() {}, true);
 
+	createjs.Tween.get(this.word_save.getNode()).to({'alpha': 0,}, 500)
+	Event.onTap('word_save', this.word_save, function() {}, true);
 	// Affichage du mot centrale
 	this.central_word.setValue(this.central_word.getNextValue());
 	this.central_word.generate();

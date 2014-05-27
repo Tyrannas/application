@@ -92,7 +92,7 @@ Labo_Menu.prototype.changeCheckbox = function(i) {
 /* Text input */
 Labo_Menu.prototype.textInput = function() {
 	var lm = this;
-	CocoonJS.App.onTextDialogFinished.addEventListener(callback = function(text){
+	var callback = function(text){
 		if (text != "" && text != null) {
 			lm.word_searched_value = text;
 			lm.textInputWord();
@@ -100,6 +100,10 @@ Labo_Menu.prototype.textInput = function() {
 		} else {
 			lm.textInput();
 		}
+	};
+	CocoonJS.App.onTextDialogFinished.addEventListener(callback);
+	CocoonJS.App.onTextDialogCancelled.addEventListener( function() {
+			CocoonJS.App.onTextDialogFinished.removeEventListener(callback);
 	});
 	CocoonJS.App.showTextDialog("", "Tapez un mot a transformer :", "");
 }
