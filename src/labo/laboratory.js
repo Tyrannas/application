@@ -21,8 +21,16 @@ Labo.menu = function() {
 	
 	gui.Labo_menu_displayAll();
 	if(Labo_menu == null) Labo_menu = new Labo_Menu(); else Labo_menu.generate();
-	Labo_menu.onValid(function(word_searched, police) { 
-		Labo.generateRecherche(word_searched, police);
+	Labo_menu.onValid(function(word_searched, police) {
+		if(police.length > 0) {
+			Labo.generateRecherche(word_searched, police);
+		}
+		else {
+			if (Menu.language == 'fr') 
+				alert("Veuillez choisir une police.");
+			else
+				alert("Please choose a police.");
+		}
 	});
 };
 
@@ -58,7 +66,10 @@ Labo.generateRecherche = function(word_searched, police) {
 		}
 		else
 		{
-			alert("Aucune correspondance.");
+			if (Menu.language == 'fr') 
+				alert("Aucune correspondance.");
+			else
+				alert("No match found.");
 			Labo.menu();
 		}
 	}, 100);
@@ -127,7 +138,7 @@ Labo.transform = function() {
 Labo.saveWord = function() {
 	var word = recherche.word_to_save;
 	MyStorage.addWord(word);
-	console.log("Saved word, new list : " +MyStorage.listWords());
+	log("Saved word, new list : " +MyStorage.listWords());
 }
 
 Labo.destroy = function() {

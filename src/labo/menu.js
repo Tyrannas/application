@@ -45,14 +45,14 @@ Labo_Menu.prototype.generate = function() {
 	if (Menu.language == 'fr')  {
 		this.word_choices[0] = new Word('Police coupable');
 		this.word_choices[1] = new Word('Police centrale');
-		this.word_choices[2] = new Word('Police de l ombre');
+		//this.word_choices[2] = new Word('Police de l ombre');
 	} else {
 		this.word_choices[0] = new Word('Cutable font');
 		this.word_choices[1] = new Word('Central font');
-		this.word_choices[2] = new Word('Shadow font');
+		//this.word_choices[2] = new Word('Shadow font');
 	}
 	
-	for(var i = 0; i < 3; i++) {
+	for(var i = 0; i < 2; i++) {
 		var y = H*(3+i)/8;
 		
 		this.checkbox[i] = new Image(res('menu_labo_checkbox'));
@@ -143,11 +143,11 @@ Labo_Menu.prototype.valid = function() {
 	if(this.choices[1]) { // Police central
 		this.police_searched.push(2);
 	}
-	if(!this.choices[0] && ! this.choices[1]) {
+	/*if(!this.choices[0] && ! this.choices[1]) {
 		this.police_searched.push(0);
 		this.police_searched.push(1);
 		this.police_searched.push(2);
-	}
+	}*/
 	this.fct_onValid(this.word_searched_value, this.police_searched);
 }
 
