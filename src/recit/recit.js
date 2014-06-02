@@ -11,6 +11,7 @@ var recit_menu = null;
         Point d'entrée du récit
 */
 Recit.start = function() {
+	Recit.destroy();
 	story_page = 1;
 	MyStorage.loadAllStories()
 	Recit.computeSizes();
@@ -19,7 +20,8 @@ Recit.start = function() {
 }
 
 Recit.destroy = function() {
-	Destroy.objet(story);
+	if(story != null)
+		Destroy.objet(story);
 	
 	word_active = false;
 }

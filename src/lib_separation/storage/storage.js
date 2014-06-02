@@ -1,7 +1,7 @@
 var MyStorage = new Object();
 
 MyStorage.clear = function() {
-	console.log('Deleting localStorage');
+	log('Deleting localStorage');
 	localStorage.clear();
 }
 
@@ -11,7 +11,7 @@ MyStorage.clear = function() {
 /////////////////////
 
 MyStorage.clearStories = function() {
-	console.log('Deleting stories');
+	log('Deleting stories');
 	var i = 0;
 	for (var i = 0; i < localStorage.length; i++) {
 		key = localStorage.key(i);
@@ -67,7 +67,7 @@ MyStorage.loadAllStories = function() {
 /////////////////////
 
 MyStorage.clearWords = function() {
-	console.log('Deleting words');
+	log('Deleting words');
 	var i = 0;
 	var keys = new Array();
 	for (var i = 0; i < localStorage.length; i++) {

@@ -42,15 +42,8 @@ function Word(value, next_value, police, code) {
 	
 	this.list_done = new Array(); // Liste des fonctions à appeler quand une fonction est terminée
 	
-	WordConstruct(this);
-}
-
-/*
-	Constructeur
-*/
-function WordConstruct(word) {
-	word.generate();
-	word.setId(word.getUniqId());
+	this.generate();
+	this.setId(this.getUniqId());
 }
 
 Word.prototype.done = function(fct_done) {
@@ -103,10 +96,6 @@ Word.prototype.generate = function() {
 	this.font.container.scaleX = fontConst.car.scale * this.getZoom();
 	this.font.container.scaleY = fontConst.car.scale * this.getZoom();
 	this.font.container.alpha = this.getAlpha();
-
-	if(this.getValue() != this.getNextValue()) {
-		this.addGesture();
-	}
 }
 
 Word.prototype.display = function() {
@@ -118,6 +107,10 @@ Word.prototype.display = function() {
 	
 	if(this.font.container.getStage() == null)
 		stage.addChild(this.font.container);
+
+	if(this.getValue() != this.getNextValue()) {
+		this.addGesture();
+	}
 }
 Word.prototype.displayGUI = function() {
 	this.font.container.x = this.getX();
@@ -138,7 +131,7 @@ Word.prototype.destroy = function() {
 }
 Word.prototype.destroyTimeouts = function() {
 	if(this.timeouts.length > 0) {
-		debug('Destroy timeouts ' + this.value + ' ; '+this.timeouts);
+		//debug('Destroy timeouts ' + this.value + ' ; '+this.timeouts);
 		for(var i = 0; i < this.timeouts.length; i++) {
 			clearTimeout(this.timeouts[i]);
 		}

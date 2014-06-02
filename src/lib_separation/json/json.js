@@ -76,13 +76,13 @@ JsonHandler.jsonFromPage = function(page) {
  * Genere une story à partir de json
  */
 JsonHandler.storyFromJson = function(json, story) {
-	if (story == undefined) {
+	if (story == undefined || story == null) {
 		switch (json.type) {
 			case 'one_page':
 				story = new StoryOnePage(json);
 				break;
 			default:
-				return undefined;
+				return null;
 		}
 	}
 	else {
