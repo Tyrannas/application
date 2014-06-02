@@ -46,7 +46,7 @@ Word.prototype.addGesture = function() {
 }
 
 Word.prototype.lancerAides = function() {
-	debug('Lancement des aides : '+this.value+' ; '+this.next_value);
+	//debug('Lancement des aides : '+this.value+' ; '+this.next_value);
 	var wait1 = rand(TIMEOUT_AIDE1.min, TIMEOUT_AIDE1.max);
 	var wait2 = wait1 + rand(TIMEOUT_AIDE1.min, TIMEOUT_AIDE1.max);
 	var wait3 = wait2 + rand(TIMEOUT_AIDE2.min, TIMEOUT_AIDE2.max);

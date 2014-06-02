@@ -86,7 +86,7 @@ Recit_Menu.prototype.generate = function() {
 				this.vignettes[i][j].display();
 				this.titles[i][j].display();
 				var name = this.titles_value[k];
-				Event.onTap('vignettes_'+k, this.titles[i][j], function() { Recit.openStory(name); }, true);
+				Event.onTap('vignettes_'+k, this.titles[i][j], function(name) { return function() { Recit.openStory(name); }}(name), true);
 				
 				if (!MyStorage.getStory(name).isStatic) {
 					//Affichage des croix d'effacement
@@ -100,7 +100,7 @@ Recit_Menu.prototype.generate = function() {
 						this.coords_titles_h[i] - this.h_vignette/2 + this.size_erase/2 + margin/2 
 					);
 					this.erase[i][j].display();
-					Event.onTap('erase_'+k, this.erase[i][j], function() { MyStorage.removeStory(name); Recit.start(); }, true);
+					Event.onTap('erase_'+k, this.erase[i][j], function(name) { return function() { MyStorage.removeStory(name); Recit.start(); }}(name), true);
 				}
 				// Evènements
 			}
