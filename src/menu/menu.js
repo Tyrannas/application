@@ -128,6 +128,18 @@ Menu.lang = function() {
 		Tween.get(Menu.words['lang_FR'].getNode()).to({
 				alpha: Menu.high_alpha_lang,
 			}, Menu.anim_duration, Ease.sineIn);
+
+		Event.onTap('Menu.lang_EN', Menu.words['lang_EN'], function() {
+			Menu.language = 'en';
+			Menu.start();
+			/*
+			Tween.get(Menu.words['lang_EN'].getNode()).to({
+					alpha: Menu.high_alpha_lang,
+				}, Menu.lang_anim_duration, Ease.sineIn);
+			Tween.get(Menu.words['lang_FR'].getNode()).to({
+					alpha: Menu.low_alpha_lang,
+				}, Menu.lang_anim_duration, Ease.sineIn);*/
+		}, true);
 	}
 	else {
 		console.log('English version');
@@ -137,32 +149,19 @@ Menu.lang = function() {
 		Tween.get(Menu.words['lang_FR'].getNode()).to({
 				alpha: Menu.low_alpha_lang,
 			}, Menu.anim_duration, Ease.sineIn);
+
+		Event.onTap('Menu.lang_FR', Menu.words['lang_FR'], function() {
+			Menu.language = 'fr';
+			Menu.start();
+			/*
+			Tween.get(Menu.words['lang_EN'].getNode()).to({
+					alpha: Menu.low_alpha_lang,
+				}, Menu.lang_anim_duration, Ease.sineIn);
+			Tween.get(Menu.words['lang_FR'].getNode()).to({
+					alpha: Menu.high_alpha_lang,
+				}, Menu.lang_anim_duration, Ease.sineIn);*/
+		}, true);
 	}
-
-	Event.onTap('Menu.lang_FR', Menu.words['lang_FR'], function() {
-		Menu.language = 'fr';
-		Menu.start();
-		/*
-		Tween.get(Menu.words['lang_EN'].getNode()).to({
-				alpha: Menu.low_alpha_lang,
-			}, Menu.lang_anim_duration, Ease.sineIn);
-		Tween.get(Menu.words['lang_FR'].getNode()).to({
-				alpha: Menu.high_alpha_lang,
-			}, Menu.lang_anim_duration, Ease.sineIn);*/
-	}, true);
-
-	Event.onTap('Menu.lang_EN', Menu.words['lang_EN'], function() {
-		Menu.language = 'en';
-		Menu.start();
-		/*
-		Tween.get(Menu.words['lang_EN'].getNode()).to({
-				alpha: Menu.high_alpha_lang,
-			}, Menu.lang_anim_duration, Ease.sineIn);
-		Tween.get(Menu.words['lang_FR'].getNode()).to({
-				alpha: Menu.low_alpha_lang,
-			}, Menu.lang_anim_duration, Ease.sineIn);*/
-	}, true);
-	
 }
 
 scriptLoaded('src/menu/menu.js');
