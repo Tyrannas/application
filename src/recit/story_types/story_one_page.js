@@ -10,6 +10,10 @@ function StoryOnePage(json_def) {
 	if (json_def != undefined && json_def.type == 'one_page') {
 		this.addPage(new Page(json_def.pages[0]));
 		this.name = json_def.name;
+		this.isStatic = json_def.isStatic;
+		if (this.isStatic == undefined) {
+			this.isStatic = false;
+		}
 		this.pages[0].setYsize(H);
 		this.pages[0].setCenterXY(W/2,H/2);
 		this.generate();

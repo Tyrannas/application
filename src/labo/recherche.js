@@ -9,6 +9,7 @@ function Recherche() {
 	
 	this.central_word = null; // Objet Word
 	this.central_word_value = null; // Objet Word
+	this.word_to_save = null;
 	this.word_try = null; // Objet Word qui déclenche un test
 	
 	this.coords_word = new Array(); // Coordonnées centrées des mots dans la liste 
@@ -130,10 +131,11 @@ Recherche.prototype.scrollFinish = function() {
 Recherche.prototype.addCentralWord = function(word) {
 	this.central_word = word;
 	this.central_word_value = word.getValue();
+	this.word_to_save = this.central_word;
 }
 
 Recherche.prototype.getCentralWord = function() {
-	return this.central_word;
+	return this.word_to_save;
 }
 
 Recherche.prototype.setPossibilities = function(data) {
@@ -165,7 +167,10 @@ Recherche.prototype.generate = function(mot_act) {
 		j++;
 	}
 	
-	this.word_try = new Word('Transformer', null, 0);
+	if (Menu.language == 'fr') 
+		this.word_try = new Word('Transformer', null, 0);
+	else
+		this.word_try = new Word('Transform', null, 0);
 	this.word_try.setZoom(0.6);
 	this.word_try.setCenterXY(this.coords_word_try.x, this.coords_word_try.y);
 	this.word_try.onTap(function() { Labo.transform(); });
@@ -173,6 +178,7 @@ Recherche.prototype.generate = function(mot_act) {
 	this.central_word = new Word(this.central_word_value);
 	this.central_word.setZoom(2);
 	this.central_word.setCenterXY(this.coords_central_word.x, this.coords_central_word.y);
+	this.word_to_save = this.central_word;
 }
 
 Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTransform = true;
@@ -189,7 +195,10 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	// Effacement du mot try
 	createjs.Tween.get(this.word_try.getNode()).to({'alpha': 0,}, 500);
 	
-	this.word_save = new Word('Sauver');
+	if (Menu.language == 'fr') 
+		this.word_save = new Word('Sauver');
+	else
+		this.word_save = new Word('Save');
 	this.word_save.setCenterX(W/3);
 	this.word_save.setY(H-margin-this.word_save.getHeight());
 	this.word_save.generate();
@@ -199,7 +208,10 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	Event.onTap('word_save', this.word_save, function() { 
 			Labo.saveWord(); 
 			o.word_save.destroy(); 
-			o.word_save = new Word('Sauve'); 
+			if (Menu.language == 'fr')
+				o.word_save = new Word('Sauve'); 
+			else
+				o.word_save = new Word('Saved'); 
 			o.word_save.setCenterX(W/3);
 			o.word_save.setY(H-margin-o.word_save.getHeight());
 			o.word_save.generate(); 
@@ -208,7 +220,10 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 
 	
 	// Bouton Editeur
-	this.start_edit = new Word('Editeur de recit');
+	if (Menu.language == 'fr')
+		this.start_edit = new Word('Editeur de recit');
+	else
+		this.start_edit = new Word('Story editor');
 	this.start_edit.setCenterX(2*W/3);
 	this.start_edit.setY(H-margin-this.start_edit.getHeight());
 	this.start_edit.setAlpha(0);
@@ -222,6 +237,7 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	this.central_word.setPolice(this.words[this.nb_side].getPolice());
 	this.central_word.setCode(this.words[this.nb_side].getCode());
 	this.central_word.generate();
+	this.word_to_save = this.central_word;
 	this.central_word.display();
 	// Animation du mot central
 	this.central_word.setCenterXY(W/2, H/2);

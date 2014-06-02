@@ -215,7 +215,10 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 	this.erase.setX(this.coords_erase.x);
 	Event.onTap('erase_word', this.erase, function(o) { return function() { MyStorage.removeWord(o.words[o.nb_side]); Editeur.classic_changeWord(o.mot_act) }}(this), true);
 
-	this.word_try = new Word('Valider', null, 0);
+	if (Menu.language == 'fr') 
+		this.word_try = new Word('Valider', null, 0);
+	else
+		this.word_try = new Word('Validate', null, 0);
 	this.word_try.setZoom(0.6);
 	this.word_try.setCenterXY(W/2, H - this.word_try.getHeight());
 	this.word_try.onTap(function() {Editeur.handle_recherche();});

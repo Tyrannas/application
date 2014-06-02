@@ -40,7 +40,10 @@ function Recit_MenuConstruct(r) {
 
 Recit_Menu.prototype.generate = function() {
 
-	this.delete_all_words = new Word("Supprimer tout");
+	if (Menu.language == 'fr') 
+		this.delete_all_words = new Word("Supprimer tout");
+	else
+		this.delete_all_words = new Word("Erase all");
 	this.delete_all_words.setZoom(0.6);
 	this.delete_all_words.setX(W - this.delete_all_words.getWidth() - margin);
 	this.delete_all_words.setY(H-margin-this.delete_all_words.getHeight());
@@ -86,8 +89,8 @@ Recit_Menu.prototype.generate = function() {
 				var name = this.titles_value[k];
 				Event.onTap('vignettes_'+k, this.titles[i][j], function(name) { return function() { Recit.openStory(name); }}(name), true);
 				
-				if (((j+1) + i*(this.nb_w)) > StoriesDb.stories.length) {
-					//Affichage des crois d'effacement
+				if (!MyStorage.getStory(name).isStatic) {
+					//Affichage des croix d'effacement
 					this.erase[i][j] = new Image(res('cross_erase'));
 					this.erase[i][j].setScaleXY(
 						getScale(this.erase[i][j].h, this.size_erase),
