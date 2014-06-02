@@ -6,14 +6,6 @@ function Page(json_def) {
 	this.nb = 0;
 	if (json_def != undefined) {
 		JsonHandler.pageFromJson(json_def, this);
-		/*
-		line = new Line();
-		line.add(new Word('Demi tour'));
-		this.addLine(line);
-		line = new Line();
-		line.add(new Word('marche', 'arriere', 1, 'IIIIIIILIIL').setZoom(2));
-		this.addLine(line);
-		*/
 	}
 	this.setYsize(H);
 	this.setCenterXY(W/2,H/3);

@@ -125,10 +125,7 @@ Labo.transform = function() {
 }
 
 Labo.saveWord = function() {
-	word = new Word(recherche.central_word.getValue());
-	word.setNextValue(recherche.words[recherche.nb_side].getValue());
-	word.setPolice(recherche.words[recherche.nb_side].getPolice());
-	word.setCode(recherche.words[recherche.nb_side].getCode());
+	var word = recherche.word_to_save;
 	MyStorage.addWord(word);
 	console.log("Saved word, new list : " +MyStorage.listWords());
 }
@@ -140,7 +137,10 @@ Labo.destroy = function() {
 
 function loadingImg() {
 	gui.menuButton();
-	var loading = new Word("Chargement");
+	if (Menu.language == 'fr') 
+		var loading = new Word("Chargement");
+	else
+		var loading = new Word("Loading");
 	
 	loading.setCenterX(W/2);
 	loading.setCenterY(H/2);
