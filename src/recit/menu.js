@@ -40,7 +40,10 @@ function Recit_MenuConstruct(r) {
 
 Recit_Menu.prototype.generate = function() {
 
-	this.delete_all_words = new Word("Supprimer tout");
+	if (Menu.language == 'fr') 
+		this.delete_all_words = new Word("Supprimer tout");
+	else
+		this.delete_all_words = new Word("Erase all");
 	this.delete_all_words.setZoom(0.6);
 	this.delete_all_words.setX(W - this.delete_all_words.getWidth() - margin);
 	this.delete_all_words.setY(H-margin-this.delete_all_words.getHeight());

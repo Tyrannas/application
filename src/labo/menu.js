@@ -23,22 +23,34 @@ function Labo_MenuConstruct(l) {
 
 Labo_Menu.prototype.generate = function() {
 	// Bouton Valider
-	this.word_valid = new Word('Chercher');
+	if (Menu.language == 'fr') 
+		this.word_valid = new Word('Chercher');
+	else
+		this.word_valid = new Word('Search');
 	this.word_valid.setCenterX(W/2);
 	this.word_valid.setY(H-margin-this.word_valid.getHeight());
 	this.word_valid.display();
 	Event.onTap('word_valid', this.word_valid, function(r) { return function() { r.valid(); }}(this), true);
 
 	// Word choices
-	this.word_choices_ask = new Word('Choisissez un mode de transformation');
+	if (Menu.language == 'fr') 
+		this.word_choices_ask = new Word('Choisissez un mode de transformation');
+	else
+		this.word_choices_ask = new Word('Chose the transformation mode');
 	this.word_choices_ask.setZoom(getScale(this.word_choices_ask.getWidth(), W - 200));
 	this.word_choices_ask.setX(100);
 	this.word_choices_ask.setCenterY(H*2/8);
 	this.word_choices_ask.display();
 	
-	this.word_choices[0] = new Word('Police coupable');
-	this.word_choices[1] = new Word('Police centrale');
-	this.word_choices[2] = new Word('Police de l ombre');
+	if (Menu.language == 'fr')  {
+		this.word_choices[0] = new Word('Police coupable');
+		this.word_choices[1] = new Word('Police centrale');
+		this.word_choices[2] = new Word('Police de l ombre');
+	} else {
+		this.word_choices[0] = new Word('Cutable font');
+		this.word_choices[1] = new Word('Central font');
+		this.word_choices[2] = new Word('Shadow font');
+	}
 	
 	for(var i = 0; i < 3; i++) {
 		var y = H*(3+i)/8;
@@ -105,7 +117,10 @@ Labo_Menu.prototype.textInput = function() {
 	CocoonJS.App.onTextDialogCancelled.addEventListener( function() {
 			CocoonJS.App.onTextDialogFinished.removeEventListener(callback);
 	});
-	CocoonJS.App.showTextDialog("", "Tapez un mot a transformer :", "");
+	if (Menu.language == 'fr') 
+		CocoonJS.App.showTextDialog("", "Tapez un mot a transformer :", "");
+	else
+		CocoonJS.App.showTextDialog("", "Write a word to transform :", "");
 }
 
 Labo_Menu.prototype.textInputWord = function() {
