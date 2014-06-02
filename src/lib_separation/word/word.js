@@ -104,7 +104,7 @@ Word.prototype.generate = function() {
 	this.font.container.scaleY = fontConst.car.scale * this.getZoom();
 	this.font.container.alpha = this.getAlpha();
 
-	if(this.value != this.next_value) {
+	if(this.getValue() != this.getNextValue()) {
 		this.addGesture();
 	}
 }
@@ -137,11 +137,13 @@ Word.prototype.destroy = function() {
 	this.inAnimation = false;
 }
 Word.prototype.destroyTimeouts = function() {
-	debug('Destroy timeouts ' + this.value + ' ; '+this.timeouts);
-	for(var i = 0; i < this.timeouts.length; i++) {
-		clearTimeout(this.timeouts[i]);
+	if(this.timeouts.length > 0) {
+		debug('Destroy timeouts ' + this.value + ' ; '+this.timeouts);
+		for(var i = 0; i < this.timeouts.length; i++) {
+			clearTimeout(this.timeouts[i]);
+		}
+		this.timeouts = new Array();
 	}
-	this.timeouts = new Array();
 }
 
 // Fonctions de mise en avant

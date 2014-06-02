@@ -9,7 +9,6 @@ function Page(json_def) {
 	}
 	this.setYsize(H);
 	this.setCenterXY(W/2,H/3);
-	this.generate();
 }
 
 //Ajout d'une line

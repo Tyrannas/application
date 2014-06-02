@@ -121,7 +121,7 @@ Menu.lang = function() {
 	Menu.words['lang_FR'].display();
 
 	if (Menu.language == 'fr') {
-		console.log('Version francaise');
+		log('Version francaise');
 		Tween.get(Menu.words['lang_EN'].getNode()).to({
 				alpha: Menu.low_alpha_lang,
 			}, Menu.anim_duration, Ease.sineIn);
@@ -142,7 +142,7 @@ Menu.lang = function() {
 		}, true);
 	}
 	else {
-		console.log('English version');
+		log('English version');
 		Tween.get(Menu.words['lang_EN'].getNode()).to({
 				alpha: Menu.high_alpha_lang,
 			}, Menu.anim_duration, Ease.sineIn);

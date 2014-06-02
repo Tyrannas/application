@@ -28,19 +28,19 @@ Recit.displayStoriesMenu = function() {
 	Destroy.all();
 	gui.Recit_menu_displayAll();
 	
-
 	stories = MyStorage.listStories();
 	recit_menu = new Recit_Menu(stories);
-	console.log("Chargement des stories : "+stories);
+	log("Chargement des stories : "+stories);
 	recit_menu.generate();
 }
 
 Recit.openStory = function(story_name) {
-	console.log('Ouverture de ' + story_name);
+	log('Ouverture de ' + story_name);
 	Destroy.all();
 	gui.Recit_displayAll();
 
 	story = MyStorage.getStory(story_name);
+	story.generate();
 	story.display();
 }
 
