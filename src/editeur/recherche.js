@@ -278,7 +278,7 @@ RechercheEditeur.prototype.display = function() {
 RechercheEditeur.prototype.destroy = function() {
 	Destroy.arrayObjet(this.words);
 	Destroy.arrayObjet(this.words_next);
-	Destroy.Objet(this.erase);
+	Destroy.objet(this.erase);
 	Destroy.objet(this.central_word);
 	Destroy.objet(this.word_try);
 }
