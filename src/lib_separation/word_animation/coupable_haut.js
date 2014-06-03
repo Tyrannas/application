@@ -47,4 +47,47 @@ Animation.onAbort.downCut = function(word) {
 	word.font.down.regX = 0;
 }
 
+// Aides visuelles
+Animation.aide1DownCut = function(word) {
+	Animation.aide1Cut(word, 'down');
+}
+Animation.aide2DownCut = function(word) {
+	Animation.aide2Cut(word);
+}
+
+Animation.aide1Cut = function(word, attr) {
+	var speed = Word_cst.duration.aide1Cut;
+	var offset = 20;
+	if(randTrue()) offset = -offset;
+	function step1() {
+		Tween.get(word.font[attr]).to({
+			regX: -offset,
+		}, speed);//, Ease.sineOut);
+	}
+	function step2() {
+		Tween.get(word.font[attr]).to({
+			regX: offset,
+		}, speed*2);//, Ease.sineOut)
+	}
+	function step3() {
+		Tween.get(word.font[attr]).to({
+			regX: 0,
+		}, speed);//, Ease.sineOut)
+	}
+	step1();
+	word.timeouts.push(setTimeout(step2, speed));
+	word.timeouts.push(setTimeout(step3, speed*3));
+}
+Animation.aide2Cut = function(word) {
+	var margin = 30;
+	gui.Aide_hand({
+		'x0': word.getX(),
+		'y0': word.getY() + word.getHeight() / 2,
+		'x1': word.getX() + word.getWidth(),
+		'y1': word.getY() + word.getHeight() / 2,
+		'h': word.getHeight(),
+		'speed': 500,
+	});
+}
+
 scriptLoaded('src/lib_separation/word_animation/coupable_haut.js');

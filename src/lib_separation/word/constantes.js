@@ -14,6 +14,9 @@ var Word_cst = {
 		ombre: 500,
 		
 		respire: 1200,
+
+		aide1Cut: 200,
+		aide1Open: 200,
 	},
 	opacity: {
 		light: 1,

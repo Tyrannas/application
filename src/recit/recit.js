@@ -11,6 +11,7 @@ var recit_menu = null;
         Point d'entrée du récit
 */
 Recit.start = function() {
+	Recit.destroy();
 	story_page = 1;
 	MyStorage.loadAllStories()
 	Recit.computeSizes();
@@ -19,9 +20,8 @@ Recit.start = function() {
 }
 
 Recit.destroy = function() {
-	clearStage();
-
-	Destroy.objet(story);
+	if(story != null)
+		Destroy.objet(story);
 	
 	word_active = false;
 }
@@ -30,19 +30,19 @@ Recit.displayStoriesMenu = function() {
 	Destroy.all();
 	gui.Recit_menu_displayAll();
 	
-
 	stories = MyStorage.listStories();
 	recit_menu = new Recit_Menu(stories);
-	console.log("Chargement des stories : "+stories);
+	log("Chargement des stories : "+stories);
 	recit_menu.generate();
 }
 
 Recit.openStory = function(story_name) {
-	console.log('Ouverture de ' + story_name);
+	log('Ouverture de ' + story_name);
 	Destroy.all();
 	gui.Recit_displayAll();
 
 	story = MyStorage.getStory(story_name);
+	story.generate();
 	story.display();
 }
 

@@ -2,7 +2,7 @@
 	Word event
 */
 Word.prototype.addGesture = function() {
-	
+	this.removeGesture();
 	var word = this;
 	function onEvent(dir) {
 		// sound_police_end(word.getPolice());
@@ -32,16 +32,40 @@ Word.prototype.addGesture = function() {
 		3: 'onErase',
 		5: 'onCut',
 	};
-	
+
 	switch(this.police)
 	{
 		case 0: case 1: case 2: case 3: case 5:
 			Event[events_fct[this.police]](this.getId(), this, onEvent, onChange, onBegin, onAbort);
+			this.lancerAides();
 		break;
 		default:
 			alert('Police inconnue : ' + this.police + ' dans la fonction Word.addGesture()');
 		break;
 	}
+}
+
+Word.prototype.lancerAides = function() {
+	//debug('Lancement des aides : '+this.value+' ; '+this.next_value);
+	var wait1 = rand(TIMEOUT_AIDE1.min, TIMEOUT_AIDE1.max);
+	var wait2 = wait1 + rand(TIMEOUT_AIDE1.min, TIMEOUT_AIDE1.max);
+	var wait3 = wait2 + rand(TIMEOUT_AIDE2.min, TIMEOUT_AIDE2.max);
+
+	var aide1_prefixe = 'aide1';
+	var aide2_prefixe = 'aide2';
+	var aides_fct = {
+		0: 'DownCut',
+		1: 'UpCut',
+		2: 'Open',
+		3: 'Erase',
+		5: 'DownCut',
+	};
+
+	var word = this;
+	this.timeouts.push(setTimeout(function(){Animation[aide1_prefixe+aides_fct[word.police]](word);}, wait1));
+	this.timeouts.push(setTimeout(function(){Animation[aide1_prefixe+aides_fct[word.police]](word);}, wait2));
+	this.timeouts.push(setTimeout(function(){Animation[aide2_prefixe+aides_fct[word.police]](word);}, wait3));
+	this.timeouts.push(setTimeout(function(){word.lancerAides();}, wait3 + TIMEOUT_AIDES_AGAIN));
 }
 
 Word.prototype.removeGesture = function() {
@@ -62,6 +86,7 @@ Word.prototype.removeGesture = function() {
 			alert('Police inconnue : ' + this.police + ' dans la fonction Word.removeGesture()');
 		break;
 	}
+	this.destroyTimeouts();
 }
 
 Word.prototype.onTap = function(handler) {
@@ -71,26 +96,6 @@ Word.prototype.onTap = function(handler) {
 		if(!word_active)
 			handler(word);
 	}}(this), true);
-}
-
-Word.prototype.removeGesture = function() {
-	switch(this.police)
-	{
-		case 0:
-		case 1:
-		case 5:
-			Event.destroy(this.getId(), 'cut');
-		break;
-		case 2:
-			Event.destroy(this.getId(), 'open');
-		break;
-		case 3:
-			Event.destroy(this.getId(), 'erase');
-		break;
-		default:
-			alert('Police inconnue : ' + this.police + ' dans la fonction Word.removeGesture()');
-		break;
-	}
 }
 
 Word.prototype.eventOnAbort = function() {

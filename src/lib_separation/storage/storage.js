@@ -1,7 +1,7 @@
 var MyStorage = new Object();
 
 MyStorage.clear = function() {
-	console.log('Deleting localStorage');
+	log('Deleting localStorage');
 	localStorage.clear();
 }
 
@@ -11,13 +11,11 @@ MyStorage.clear = function() {
 /////////////////////
 
 MyStorage.clearStories = function() {
-	console.log('Deleting stories');
+	log('Deleting stories');
 	var i = 0;
-	for (var key in localStorage){
-		if (Menu.language == 'fr' && key.substring(0,9) == "story_fr_") { 
-			localStorage.removeItem(key);
-		}
-		else if (Menu.language == 'en' && key.substring(0,9) == "story_en_") { 
+	for (var i = 0; i < localStorage.length; i++) {
+		key = localStorage.key(i);
+		if (key.substring(0,9) == "story_"+Menu.language+"_") { 
 			localStorage.removeItem(key);
 		}
 	}
@@ -26,7 +24,8 @@ MyStorage.clearStories = function() {
 MyStorage.listStories = function() {
 	var j = 0;
 	var keys = new Array();
-	for (var key in localStorage){
+	for (var i = 0; i < localStorage.length; i++) {
+		key = localStorage.key(i);
 		if (key.substring(0,9) == "story_"+Menu.language+"_") { 
 			keys[j] = key.substring(9);
 			j++;
@@ -68,10 +67,11 @@ MyStorage.loadAllStories = function() {
 /////////////////////
 
 MyStorage.clearWords = function() {
-	console.log('Deleting words');
+	log('Deleting words');
 	var i = 0;
 	var keys = new Array();
-	for (var key in localStorage){
+	for (var i = 0; i < localStorage.length; i++) {
+		key = localStorage.key(i);
 		if (key.substring(0,9) == "words_"+Menu.language+"_") { 
 			localStorage.removeItem(key);
 		}
@@ -79,9 +79,13 @@ MyStorage.clearWords = function() {
 }
 
 MyStorage.listWords = function() {
+	/*debug('localStorage :');
+	debug(localStorage);
+*/
 	var i = 0, j = 0;
 	var keys = new Array();
-	for (var key in localStorage){
+	for (var i = 0; i < localStorage.length; i++) {
+		key = localStorage.key(i);
 		if (key.substring(0,9) == "words_"+Menu.language+"_") { 
 			keys[j] = key.substring(9);
 			j++;
