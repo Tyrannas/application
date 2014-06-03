@@ -221,9 +221,9 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	
 	// Bouton Editeur
 	if (Menu.language == 'fr')
-		this.start_edit = new Word('Editeur de recit');
+		this.start_edit = new Word('Editeur');
 	else
-		this.start_edit = new Word('Story editor');
+		this.start_edit = new Word('Editor');
 	this.start_edit.setCenterX(2*W/3);
 	this.start_edit.setY(H-margin-this.start_edit.getHeight());
 	this.start_edit.setAlpha(0);
