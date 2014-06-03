@@ -29,7 +29,7 @@ Labo.menu = function() {
 			if (Menu.language == 'fr') 
 				alert("Veuillez choisir une police.");
 			else
-				alert("Please choose a police.");
+				alert("Please choose a font.");
 		}
 	});
 };
