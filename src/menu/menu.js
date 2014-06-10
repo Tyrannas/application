@@ -18,6 +18,8 @@ Menu.start = function() {
 	Menu.editeur();
 	Menu.lang();
 
+	show_err_message_too_many_stories = true;
+
 	gui.MenuPrincipal();
 }
 

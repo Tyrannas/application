@@ -107,6 +107,15 @@ Recit_Menu.prototype.generate = function() {
 			k++;
 		}
 	}
+	if (this.titles_value.length > this.nb_w*this.nb_h && show_err_message_too_many_stories) {
+		show_err_message_too_many_stories = false;
+		var msg;
+		if (language == 'fr')
+			msg = "Le nombre de récits enregistré dépasse la capacité maximale de l'affichage, supprimez des récits et d'autres apparaitront";
+		else
+			msg = "There are too many stories saved, you may want to delete some so other may appear";
+		alert(msg);
+	}
 }
 
 /* Text input */
