@@ -37,9 +37,10 @@ Labo_Menu.prototype.generate = function() {
 		this.word_choices_ask = new Word('Choisissez un mode de transformation');
 	else
 		this.word_choices_ask = new Word('Chose the transformation mode');
-	this.word_choices_ask.setZoom(getScale(this.word_choices_ask.getWidth(), W - 200));
-	this.word_choices_ask.setX(100);
-	this.word_choices_ask.setCenterY(H*2/8);
+	var police_scale = getScale(this.word_choices_ask.getWidth(), 6*W/10);
+	this.word_choices_ask.setZoom(police_scale);
+	this.word_choices_ask.setCenterX(W/2);
+	this.word_choices_ask.setCenterY(H*3/8);
 	this.word_choices_ask.display();
 	
 	if (language == 'fr')  {
@@ -51,16 +52,21 @@ Labo_Menu.prototype.generate = function() {
 		this.word_choices[1] = new Word('Central font');
 		//this.word_choices[2] = new Word('Shadow font');
 	}
+	this.word_choices[0].setZoom(police_scale);
+	this.word_choices[1].setZoom(police_scale);
+	//this.word_choices[2].setZoom(police_scale);
 	
 	for(var i = 0; i < 2; i++) {
-		var y = H*(3+i)/8;
+		var y = H*(4+i)/8;
 		
 		this.checkbox[i] = new Image(res('menu_labo_checkbox'));
+		this.checkbox[i].setScaleXY(police_scale, police_scale);
 		this.checkbox[i].setX(W/4);
 		this.checkbox[i].setCenterY(y);
 		this.checkbox[i].display();
 		
 		this.checkbox_valid[i] = new Image(res('menu_labo_checkbox_valid'));
+		this.checkbox_valid[i].setScaleXY(police_scale, police_scale);
 		this.checkbox_valid[i].setX(W/4);
 		this.checkbox_valid[i].setCenterY(y);
 		this.checkbox_valid[i].setAlpha(0);
@@ -79,6 +85,7 @@ Labo_Menu.prototype.generate = function() {
 	// Input text
 	this.input_text = new Image(res('menu_labo_input_text'));
 	this.input_text.setScaleX(getScale(this.input_text.w, W/2));
+	this.input_text.setScaleY(getScale(this.input_text.h, H/7));
 	this.input_text.setX((W/2) - (this.input_text.getWidth()/2));
 	this.input_text.setY(15);
 	this.input_text.display();
@@ -126,7 +133,8 @@ Labo_Menu.prototype.textInput = function() {
 Labo_Menu.prototype.textInputWord = function() {
 	Destroy.objet(this.word_searched);
 	this.word_searched = new Word(this.word_searched_value);
-	this.word_searched.setCenterXY(W/2, 15 + this.input_text.h / 2);
+	this.word_searched.setZoom(getMinScale(this.word_searched.getHeight(), 0.9*this.input_text.getHeight(), this.word_searched.getWidth(), 0.8*this.input_text.getWidth()));
+	this.word_searched.setCenterXY(W/2, this.input_text.getY()+this.input_text.getHeight() / 2);
 	this.word_searched.display();
 }
 
