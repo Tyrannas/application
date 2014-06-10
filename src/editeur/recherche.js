@@ -218,7 +218,7 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 	if (language == 'fr') 
 		this.word_try = new Word('Valider', null, 0);
 	else
-		this.word_try = new Word('Save', null, 0);
+		this.word_try = new Word('Ok', null, 0);
 	this.word_try.setZoom(0.6);
 	this.word_try.setCenterXY(W/2, H - this.word_try.getHeight());
 	this.word_try.onTap(function() {Editeur.handle_recherche();});

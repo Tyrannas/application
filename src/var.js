@@ -33,6 +33,8 @@ var fontSize = 28;
 
 var preload;
 
+var show_err_message_too_many_stories = true;
+
 // Bitmap fonts
 var font_h = Math.ceil(H / 10);
 
