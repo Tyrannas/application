@@ -26,7 +26,7 @@ Labo.menu = function() {
 			Labo.generateRecherche(word_searched, police);
 		}
 		else {
-			if (Menu.language == 'fr') 
+			if (language == 'fr') 
 				alert("Veuillez choisir une police.");
 			else
 				alert("Please choose a font.");
@@ -66,7 +66,7 @@ Labo.generateRecherche = function(word_searched, police) {
 		}
 		else
 		{
-			if (Menu.language == 'fr') 
+			if (language == 'fr') 
 				alert("Aucune correspondance.");
 			else
 				alert("No match found.");
@@ -136,7 +136,7 @@ Labo.transform = function() {
 }
 
 Labo.saveWord = function() {
-	var word = recherche.word_to_save;
+	var word = recherche.getCentralWord();
 	MyStorage.addWord(word);
 	log("Saved word, new list : " +MyStorage.listWords());
 }
@@ -148,7 +148,7 @@ Labo.destroy = function() {
 
 function loadingImg() {
 	gui.menuButton();
-	if (Menu.language == 'fr') 
+	if (language == 'fr') 
 		var loading = new Word("Chargement");
 	else
 		var loading = new Word("Loading");

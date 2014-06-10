@@ -115,6 +115,10 @@ function getScale(c_obj, c) {
 	return c / c_obj;
 }
 
+function getMinScale(c_obj1, c1, c_obj2, c2) {
+	return Math.min(c1/c_obj1, c2/c_obj2);
+}
+
 function rand(min, max)
 {
 	return Math.floor((Math.random() * max) + min);

@@ -2,7 +2,7 @@
 
 function Word_ombre(data) {
 	opacity_OMBRE = 1;
-	if(Menu.language == 'fr') {
+	if(language == 'fr') {
 		this.CYGNE = new createjs.Bitmap(res('CYGNE'));
 		this.OMBRE = new createjs.Bitmap(res('OMBRE'));
 		var scale = 1.2;

@@ -1,6 +1,7 @@
 /* Constantes */
 
 var DEBUG = true;		// Active le mode débug si true
+var language = 'en';
 
 var NB_FPS = 30;		// Nombre de FPS (Frames Per Second, images par seconde)
 var MS_AFF_FPS = 1000;	// Nombre de milisecondes entre deux affichages des FPS

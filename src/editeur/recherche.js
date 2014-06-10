@@ -215,7 +215,7 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 	this.erase.setX(this.coords_erase.x);
 	Event.onTap('erase_word', this.erase, function(o) { return function() { MyStorage.removeWord(o.words[o.nb_side]); Editeur.classic_changeWord(o.mot_act) }}(this), true);
 
-	if (Menu.language == 'fr') 
+	if (language == 'fr') 
 		this.word_try = new Word('Valider', null, 0);
 	else
 		this.word_try = new Word('Save', null, 0);
