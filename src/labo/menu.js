@@ -37,6 +37,7 @@ Labo_Menu.prototype.generate = function() {
 		this.word_choices_ask = new Word('Choisissez un mode de transformation');
 	else
 		this.word_choices_ask = new Word('Chose the transformation mode');
+
 	var police_scale = getScale(this.word_choices_ask.getWidth(), 6*W/10);
 	this.word_choices_ask.setZoom(police_scale);
 	this.word_choices_ask.setCenterX(W/2);
@@ -48,7 +49,7 @@ Labo_Menu.prototype.generate = function() {
 		this.word_choices[1] = new Word('Police centrale');
 		//this.word_choices[2] = new Word('Police de l ombre');
 	} else {
-		this.word_choices[0] = new Word('Cutable font');
+		this.word_choices[0] = new Word('Guillotine font');
 		this.word_choices[1] = new Word('Central font');
 		//this.word_choices[2] = new Word('Shadow font');
 	}

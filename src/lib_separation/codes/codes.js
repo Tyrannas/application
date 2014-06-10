@@ -97,13 +97,22 @@ function convertValue(value, code, police) {
 						new_value += (code[i_code] == 'o') ? (value[i] + '_') : value[i];
 					break;
 					case 'y': // Si le 'y' a le code 'i', le haut doit être en V (provisoirement 'Y')
-						new_value += (code[i_code] == 'l') ? 'Y' : 'y';
+						new_value += (code[i_code] == 'l') ? 'y' : 'y';
 					break;
 					case 'C': // Le C peut être rond ('C') ou carré ('[')
 						new_value += (code[i_code] == 'O') ? 'C' : '[';
 					break;
 					case 'E': // Le E peut être rond ('') ou carré ('E')
 						new_value += (code[i_code] == 'O') ? 'Ê' : 'E';
+					break;
+					default:
+						new_value += value[i];
+				}
+			break;
+			case 2:
+				switch(value[i]) {
+					case 'E': // Le E peut être rond ('e') ou carré ('E')
+						new_value += 'e';
 					break;
 					default:
 						new_value += value[i];

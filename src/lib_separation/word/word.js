@@ -3,7 +3,7 @@ var word_active = false;
 /**
 	Class Word
 */
-function Word(value, next_value, police, code) {
+function Word(value, next_value, police, code, autoAddGesture) {
 	this.id = ''; // Id unique
 	
 	this.x = 0; // Position x en pixel
@@ -42,6 +42,11 @@ function Word(value, next_value, police, code) {
 	
 	this.list_done = new Array(); // Liste des fonctions à appeler quand une fonction est terminée
 	
+	if(autoAddGesture == undefined || autoAddGesture == null)
+		this.autoAddGesture = true;
+	else
+		this.autoAddGesture = false;
+
 	this.generate();
 	this.setId(this.getUniqId());
 }
@@ -108,7 +113,7 @@ Word.prototype.display = function() {
 	if(this.font.container.getStage() == null)
 		stage.addChild(this.font.container);
 
-	if(this.getValue() != this.getNextValue()) {
+	if(this.getValue() != this.getNextValue() && this.autoAddGesture) {
 		this.addGesture();
 	}
 }

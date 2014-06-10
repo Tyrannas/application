@@ -35,7 +35,7 @@ Intro.laSeparation = function() {
 	
 	var anim_duration = 2000;
 	var zoom = 2;
-	la_separation = new Word('Separation', 'Perception', 5);
+	la_separation = new Word('Separation', 'Perception', 5, null, false);
 	la_separation.setZoom(zoom);
 	la_separation.setCenterXY(W / 2, H / 2);
 	la_separation.display();

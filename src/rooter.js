@@ -37,6 +37,11 @@ Rooter.preloadAll = function(handler) {
 			// Menu recit
 			{src:"img/menu_recit/vignette.png", id:"menu_recit_vignette"},
 			{src:"img/menu_recit/erase.png", id:"cross_erase"},
+			// Ombre
+			{src:"img/ombre/OMBRE.png", id:"OMBRE"},
+			{src:"img/ombre/CYGNE.png", id:"CYGNE"},
+			{src:"img/ombre/shading.png", id:"SHADING"},
+			{src:"img/ombre/slicing.png", id:"SLICING"},
 		// Audio
 			{src:"sound/cut.ogg", id:"audio_cut"},
 			{src:"sound/ambiant.ogg", id:"audio_ambiant"},
