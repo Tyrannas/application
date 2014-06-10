@@ -39,7 +39,7 @@ function Recit_MenuConstruct(r) {
 
 Recit_Menu.prototype.generate = function() {
 
-	if (Menu.language == 'fr') 
+	if (language == 'fr') 
 		this.delete_all_words = new Word("Supprimer tout");
 	else
 		this.delete_all_words = new Word("Erase all");

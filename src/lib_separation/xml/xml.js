@@ -54,7 +54,7 @@ Xml.importStory = function(xml_file) {
 }
 
 Xml.importLabRequest = function(word_requested) {
-	var xml_file = Xml.load('http://192.185.52.237/~lasepa/beta/API/getWordPossibilitiesv2.php?word=' + word_requested + "&language=" + Menu.language);
+	var xml_file = Xml.load('http://192.185.52.237/~lasepa/beta/API/getWordPossibilitiesv2.php?word=' + word_requested + "&language=" + language);
 	
 	var p = new Array();
 	
