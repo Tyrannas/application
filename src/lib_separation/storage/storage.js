@@ -13,11 +13,15 @@ MyStorage.clear = function() {
 MyStorage.clearStories = function() {
 	log('Deleting stories');
 	var i = 0;
+	var to_del = new Array();
 	for (var i = 0; i < localStorage.length; i++) {
 		key = localStorage.key(i);
 		if (key.substring(0,9) == "story_"+language+"_") { 
-			localStorage.removeItem(key);
+			to_del.push(key);
 		}
+	}
+	for (var i=0; i<to_del.length;i++) {
+		localStorage.removeItem(to_del[i]);
 	}
 }
 
