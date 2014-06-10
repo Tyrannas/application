@@ -111,9 +111,9 @@ function convertValue(value, code, police) {
 			break;
 			case 2:
 				switch(value[i]) {
-					case 'E': // Le E peut être rond ('e') ou carré ('E')
+					/*case 'E': // Le E peut être rond ('e') ou carré ('E')
 						new_value += 'e';
-					break;
+					break;*/
 					default:
 						new_value += value[i];
 				}
