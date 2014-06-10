@@ -5,7 +5,7 @@ Editeur.classic_init = function() {
 	this.word_x = W/2;
 	this.word_y = 2*H/3;
 	this.word_zoom = 2;
-	if (Menu.language == 'fr') {
+	if (language == 'fr') {
 		this.title = new Word('Titre');
 		this.classic_word = new Word('Changez moi');
 		this.word_save = new Word('Sauver');
@@ -55,7 +55,7 @@ Editeur.classic_display = function() {
 	Event.onTap('word_save', this.word_save, function() { 
 			Editeur.saveStory();
 			o.word_save.destroy(); 
-			if (Menu.language == 'fr') 
+			if (language == 'fr') 
 				o.word_save = new Word('Sauve'); 
 			else 
 				o.word_save = new Word('Saved'); 
@@ -73,7 +73,7 @@ Editeur.classic_changeWord = function(offset) {
 	}
 	var known_words = MyStorage.listWords().map(function(x) {return JsonHandler.wordFromJson(JSON.parse(MyStorage.getWord(x)));});
 	if (known_words.length <= 0) {
-		if (Menu.language == 'fr')
+		if (language == 'fr')
 			alert('Aucun mot enregistré, allez dans le Labo !');
 		else 
 			alert('No words saved, let\'s go to the Lab !');
@@ -81,9 +81,7 @@ Editeur.classic_changeWord = function(offset) {
 	} else {
 		this.recherche = new RechercheEditeur(this.classic_recherche_result);
 		Destroy.all();
-		console.log("Mots connus : "+MyStorage.listWords());
 		this.recherche.setPossibilities(known_words);
-		console.log(offset);
 		this.recherche.generate(offset);
 		gui.Editeur_classic_displayRecherche();
 		this.recherche.display();
