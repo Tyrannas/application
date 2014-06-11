@@ -30,10 +30,7 @@ Menu.destroy = function() {
 Menu.recit = function() {
 	var zoom = 2;
 
-	if (language == 'fr')
-		Menu.words['recit'] = new Word('salon', null, 5);
-	else
-		Menu.words['recit'] = new Word('lounge', null, 5);
+	Menu.words['recit'] = new Word('salon', null, 5);
 	
 	Menu.words['recit'].setZoom(zoom);
 	Menu.words['recit'].setX(-Menu.words['recit'].getWidth());
