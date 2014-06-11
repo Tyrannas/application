@@ -18,13 +18,13 @@ Animation.onChange.ombre = function(word, val) {
 	var opacity2 = opacity_OMBRE - step * val;
 	if(opacity2 < 0) opacity2 = 0;
 
-	OMBRE.setOpacity(opacity2);
-	mainLayer.draw();
+	word.font.OMBRE.alpha = opacity2;
+	word.font.CYGNE.alpha = 1 - opacity2;
 }
 
 Animation.onAbort.erase = function(word) {
-	OMBRE.setOpacity(1);
-	opacity_OMBRE = 1;
+	/*word.font.OMBRE.alpha = 1;
+	opacity_OMBRE = 1;*/
 }
 
 scriptLoaded('scripts/libs/separation_toolkit/word_animation/ombre.js');

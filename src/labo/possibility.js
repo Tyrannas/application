@@ -2,6 +2,7 @@ function Possibility(value, police, code) {
 	this.value = value;
 	this.police = police;
 	this.code = code;
+	//debug(this.value + ' ' + this.code);
 }
 
 Possibility.prototype.getValue = function() {

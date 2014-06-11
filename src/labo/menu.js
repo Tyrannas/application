@@ -48,7 +48,7 @@ Labo_Menu.prototype.generate = function() {
 		this.word_choices[1] = new Word('Police centrale');
 		//this.word_choices[2] = new Word('Police de l ombre');
 	} else {
-		this.word_choices[0] = new Word('Cutable font');
+		this.word_choices[0] = new Word('Guillotine font');
 		this.word_choices[1] = new Word('Central font');
 		//this.word_choices[2] = new Word('Shadow font');
 	}
