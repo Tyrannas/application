@@ -1,6 +1,7 @@
 /* Constantes */
 
 var DEBUG = true;		// Active le mode débug si true
+var language = 'en';
 
 var NB_FPS = 30;		// Nombre de FPS (Frames Per Second, images par seconde)
 var MS_AFF_FPS = 1000;	// Nombre de milisecondes entre deux affichages des FPS
@@ -9,6 +10,10 @@ var H = window.innerHeight;	// Hauteur de l'écran
 
 var C_BACK = '#000'; // Color background
 var C_CONT = '#fff'; // Color content
+
+var TIMEOUT_AIDE1 = {'min':4000, 'max':6000};
+var TIMEOUT_AIDE2 = {'min':4000, 'max':10000};
+var TIMEOUT_AIDES_AGAIN = 2000;
 
 var Tween = createjs.Tween;
 var Ease = createjs.Ease;
@@ -27,6 +32,8 @@ var fontConst;
 var fontSize = 28;
 
 var preload;
+
+var show_err_message_too_many_stories = true;
 
 // Bitmap fonts
 var font_h = Math.ceil(H / 10);

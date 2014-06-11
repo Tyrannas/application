@@ -65,7 +65,7 @@ Line.prototype.addTab = function(police) {
 */
 Line.prototype.generate = function() {
 	for(var i = 0; i < this.nb; i++) {
-		this.words[i].activeOnTap();
+		this.words[i].generate();
 	}
 }
 

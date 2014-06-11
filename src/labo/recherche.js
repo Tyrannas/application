@@ -131,7 +131,6 @@ Recherche.prototype.scrollFinish = function() {
 Recherche.prototype.addCentralWord = function(word) {
 	this.central_word = word;
 	this.central_word_value = word.getValue();
-	this.word_to_save = this.central_word;
 }
 
 Recherche.prototype.getCentralWord = function() {
@@ -167,7 +166,7 @@ Recherche.prototype.generate = function(mot_act) {
 		j++;
 	}
 	
-	if (Menu.language == 'fr') 
+	if (language == 'fr') 
 		this.word_try = new Word('Transformer', null, 0);
 	else
 		this.word_try = new Word('Transform', null, 0);
@@ -178,28 +177,31 @@ Recherche.prototype.generate = function(mot_act) {
 	this.central_word = new Word(this.central_word_value);
 	this.central_word.setZoom(2);
 	this.central_word.setCenterXY(this.coords_central_word.x, this.coords_central_word.y);
-	this.word_to_save = this.central_word;
 }
 
 Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTransform = true;
 	for(var i = 0; i < this.nb_max; i++) {
 		// Effacement de la roue
-		if(i != this.nb_side) createjs.Tween.get(this.words[i].getNode()).to({'alpha': 0,}, 500);
+		//if(i != this.nb_side) createjs.Tween.get(this.words[i].getNode()).to({'alpha': 0,}, 500);
+		createjs.Tween.get(this.words[i].getNode()).to({'alpha': 0,}, 500);
 	}
 	
 	// Animation du mot courant de la liste
+	/*
 	this.words[this.nb_side].setCenterX(W/2);
 	this.words[this.nb_side].setY(0);
+	createjs.Tween.get(this.words[this.nb_side].getNode()).to({'x': this.words[this.nb_side].getX(),'y': this.words[this.nb_side].getY(),}, 500);
+	*/
 	createjs.Tween.get(this.words[this.nb_side].getNode()).to({'x': this.words[this.nb_side].getX(),'y': this.words[this.nb_side].getY(),}, 500);
 	
 	// Effacement du mot try
 	createjs.Tween.get(this.word_try.getNode()).to({'alpha': 0,}, 500);
 	
-	if (Menu.language == 'fr') 
+	if (language == 'fr') 
 		this.word_save = new Word('Sauver');
 	else
 		this.word_save = new Word('Save');
-	this.word_save.setCenterX(W/3);
+	this.word_save.setCenterX(W/4);
 	this.word_save.setY(H-margin-this.word_save.getHeight());
 	this.word_save.generate();
 	this.word_save.display();
@@ -208,11 +210,11 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	Event.onTap('word_save', this.word_save, function() { 
 			Labo.saveWord(); 
 			o.word_save.destroy(); 
-			if (Menu.language == 'fr')
+			if (language == 'fr')
 				o.word_save = new Word('Sauve'); 
 			else
 				o.word_save = new Word('Saved'); 
-			o.word_save.setCenterX(W/3);
+			o.word_save.setCenterX(W/4);
 			o.word_save.setY(H-margin-o.word_save.getHeight());
 			o.word_save.generate(); 
 			o.word_save.display(); }, 
@@ -220,11 +222,11 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 
 	
 	// Bouton Editeur
-	if (Menu.language == 'fr')
-		this.start_edit = new Word('Editeur de recit');
+	if (language == 'fr')
+		this.start_edit = new Word('Editeur');
 	else
-		this.start_edit = new Word('Story editor');
-	this.start_edit.setCenterX(2*W/3);
+		this.start_edit = new Word('Story');
+	this.start_edit.setCenterX(W/2);
 	this.start_edit.setY(H-margin-this.start_edit.getHeight());
 	this.start_edit.setAlpha(0);
 	this.start_edit.generate();
@@ -232,19 +234,31 @@ Recherche.prototype.transform = function() { if(!this.inTransform) { this.inTran
 	createjs.Tween.get(this.start_edit.getNode()).to({'alpha': 1,}, 500);
 	Event.onTap('start_edit', this.start_edit, function() { return function() { Editeur.start(); }}(this), true);
 
+	if (language == 'fr')
+		this.back_to_recherche = new Word('Retour');
+	else
+		this.back_to_recherche = new Word('Go back');
+	this.back_to_recherche.setCenterX(3*W/4);
+	this.back_to_recherche.setY(H-margin-this.back_to_recherche.getHeight());
+	this.back_to_recherche.setAlpha(0);
+	this.back_to_recherche.generate();
+	this.back_to_recherche.display();
+	createjs.Tween.get(this.back_to_recherche.getNode()).to({'alpha': 1,}, 500);
+	var r = this;
+	Event.onTap('back_to_recherche', r.back_to_recherche, function() { r.transformFinish(); }, true); 
+
 	// Modification du mot central
 	this.central_word.setNextValue(this.words[this.nb_side].getValue());
 	this.central_word.setPolice(this.words[this.nb_side].getPolice());
 	this.central_word.setCode(this.words[this.nb_side].getCode());
 	this.central_word.generate();
-	this.word_to_save = this.central_word;
+	this.word_to_save = new Word(this.central_word.getValue(), this.central_word.getNextValue(), this.central_word.getPolice(), this.central_word.getCode());
 	this.central_word.display();
 	// Animation du mot central
 	this.central_word.setCenterXY(W/2, H/2);
 	createjs.Tween.get(this.central_word.getNode())
 		.to({'x': this.central_word.getX(),'y': this.central_word.getY(),}, 500)
-		.call(function(r){return function(){ r.central_word.addGesture(); 
-	Event.onTap('back_to_recherche', r.central_word, function() { r.transformFinish(); }, true); }}(this));
+		.call(function(r){return function(){ r.central_word.addGesture();}}(this));
 }}
 
 Recherche.prototype.transformFinish = function() {
@@ -260,6 +274,9 @@ Recherche.prototype.transformFinish = function() {
 
 	createjs.Tween.get(this.word_save.getNode()).to({'alpha': 0,}, 500)
 	Event.onTap('word_save', this.word_save, function() {}, true);
+
+	createjs.Tween.get(this.back_to_recherche.getNode()).to({'alpha': 0,}, 500)
+	Event.onTap('back_to_recherche', this.back_to_recherche, function() {}, true);
 	// Affichage du mot centrale
 	this.central_word.setValue(this.central_word.getNextValue());
 	this.central_word.generate();

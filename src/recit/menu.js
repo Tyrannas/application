@@ -22,7 +22,6 @@ function Recit_MenuConstruct(r) {
 	var w = W - 200;
 	var offsetX = 100;
 	
-	
 	r.h_vignette = Math.ceil((H-(r.nb_h+1)*margin)/r.nb_h);
 	// r.nb_w = Math.floor(w / r.h_vignette);
 	r.w_vignette = Math.ceil((w-(r.nb_w+1)*margin)/r.nb_w);
@@ -40,7 +39,7 @@ function Recit_MenuConstruct(r) {
 
 Recit_Menu.prototype.generate = function() {
 
-	if (Menu.language == 'fr') 
+	if (language == 'fr') 
 		this.delete_all_words = new Word("Supprimer tout");
 	else
 		this.delete_all_words = new Word("Erase all");
@@ -107,6 +106,15 @@ Recit_Menu.prototype.generate = function() {
 			}
 			k++;
 		}
+	}
+	if (this.titles_value.length > this.nb_w*this.nb_h && show_err_message_too_many_stories) {
+		show_err_message_too_many_stories = false;
+		var msg;
+		if (language == 'fr')
+			msg = "Le nombre de récits enregistré dépasse la capacité maximale de l'affichage, supprimez des récits et d'autres apparaitront";
+		else
+			msg = "There are too many stories saved, you may want to delete some so other may appear";
+		alert(msg);
 	}
 }
 

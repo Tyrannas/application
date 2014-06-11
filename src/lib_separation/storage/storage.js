@@ -1,7 +1,7 @@
 var MyStorage = new Object();
 
 MyStorage.clear = function() {
-	console.log('Deleting localStorage');
+	log('Deleting localStorage');
 	localStorage.clear();
 }
 
@@ -11,23 +11,26 @@ MyStorage.clear = function() {
 /////////////////////
 
 MyStorage.clearStories = function() {
-	console.log('Deleting stories');
+	log('Deleting stories');
 	var i = 0;
-	for (var key in localStorage){
-		if (Menu.language == 'fr' && key.substring(0,9) == "story_fr_") { 
-			localStorage.removeItem(key);
+	var to_del = new Array();
+	for (var i = 0; i < localStorage.length; i++) {
+		key = localStorage.key(i);
+		if (key.substring(0,9) == "story_"+language+"_") { 
+			to_del.push(key);
 		}
-		else if (Menu.language == 'en' && key.substring(0,9) == "story_en_") { 
-			localStorage.removeItem(key);
-		}
+	}
+	for (var i=0; i<to_del.length;i++) {
+		localStorage.removeItem(to_del[i]);
 	}
 }
 
 MyStorage.listStories = function() {
 	var j = 0;
 	var keys = new Array();
-	for (var key in localStorage){
-		if (key.substring(0,9) == "story_"+Menu.language+"_") { 
+	for (var i = 0; i < localStorage.length; i++) {
+		key = localStorage.key(i);
+		if (key.substring(0,9) == "story_"+language+"_") { 
 			keys[j] = key.substring(9);
 			j++;
 		}
@@ -37,7 +40,7 @@ MyStorage.listStories = function() {
 
 //Prend un objet story en argument
 MyStorage.addStory = function(story) {
-	var name = "story_"+Menu.language+"_"+story.name;
+	var name = "story_"+language+"_"+story.name;
 	json_story = JSON.stringify(JsonHandler.jsonFromStory(story));
 	localStorage.setItem(name, json_story);
 	return name;
@@ -45,12 +48,12 @@ MyStorage.addStory = function(story) {
 
 //Renvoit un objet story
 MyStorage.getStory = function(name) {
-	return JsonHandler.storyFromJson(JSON.parse(localStorage.getItem("story_"+Menu.language+"_"+name)));
+	return JsonHandler.storyFromJson(JSON.parse(localStorage.getItem("story_"+language+"_"+name)));
 }
 
 //Argment : nom de la story à supprimer
 MyStorage.removeStory = function(name) {
-	localStorage.removeItem("story_"+Menu.language+"_"+name);
+	localStorage.removeItem("story_"+language+"_"+name);
 }
 
 MyStorage.loadAllStories = function() {
@@ -68,31 +71,37 @@ MyStorage.loadAllStories = function() {
 /////////////////////
 
 MyStorage.clearWords = function() {
-	console.log('Deleting words');
+	log('Deleting words');
 	var i = 0;
 	var keys = new Array();
-	for (var key in localStorage){
-		if (key.substring(0,9) == "words_"+Menu.language+"_") { 
+	for (var i = 0; i < localStorage.length; i++) {
+		key = localStorage.key(i);
+		if (key.substring(0,9) == "words_"+language+"_") { 
 			localStorage.removeItem(key);
 		}
 	}
 }
 
 MyStorage.listWords = function() {
+	/*debug('localStorage :');
+	debug(localStorage);
+*/
 	var i = 0, j = 0;
 	var keys = new Array();
-	for (var key in localStorage){
-		if (key.substring(0,9) == "words_"+Menu.language+"_") { 
+	for (var i = 0; i < localStorage.length; i++) {
+		key = localStorage.key(i);
+		log("clé : " +key)
+		if (key.substring(0,9) == "words_"+language+"_") { 
 			keys[j] = key.substring(9);
 			j++;
 		}
-		i++;
 	}
+	log(j+" words selected among "+i);
 	return keys;
 }
 
 MyStorage.addWord = function(word) {
-	var name = "words_"+Menu.language+"_"+word.value+"_"+word.next_value;
+	var name = "words_"+language+"_"+word.value+"_"+word.next_value;
 	json_word = JSON.stringify(JsonHandler.jsonFromWord(word));
 	localStorage.setItem(name, json_word);
 	return name;
@@ -100,11 +109,11 @@ MyStorage.addWord = function(word) {
 
 //Key est 'value_nextvalue'
 MyStorage.getWord = function(key) {
-	return localStorage.getItem("words_"+Menu.language+"_"+key);
+	return localStorage.getItem("words_"+language+"_"+key);
 }
 
 MyStorage.removeWordKey = function(key) {
-	localStorage.removeItem("words_"+Menu.language+"_"+key);
+	localStorage.removeItem("words_"+language+"_"+key);
 }
 
 MyStorage.removeWord = function(word) {

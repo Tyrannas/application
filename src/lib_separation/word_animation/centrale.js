@@ -70,4 +70,46 @@ Animation.onAbort.open = function(word) {
 	word.font.down.regY = 0;
 }
 
+// Aides visuelles
+Animation.aide1Open = function(word) {
+	var speed = Word_cst.duration.aide1Open;
+	var offset = 20;
+	if(randTrue()) {
+		var node1 = word.font.up;
+		var node2 = word.font.down;
+	}
+	else {
+		var node1 = word.font.down;
+		var node2 = word.font.up;
+		offset = -offset;
+	}
+	function step1() {
+		Tween.get(node1).to({
+			regY: offset,
+		}, speed);
+	}
+	function step2() {
+		Tween.get(node2).to({
+			regY: -offset,
+		}, speed);
+	}
+	function step3() {
+		Tween.get(node1).to({
+			regY: 0,
+		}, speed);
+	}
+	function step4() {
+		Tween.get(node2).to({
+			regY: 0,
+		}, speed);
+	}
+	step1();
+	word.timeouts.push(setTimeout(step2, speed));
+	word.timeouts.push(setTimeout(step3, speed*2));
+	word.timeouts.push(setTimeout(step4, speed*3));
+}
+Animation.aide2Open = function(word) {
+	log(word.getValue()+" : aide 2 (centrale)");
+}
+
 scriptLoaded('src/lib_separation/word_animation/centrale.js');

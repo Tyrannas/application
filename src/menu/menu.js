@@ -5,7 +5,6 @@ var Menu = {};
 Menu.words = new Array();
 Menu.anim_duration = 2000;
 Menu.opacity = 0.5;
-Menu.language = 'fr';
 Menu.low_alpha_lang = 0.2;
 Menu.high_alpha_lang = 1;
 Menu.lang_anim_duration = 500;
@@ -19,6 +18,8 @@ Menu.start = function() {
 	Menu.editeur();
 	Menu.lang();
 
+	show_err_message_too_many_stories = true;
+
 	gui.MenuPrincipal();
 }
 
@@ -29,7 +30,7 @@ Menu.destroy = function() {
 Menu.recit = function() {
 	var zoom = 2;
 
-	if (Menu.language == 'fr')
+	if (language == 'fr')
 		Menu.words['recit'] = new Word('salon', null, 5);
 	else
 		Menu.words['recit'] = new Word('lounge', null, 5);
@@ -53,7 +54,7 @@ Menu.recit = function() {
 Menu.labo = function() {
 	var zoom = 2;
 
-	if (Menu.language == 'fr')
+	if (language == 'fr')
 		Menu.words['labo'] = new Word('labo', null, 5);
 	else
 		Menu.words['labo'] = new Word('lab', null, 5);
@@ -74,7 +75,7 @@ Menu.labo = function() {
 }
 
 Menu.aide = function() {
-	if (Menu.language == 'fr')
+	if (language == 'fr')
 		Menu.words['aide'] = new Word('aide', null, 0);
 	else
 		Menu.words['aide'] = new Word('help', null, 0);
@@ -93,7 +94,7 @@ Menu.aide = function() {
 }
 
 Menu.editeur = function() {
-	if (Menu.language == 'fr') 
+	if (language == 'fr') 
 		Menu.words['editeur'] = new Word('editeur', null, 0);
 	else 
 		Menu.words['editeur'] = new Word('editor', null, 0);
@@ -120,49 +121,48 @@ Menu.lang = function() {
 	Menu.words['lang_FR'].setAlpha(0);
 	Menu.words['lang_FR'].display();
 
-	if (Menu.language == 'fr') {
-		console.log('Version francaise');
+	if (language == 'fr') {
+		log('Version francaise');
 		Tween.get(Menu.words['lang_EN'].getNode()).to({
 				alpha: Menu.low_alpha_lang,
 			}, Menu.anim_duration, Ease.sineIn);
 		Tween.get(Menu.words['lang_FR'].getNode()).to({
 				alpha: Menu.high_alpha_lang,
 			}, Menu.anim_duration, Ease.sineIn);
+
+		Event.onTap('Menu.lang_EN', Menu.words['lang_EN'], function() {
+			language = 'en';
+			Menu.start();
+			/*
+			Tween.get(Menu.words['lang_EN'].getNode()).to({
+					alpha: Menu.high_alpha_lang,
+				}, Menu.lang_anim_duration, Ease.sineIn);
+			Tween.get(Menu.words['lang_FR'].getNode()).to({
+					alpha: Menu.low_alpha_lang,
+				}, Menu.lang_anim_duration, Ease.sineIn);*/
+		}, true);
 	}
 	else {
-		console.log('English version');
+		log('English version');
 		Tween.get(Menu.words['lang_EN'].getNode()).to({
 				alpha: Menu.high_alpha_lang,
 			}, Menu.anim_duration, Ease.sineIn);
 		Tween.get(Menu.words['lang_FR'].getNode()).to({
 				alpha: Menu.low_alpha_lang,
 			}, Menu.anim_duration, Ease.sineIn);
+
+		Event.onTap('Menu.lang_FR', Menu.words['lang_FR'], function() {
+			language = 'fr';
+			Menu.start();
+			/*
+			Tween.get(Menu.words['lang_EN'].getNode()).to({
+					alpha: Menu.low_alpha_lang,
+				}, Menu.lang_anim_duration, Ease.sineIn);
+			Tween.get(Menu.words['lang_FR'].getNode()).to({
+					alpha: Menu.high_alpha_lang,
+				}, Menu.lang_anim_duration, Ease.sineIn);*/
+		}, true);
 	}
-
-	Event.onTap('Menu.lang_FR', Menu.words['lang_FR'], function() {
-		Menu.language = 'fr';
-		Menu.start();
-		/*
-		Tween.get(Menu.words['lang_EN'].getNode()).to({
-				alpha: Menu.low_alpha_lang,
-			}, Menu.lang_anim_duration, Ease.sineIn);
-		Tween.get(Menu.words['lang_FR'].getNode()).to({
-				alpha: Menu.high_alpha_lang,
-			}, Menu.lang_anim_duration, Ease.sineIn);*/
-	}, true);
-
-	Event.onTap('Menu.lang_EN', Menu.words['lang_EN'], function() {
-		Menu.language = 'en';
-		Menu.start();
-		/*
-		Tween.get(Menu.words['lang_EN'].getNode()).to({
-				alpha: Menu.high_alpha_lang,
-			}, Menu.lang_anim_duration, Ease.sineIn);
-		Tween.get(Menu.words['lang_FR'].getNode()).to({
-				alpha: Menu.low_alpha_lang,
-			}, Menu.lang_anim_duration, Ease.sineIn);*/
-	}, true);
-	
 }
 
 scriptLoaded('src/menu/menu.js');

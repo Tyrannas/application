@@ -4,7 +4,7 @@
 var Destroy = {};
 
 Destroy.objet = function(obj) {
-	if(obj != null) {
+	if(obj != null && obj.destroy != undefined) {
 		obj.destroy();
 		obj = null;
 	}
@@ -49,10 +49,10 @@ Destroy.all = function() {
 	stage.removeAllChildren();
 	
 	Intro.destroy();
-	// Menu.destroy();
+	Menu.destroy();
 	// Aide.destroy();
-	// Recit.destroy();
-	// Labo.destroy();
+	Recit.destroy();
+	Labo.destroy();
 	
 	Event.destroyAll();
 	
