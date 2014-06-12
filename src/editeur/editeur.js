@@ -41,7 +41,7 @@ Editeur.textInputTitle = function(x, y, z) {
 	CocoonJS.App.onTextDialogCancelled.addEventListener( function() {
 			CocoonJS.App.onTextDialogFinished.removeEventListener(callback);
 	});
-	if (language == 'fr)
+	if (language == 'fr')
 		CocoonJS.App.showTextDialog("", "Tapez votre titre :", "");
 	else
 		CocoonJS.App.showTextDialog("", "Enter a title :", "");
