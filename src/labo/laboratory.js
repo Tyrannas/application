@@ -52,26 +52,29 @@ Labo.generateRecherche = function(word_searched, police) {
 
 	setTimeout(function(){
 		// var p = Db.wordPossibilities(word_searched); // bdd interne (REMOVED TEMP)
-		var p = Xml.importLabRequest(word_searched); // bdd externe
-		var p2 = new Array();
-		for(var i = 0; i < p.length; i++) {
-			if(inArray(police, p[i].getPolice())) {
-				p2.push(p[i]);
+		function getWordsFinished(p) {
+			var p2 = new Array();
+			for(var i = 0; i < p.length; i++) {
+				if(inArray(police, p[i].getPolice())) {
+					p2.push(p[i]);
+				}
+			}
+			if(p2.length > 0)
+			{
+				recherche.setPossibilities(p2);
+				Labo.displayRecherche();
+			}
+			else
+			{
+				if (language == 'fr') 
+					alert("Aucune correspondance.");
+				else
+					alert("No match found.");
+				Labo.menu();
 			}
 		}
-		if(p2.length > 0)
-		{
-			recherche.setPossibilities(p2);
-			Labo.displayRecherche();
-		}
-		else
-		{
-			if (language == 'fr') 
-				alert("Aucune correspondance.");
-			else
-				alert("No match found.");
-			Labo.menu();
-		}
+		Xml.importLabRequest(word_searched, getWordsFinished); // bdd externe
+		//getWordsFinished(new Array());
 	}, 100);
 }
 

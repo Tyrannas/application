@@ -50,7 +50,7 @@ App.init = function() {
 	// }
 	
 	// Initialisation des FPS
-	createjs.Ticker.setFPS(NB_FPS);
+	//createjs.Ticker.setFPS(NB_FPS);
 	
 	initConstantes();
 	
