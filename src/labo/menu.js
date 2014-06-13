@@ -36,8 +36,7 @@ Labo_Menu.prototype.generate = function() {
 	if (language == 'fr') 
 		this.word_choices_ask = new Word('Choisissez un mode de transformation');
 	else
-		this.word_choices_ask = new Word('Chose the transformation mode');
-
+		this.word_choices_ask = new Word('Choose the transformation mode');
 	var police_scale = getScale(this.word_choices_ask.getWidth(), 6*W/10);
 	this.word_choices_ask.setZoom(police_scale);
 	this.word_choices_ask.setCenterX(W/2);
@@ -128,7 +127,7 @@ Labo_Menu.prototype.textInput = function() {
 	if (language == 'fr') 
 		CocoonJS.App.showTextDialog("", "Tapez un mot a transformer :", "");
 	else
-		CocoonJS.App.showTextDialog("", "Write a word to transform :", "");
+		CocoonJS.App.showTextDialog("", "Write a word to be transformed :", "");
 }
 
 Labo_Menu.prototype.textInputWord = function() {
