@@ -8,6 +8,7 @@ var MS_AFF_FPS = 1000;	// Nombre de milisecondes entre deux affichages des FPS
 var W = window.innerWidth;	// Largeur de l'écran
 var H = window.innerHeight;	// Hauteur de l'écran
 
+
 var C_BACK = '#000';//+randRange(0,59)+randRange(0,59)+randRange(0,59); // Color background
 var C_CONT = '#fff'; // Color content
 
