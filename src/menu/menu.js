@@ -14,7 +14,7 @@ Menu.start = function() {
 	
 	Menu.recit();
 	Menu.labo();
-	Menu.aide();
+	//Menu.aide();
 	Menu.editeur();
 	Menu.lang();
 
