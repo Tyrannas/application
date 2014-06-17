@@ -5,8 +5,8 @@ var Menu = {};
 Menu.words = new Array();
 Menu.anim_duration = 2000;
 Menu.opacity = 0.5;
-Menu.low_alpha_lang = Menu.opacity;
-Menu.high_alpha_lang = 0.2;
+Menu.low_alpha_lang = 0.4;
+Menu.high_alpha_lang = Menu.opacity;
 Menu.lang_anim_duration = 500;
 
 Menu.start = function() {

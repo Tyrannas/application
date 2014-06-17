@@ -53,6 +53,7 @@ Destroy.all = function() {
 	// Aide.destroy();
 	Recit.destroy();
 	Labo.destroy();
+	Editeur.destroy();
 	
 	Event.destroyAll();
 	
