@@ -1,4 +1,5 @@
 Editeur.classic_init = function() {
+	Destroy.all();
 	this.title_x = W/2;
 	this.title_y = H/3;
 	this.title_zoom = 1;
@@ -24,6 +25,7 @@ Editeur.classic_init = function() {
 }
 
 Editeur.classic_recherche_result = function(word) {
+	Destroy.all();
 	Editeur.classic_word = word;
 	Editeur.classic_word_copy = new Word(word.getValue(), word.getNextValue(), word.getPolice(), word.getCode());
 	Editeur.classic_word_copy.setZoom(Editeur.classic_word.getZoom());
@@ -32,7 +34,6 @@ Editeur.classic_recherche_result = function(word) {
 
 
 Editeur.classic_display = function() {
-	Destroy.all();
 	this.title.setZoom(this.title_zoom);
 	this.title.setCenterXY(this.title_x, this.title_y);
 	this.title.display();
@@ -100,6 +101,10 @@ Editeur.classic_getStory = function() {
 	story.setName(this.title.getValue());
 	story.addPage(page);
 	return story;
+}
+
+Editeur.classic_destroy = function() {
+		Destroy.objet(this.classic_word);
 }
 
 scriptLoaded('src/editeur/editeur_classic.js');

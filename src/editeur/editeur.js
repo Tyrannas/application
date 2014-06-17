@@ -16,9 +16,9 @@ Editeur.displayMenu = function() {
 }
 
 Editeur.displayEdition = function(type) {
+	Destroy.all();
 	this.type = type;
 	console.log('Ouverture d\'edition '+type);
-	Destroy.all();
 	Editeur[type+'_init']();
 }
 
@@ -86,6 +86,12 @@ Editeur.saveStory = function() {
 	story = Editeur[this.type+'_getStory']();
 	MyStorage.addStory(story);
 	console.log('Saved story');
+}
+
+Editeur.destroy = function() {
+	if (this.type != undefined) {
+		Editeur[this.type+'_destroy']();
+	}
 }
 
 scriptLoaded('src/editeur/editeur.js');
