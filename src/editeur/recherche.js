@@ -221,7 +221,7 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 		this.word_try = new Word('Ok', null, 0);
 	this.word_try.setZoom(0.6);
 	this.word_try.setCenterXY(W/2, H - this.word_try.getHeight());
-	this.word_try.onTap(function() {Editeur.handle_recherche();});
+	this.word_try.onTap(function() { Editeur.handle_recherche();});
 
 	this.central_word = new Word(this.words[this.nb_side].getValue());
 	this.central_word.setZoom(2);
