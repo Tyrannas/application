@@ -11,9 +11,11 @@ var App = {};
 
 App.init = function() {
 	// Initialisation du canvas
-	canvas = CocoonJS.App.createScreenCanvas();
+	canvas = document.createElement('canvas');//CocoonJS.App.createScreenCanvas();
 	GUIcanvas = document.createElement('canvas');
 
+	canvas.width = W;
+	canvas.height = H;
 	GUIcanvas.width = W;// * window.devicePixelRatio;
 	GUIcanvas.height = H;// * window.devicePixelRatio;
 
