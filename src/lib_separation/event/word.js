@@ -5,7 +5,7 @@ Word.prototype.addGesture = function() {
 	this.removeGesture();
 	var word = this;
 	function onEvent(dir) {
-		// sound_police_end(word.getPolice());
+		//sound_police_end(word.getPolice());
 		word.setAnimation(dir);
 		word.animate(dir);
 	}
@@ -15,12 +15,12 @@ Word.prototype.addGesture = function() {
 	}
 	function onBegin(dir) {
 		if(!word.inAnimation) {
-			//sound_manager.police_begin(word.getPolice(), dir);
+			sound_manager.police_begin(word.getPolice(), dir);
 		}
 	}
 	function onAbort(dir) {
 		if((dir != 0 || word.getPolice() == 3) && !word.inAnimation) {
-			//sound_manager.police_abort(word.getPolice(), dir);
+			sound_manager.police_abort(word.getPolice(), dir);
 			word.eventOnAbort();
 		}
 	}
