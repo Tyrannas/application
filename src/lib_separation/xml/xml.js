@@ -1,9 +1,19 @@
 var Xml = {};
+window['DOMParser'] = domParser;
 
-Xml.load = function(xml_path) {
+Xml.load = function(xml_path, word_requested, handler) {
 	var loadedFile;
 
-	if(navigator.appname == 'Microsoft Internet Explorer') {
+	var XHR = new XMLHttpRequest();
+	XHR.onload = function(){
+		var tmp = new DOMParser();
+		var loadedFile = tmp.parseFromString(this.responseText, 'text/xml');
+		Xml.importLabRequest(word_requested, handler, loadedFile);
+	};
+	XHR.open("GET", xml_path, true);
+	XHR.send();
+
+	/*if(navigator.appname == 'Microsoft Internet Explorer') {
 		loadedFile = new ActiveXObject("Microsoft.XMLDOM");
 		loadedFile.async = false;
 		while(loadedFile.readyState != 4) {};
@@ -15,8 +25,9 @@ Xml.load = function(xml_path) {
 		xmlhttp.setRequestHeader('Content-Type', 'text/xml');
 		xmlhttp.send();
 		loadedFile = xmlhttp.responseXML;
+		
 	}
-	return loadedFile;
+	return loadedFile;*/
 }
 
 Xml.importStory = function(xml_file) {
@@ -53,9 +64,16 @@ Xml.importStory = function(xml_file) {
 
 }
 
-Xml.importLabRequest = function(word_requested) {
-	var xml_file = Xml.load('http://192.185.52.237/~lasepa/beta/API/getWordPossibilitiesv2.php?word=' + word_requested + "&language=" + language);
-	
+Xml.importLabRequest = function(word_requested, handler, xml_file) {
+	debug(word_requested);
+	debug(handler);
+	debug(xml_file);
+	if(xml_file == undefined)
+	{
+		Xml.load('http://192.185.52.237/~lasepa/beta/API/getWordPossibilitiesv2.php?word=' + word_requested + "&language=" + language, word_requested, handler);
+		return;
+	}
+
 	var p = new Array();
 	
 	var xroot = xml_file.getElementsByTagName("root")[0];
@@ -82,7 +100,7 @@ Xml.importLabRequest = function(word_requested) {
 		}
 	}
 	p=randArray(p);
-	return p;
+	handler(p);
 }
 
 scriptLoaded('src/lib_separation/xml/xml.js');
