@@ -80,14 +80,26 @@ Animation.aide1Cut = function(word, attr) {
 }
 Animation.aide2Cut = function(word) {
 	var margin = 30;
-	gui.Aide_hand({
-		'x0': word.getX(),
-		'y0': word.getY() + word.getHeight() / 2,
-		'x1': word.getX() + word.getWidth(),
-		'y1': word.getY() + word.getHeight() / 2,
-		'h': word.getHeight(),
-		'speed': 500,
-	});
+	if(randTrue()) {
+		gui.Aide_hand({
+			'x0': word.getX(),
+			'y0': word.getY() + word.getHeight() / 2,
+			'x1': word.getX() + word.getWidth(),
+			'y1': word.getY() + word.getHeight() / 2,
+			'h': word.getHeight(),
+			'speed': 500,
+		});
+	} else {
+		gui.Aide_hand({
+			'x1': word.getX(),
+			'y0': word.getY() + word.getHeight() / 2,
+			'x0': word.getX() + word.getWidth(),
+			'y1': word.getY() + word.getHeight() / 2,
+			'h': word.getHeight(),
+			'speed': 500,
+		});
+	}
+	
 }
 
 scriptLoaded('src/lib_separation/word_animation/coupable_haut.js');
