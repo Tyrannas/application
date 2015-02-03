@@ -65,11 +65,9 @@ Xml.importStory = function(xml_file) {
 }
 
 Xml.importLabRequest = function(word_requested, handler, xml_file) {
-	debug(word_requested);
-	debug(handler);
-	debug(xml_file);
 	if(xml_file == undefined)
 	{
+		//Xml.load('http://127.0.0.1/separation/getWordPossibilitiesv2.php?word=' + word_requested + "&language=" + language, word_requested, handler);
 		Xml.load('http://192.185.52.237/~lasepa/beta/API/getWordPossibilitiesv2.php?word=' + word_requested + "&language=" + language, word_requested, handler);
 		return;
 	}

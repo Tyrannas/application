@@ -8,7 +8,7 @@ StoriesDb.fr_stories = [
 
 StoriesDb.en_stories = [
 	'{"isStatic":true, "name":"Separation", "type":"one_page", "pages":[{"lines":[{"words":[{"value":"THIS", "zoom":1}, {"value":"SEPARATION", "next_value":"PERCEPTION", "police":0, "code":"AAAAAATIAII", "zoom":1}]}, {"words":[{"value":"which crept"}]}, {"words":[{"value":"in the"}, {"value":"shading", "next_value":"slicing", "police":3}, {"value":" of words"}]}, {"words":[{"value":"SHREDS", "next_value":"CHASES", "police":2, "code":"hack_sale", "zoom":1}, {"value":"ME", "police":2}]}]}]}',
-	'{"isStatic":true, "name":"Friends", "type":"one_page", "pages":[{"lines":[{"words":[{"value":"Friends", "zoom":1}]}, {"words":[{"value":"english", "next_value":"french", "police":0, "code":"CAAIIAII", "zoom":2}]}, {"words":[{"value":" "}]}]}]}',
+	'{"isStatic":true, "name":"Translation", "type":"one_page", "pages":[{"lines":[{"words":[{"value":"Translation", "zoom":1}]}, {"words":[{"value":"english", "next_value":"french", "police":0, "code":"CAAIIAII", "zoom":2}]}, {"words":[{"value":" "}]}]}]}',
 	];
 
 

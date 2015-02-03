@@ -144,8 +144,9 @@ Gui.prototype.Editeur_classic_button_down = function() {
 // Aide visuelle
 Gui.prototype.Aide_hand = function(data) {
 	var hand = new Image(res('help_hand'));
-	hand.setXY(data.x0 - hand.getWidth(), data.y0);
-	hand.setScaleY(getScale(hand.getHeight(), data.h));
+	offset = {'x':-hand.getWidth()*1/2,'y':-hand.getHeight()*1/6};
+	hand.setXY(data.x0 + offset.x, data.y0 + offset.y);
+	//hand.setScaleY(getScale(hand.getHeight(), data.h));
 	hand.display();
 	hand.setAlpha(0);
 
@@ -156,8 +157,8 @@ Gui.prototype.Aide_hand = function(data) {
 	}
 	function step2() {
 		Tween.get(hand.bmp).to({
-			'x': data.x1 - hand.getWidth()/3,
-			'y': data.x2,
+			'x': data.x1 + offset.x,
+			'y': data.y1 + offset.y,
 		}, data.speed * 2).call(step3);
 	}
 	function step3() {

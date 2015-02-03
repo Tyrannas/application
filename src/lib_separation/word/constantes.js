@@ -17,6 +17,7 @@ var Word_cst = {
 
 		aide1Cut: 200,
 		aide1Open: 200,
+		aide1Erase: 800,
 	},
 	opacity: {
 		light: 1,

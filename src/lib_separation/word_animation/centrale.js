@@ -109,7 +109,35 @@ Animation.aide1Open = function(word) {
 	word.timeouts.push(setTimeout(step4, speed*3));
 }
 Animation.aide2Open = function(word) {
-	log(word.getValue()+" : aide 2 (centrale)");
+	margin = word.getWidth()/6;
+	speed = 200;
+	function step1() {
+		gui.Aide_hand({
+			'x0': word.getX() + word.getWidth() / 2,
+			'y0': word.getY(),
+			'x1': word.getX() + word.getWidth() / 2,
+			'y1': word.getY() + word.getHeight(),
+			'h': word.getHeight(),
+			'speed': speed,
+		});
+	}
+	function step2() {
+		gui.Aide_hand({
+			'x0': word.getX() + word.getWidth() / 2,
+			'y1': word.getY(),
+			'x1': word.getX() + word.getWidth() / 2,
+			'y0': word.getY() + word.getHeight(),
+			'h': word.getHeight(),
+			'speed': speed,
+		});
+	}
+	if(randTrue()) {
+		step1();
+		word.timeouts.push(setTimeout(step2, speed*3));
+	} else {
+		step2();
+		word.timeouts.push(setTimeout(step1, speed*3));
+	}
 }
 
 scriptLoaded('src/lib_separation/word_animation/centrale.js');
