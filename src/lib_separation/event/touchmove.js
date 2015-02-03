@@ -2,13 +2,13 @@
 	Event checkTouchMove
 */
 
-Event.checkTouchMove = function(obj_list, coords) {
-	for(var i in obj_list) {
-		var obj = obj_list[i];
-		if(obj == undefined) alert('undefined : ' + i); else
+Event.checkTouchMove = function(objs, coords) {
+	for(var i in objs) {
+		var obj = objs[i];
+		if(obj === undefined) alert('undefined : ' + i); else
 		// On regarde si le curseur est dans le cadre
-		if((obj.y1 <= coords.y1) && (coords.y1 <= obj.y2) &&
-		   (obj.y1 <= coords.y2) && (coords.y2 <= obj.y2)) {
+		if(	(obj.y1 <= coords.y1) && (coords.y1 <= obj.y2) &&
+		   	(obj.y1 <= coords.y2) && (coords.y2 <= obj.y2)) {
 			// Si le curseur est entré dans le rectangle par la gauche / le haut,
 			// c'est le début d'un event de direction 1
 			if((coords.x1 <= obj.x1) && (obj.x1 <= coords.x2)) {
@@ -44,10 +44,7 @@ Event.checkTouchMove = function(obj_list, coords) {
 			// Si la valeur est à 1 c'est que le geste est fini
 			if(obj.value == 1) {
 				obj.onEvent(obj.direction);
-				
-				obj.direction = 0;
-				obj.value = 0;
-				obj.old_value = 0;
+				Event.touchMoveInit(obj);
 			}
 			else if(obj.old_value != obj.value) {
 				obj.onChange(obj.direction, obj.value);
@@ -57,13 +54,26 @@ Event.checkTouchMove = function(obj_list, coords) {
 		// Sinon on remets à 0 l'évènement
 		else
 		{
-			obj.onAbort(obj.direction);
-			
-			obj.direction = 0;
-			obj.value = 0;
-			obj.old_value = 0;
+			Event.touchMoveAbort(obj);
 		}
 	}
-}
+};
+
+Event.touchMoveInit = function(obj) {	
+	obj.direction = 0;
+	obj.value = 0;
+	obj.old_value = 0;
+};
+
+Event.touchMoveAbort = function(obj) {
+	obj.onAbort(obj.direction);
+	Event.touchMoveInit(obj);
+};
+
+Event.touchMoveAbortAll = function(objs) {
+	for(var i in objs) {
+		Event.touchMoveAbort(objs[i]);
+	}
+};
 
 scriptLoaded('scripts/libs/separation_toolkit/event/touchmove.js');
