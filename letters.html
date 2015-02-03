@@ -2,11 +2,11 @@
 	<head>
 	</head>
 	<body style="background:#000;overflow:hidden;">
-		<svg id="up" style="position:absolute;top:0;left:0;height:100%;" viewBox="0 0 356 456" >
-			<path fill="none" stroke="#fff" />
+		<svg id="up" style="position:absolute;top:0;left:0;height:100%;" viewBox="0 0 534 456" >
+			<path stroke-linecap="butt" fill="none" stroke="#fff" />
 		</svg>
-		<svg id="down" style="position:absolute;top:0;left:0;height:100%;" viewBox="0 0 356 456" >
-			<path fill="none" stroke="#fff" />
+		<svg id="down" style="position:absolute;top:0;left:0;height:100%;" viewBox="0 0 534 456" >
+			<path stroke-linecap="butt" fill="none" stroke="#fff" />
 		</svg>
 
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -19,6 +19,7 @@
 			}
 
 			function svgM(x,y) { return 'M '+x+' '+y; } // Move to x,y
+			function svgL(x,y) { return 'L '+x+' '+y; } // Line to x,y
 			function svgH(x) { return 'H '+x; } // Draw line to x
 			function svgV(y) { return 'V '+y; } // Draw line to y
 			function svgA(rx,ry,xaxisrotation,largearcflag,sweepflag,x,y) {
@@ -28,23 +29,42 @@
 			function generatePathLetter(letter, code, police, part, sw) {
 				var sw2 = sw/2;
 
-				var x1 = 89, x2 = 178, x3 = 267,
-					y1 = 40, y2 = 228, y3 = 416, y8 = 284;
-				var y4 = y1+sw2, y5 = y2-sw2, y6 = y2+sw2, y7 = y3-sw2;
-				var r1 = x2-x1, r2 = (y7-y8)/2;
+				var x1 = 89, x2 = 178, x3 = 267, x12 = 445,
+					y1 = 40, y2 = 228, y3 = 416;
+				var x5 = x2-sw2, x6 = sw2, x8 = x3-sw2/2-0.07*sw, x9 = 534-x8,
+					x10 = x1+sw2/2, x11 = x12-sw2/2,
+					y4 = y1+sw2, y5 = y2-sw2, y6 = y2+sw2, y7 = y3-sw2,
+					r1 = x2-x1, r3 = (x1-sw2)/2;
+				var y8 = y3-r1-sw, y13 = y7-r3, y14 = y3-r1, y15 = y14-r1,
+					x7 = x3-r1;
+				var r2 = (y7-y8)/2;
 				var y9 = y8-r2, y10 = y8+r2, x4 = x3-r2,
-					y11 = y4+r1;
+					y11 = y4+r1, y12 = y7-r1;
+
+				console.log(r2, (89-25)/2);
 
 				var letters = {
 					demihaut: {
 						up: {
-							'O': svgM(x1,y2)+svgV(y11)+svgA(r1,r1,0,0,1,x3,y11)+svgV(y2)
+							'O': svgM(x1,y2)+svgV(y11)+svgA(r1,r1,0,0,1,x3,y11)+svgV(y2),
+							'E': svgM(x1,y2)+svgV(y4)+svgH(x2),
+							'I': svgM(x1,y2)+svgV(y1),
+							'M': svgM(x1,y2)+svgV(y4)+svgH(x10)+svgL(x8,y5)+svgH(x9)+svgL(x11,y4)+svgH(x12)+svgV(y2),
 						},
 						down: {
 							'A': svgM(x1,y3)+svgV(y6)+svgH(x3)+svgV(y3),
 							'B': svgM(x1,y2)+svgV(y7)+svgH(x4)+svgA(r2,r2,0,0,0,x4,y8)+svgA(r2,r2,0,0,0,x3,y9)+svgV(y2)+svgM(x1,y8)+svgH(x4),
-							'C': svgM(x1,y3),
-							'/': ''
+							'C': svgM(x1,y2)+svgV(y12)+svgA(r1,r1,0,0,0,x3,y12),
+							'D': svgM(x1,y2)+svgV(y7)+svgH(x4)+svgA(r2,r2,0,0,0,x3,y10)+svgV(y2),
+							'E': svgM(x5,y6)+svgH(x1)+svgV(y7)+svgH(x2),
+							'F': svgM(x5,y6)+svgH(x1)+svgV(y3),
+							'G': svgM(x1,y2)+svgV(y12)+svgA(r1,r1,0,0,0,x3,y12)+svgV(y8)+svgH(x2),
+							'H': svgM(x1,y3)+svgV(y6)+svgH(x3)+svgV(y3),
+							'I': svgM(x1,y2)+svgV(y3),
+							'J': svgM(x1,y2)+svgV(y13)+svgA(r3,r3,0,0,1,x6,y13)+svgV(y10),
+							'K': svgM(x1,y2)+svgV(y3)+svgM(x3,y2)+svgV(y15)+svgA(r1,r1,0,0,1,x7,y14)+svgA(r1,r1,0,0,1,x3,y3)+svgV(y3)+svgM(x1,y14)+svgH(x7),
+							'L': svgM(x1,y2)+svgV(y7)+svgH(x2),
+							'M': svgM(x1,y2)+svgV(y3)+svgM(x3,y2)+svgV(y3)+svgM(x12,y2)+svgV(y3),
 						}
 					}
 				};
@@ -76,8 +96,8 @@
 				up.css(pos);
 				down.css(pos);
 
-				var letter = 'B';
-				var code = 'O';
+				var letter = 'M';
+				var code = 'M';
 				var police = 'demihaut';
 				var sw = 50;
 
