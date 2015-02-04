@@ -17,14 +17,14 @@ Event.onCut = function(id, object, callbackOnEvent, callbackOnChange, callbackOn
 		value: 0,
 		old_value: 0,
 	};
-}
+};
 
 Event.cut = function(coords) {
 	Event.checkTouchMove(Event.cut_obj, coords);	
-}
+};
 
 Event.destroyCut = function(id) {
 	Destroy.listItem(Event.cut_obj, id);
-}
+};
 
 scriptLoaded('scripts/libs/separation_toolkit/event/cut.js');
