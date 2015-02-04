@@ -34,28 +34,17 @@ var App = App || {};
 		// if(ctx.mozImageSmoothingEnabled) {ctx.mozImageSmoothingEnabled = false;}
 		// if(ctx.oImageSmoothingEnabled) {ctx.oImageSmoothingEnabled = false;}
 		
-		GUIstage = new createjs.Stage(GUIcanvas);
+		GUIstage = stage;//new createjs.Stage(GUIcanvas);
 		// stage.nextStage = GUIstage;
 		// ctx = GUIstage.canvas.getContext('2d');
-		// createjs.Touch.enable(GUIstage);
+		createjs.Touch.enable(stage);
 		
 		gui = new Gui();
 		
 		// Initialisation des events
-		var hammertime = new Hammer(canvas);
-		hammertime.on('tap', Event.tap);
-		hammertime.on('panmove', Event.touchmove);
-		hammertime.on('panup', Event.touchend);
-		// GUIcanvas.addEventListener(Event.events.tap, Event.tap);
-		// GUIcanvas.addEventListener(Event.events.touchend, Event.touchend);
-		// GUIcanvas.addEventListener(Event.events.touchmove, Event.touchmove);
-		
-		// if(appOnDevice()) {
-			// canvas.addEventListener('touchend', function(event) { Event.touchend(event); });
-		// }
-		// else {
-			// stage.on('mouseleave', function(event) { Event.touchend(event); });
-		// }
+		stage.on(Event.events.tap, Event.tap);
+		canvas.addEventListener(Event.events.touchmove, Event.touchmove);
+		document.addEventListener(Event.events.touchend, Event.touchend);
 		
 		// Initialisation des FPS
 		//createjs.Ticker.setFPS(NB_FPS);
@@ -67,7 +56,7 @@ var App = App || {};
 
 	App.mainLoop = function() {
 		stage.update();
-		GUIstage.update();
+		// GUIstage.update();
 	};
 
 	App.start = function() {

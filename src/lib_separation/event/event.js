@@ -9,44 +9,30 @@ var Event = Event || {};
 	Event.events = {
 		tap : (appOnDevice_real() ? 'click' : 'click'),
 		touchmove : (appOnDevice_real() ? 'touchmove' : 'mousemove'),
-		touchend : (appOnDevice_real() ? 'touchend' : 'mouseout'),
+		touchend : (appOnDevice_real() ? 'touchend' : 'mouseleave'),
 		dbltap : (appOnDevice_real() ? 'dblclick' : 'dblclick'),
 	};
 
-	// Event.getMousePos = function(event) {
-	// 	if(!appOnDevice_real()) {
-	// 		return { x: event.stageX, y: event.stageY };
-	// 	}
-	// 	else {
-	// 		return {
-	// 			x: event.nativeEvent.changedTouches[0].pageX,
-	// 			y: event.nativeEvent.changedTouches[0].pageY
-	// 		};
-	// 	}
-	// };
+	Event.getMousePos = function(event) {
+		// event de createJS 'click'
+		return { x: event.stageX, y: event.stageY };
+	};
 
 	Event.getMousePosMove = function(event) {
-		// if(!appOnDevice_real()) {
-		// 	return { x: event.clientX, y: event.clientY };
-		// }
-		// else {
-		// 	return { 
-		// 		x: event.touches[0].clientX,
-		// 		y: event.touches[0].clientY
-		// 	};
-		// }
-		return {
-			x: event.center.x,
-			y: event.center.y
-		};
+		// event classique HTML
+		if(!appOnDevice_real()) {
+			return { x: event.clientX, y: event.clientY };
+		}
+		else {
+			return { 
+				x: event.touches[0].clientX,
+				y: event.touches[0].clientY
+			};
+		}
 	};
 
 	Event.getTouchPos = function(event) {
-		// return Event.getMousePos(event);
-		return {
-			x: event.center.x,
-			y: event.center.y
-		};
+		return Event.getMousePos(event);
 	};
 
 	Event.getTouchMove = function(event) {
