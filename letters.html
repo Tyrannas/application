@@ -31,12 +31,12 @@
 
 				var x1 = 89, x2 = 178, x3 = 267, x12 = 445,
 					y1 = 40, y2 = 228, y3 = 416;
-				var x5 = x2-sw2, x6 = sw2, x8 = x3-sw2/2-0.07*sw, x9 = 534-x8,
+				var x5 = x2-sw2, x6 = sw2, x8 = x3-sw2/2-0.06*sw, x9 = 534-x8,
 					x10 = x1+sw2/2, x11 = x12-sw2/2,
 					y4 = y1+sw2, y5 = y2-sw2, y6 = y2+sw2, y7 = y3-sw2,
 					r1 = x2-x1, r3 = (x1-sw2)/2;
 				var y8 = y3-r1-sw, y13 = y7-r3, y14 = y3-r1, y15 = y14-r1,
-					x7 = x3-r1;
+					x7 = x3-r1, x13 = x9-x2;
 				var r2 = (y7-y8)/2;
 				var y9 = y8-r2, y10 = y8+r2, x4 = x3-r2,
 					y11 = y4+r1, y12 = y7-r1;
@@ -65,6 +65,9 @@
 							'K': svgM(x1,y2)+svgV(y3)+svgM(x3,y2)+svgV(y15)+svgA(r1,r1,0,0,1,x7,y14)+svgA(r1,r1,0,0,1,x3,y3)+svgV(y3)+svgM(x1,y14)+svgH(x7),
 							'L': svgM(x1,y2)+svgV(y7)+svgH(x2),
 							'M': svgM(x1,y2)+svgV(y3)+svgM(x3,y2)+svgV(y3)+svgM(x12,y2)+svgV(y3),
+							'N': svgM(x1,y3)+svgV(y6)+svgH(x13)+svgL(x8,y7)+svgH(x3)+svgV(y2),
+							'O': svgM(x1,y2)+svgV(y12)+svgA(r1,r1,0,0,0,x3,y12)+svgV(y2),
+							'R': svgM(x2,(y2+y3)/2)+svgL(x3,y3)+svgV(y3+1),
 						}
 					}
 				};
@@ -96,8 +99,8 @@
 				up.css(pos);
 				down.css(pos);
 
-				var letter = 'M';
-				var code = 'M';
+				var letter = 'R';
+				var code = 'O';
 				var police = 'demihaut';
 				var sw = 50;
 
