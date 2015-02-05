@@ -1,3 +1,5 @@
 *.zip
 *.apk
-node_modules/*
+node_modules/
+cache/
+Separation/
