@@ -1,0 +1,33 @@
+{
+  "name": "Separation",
+  "version": "4.0.0",
+  "description": "Application autour de la poésie à 2 mi-mots",
+  "main": "index.html",
+  "dependencies": {
+    "nw": "~0.12.0-alpha2"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-node-webkit-builder": "~1.0.0"
+  },
+  "scripts": {
+    "start": "nw"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/La-separation/application"
+  },
+  "bugs": {
+    "url": "https://github.com/La-separation/application/issues"
+  },
+  "window": {
+    "width": 800,
+    "height": 450,
+    "toolbar": false,
+    "frame": true,
+    "icon": "res/img/logo/logo_48.png"
+  }
+}
