@@ -43,29 +43,26 @@ Rooter.preloadAll = function(handler) {
 			{src:"img/ombre/shading.png", id:"SHADING"},
 			{src:"img/ombre/slicing.png", id:"SLICING"},
 		// Audio
-			{src:"sound/cut.ogg", id:"audio_cut"},
-			{src:"sound/ambiant.ogg", id:"audio_ambiant"},
-			{src:"sound/rub1.ogg", id:"audio_rub1"},
-			{src:"sound/rub2.ogg", id:"audio_rub2"},
-			{src:"sound/tear1.ogg", id:"audio_tear1"},
-			{src:"sound/tear2.ogg", id:"audio_tear2"},
+			// {src:"sound/cut.ogg", id:"audio_cut", type: createjs.AbstractLoader.SOUND},
+			// {src:"sound/rub1.ogg", id:"audio_rub1", type: createjs.AbstractLoader.SOUND},
+			// {src:"sound/rub2.ogg", id:"audio_rub2"},
+			// {src:"sound/tear1.ogg", id:"audio_tear1"},
+			// {src:"sound/tear2.ogg", id:"audio_tear2"},
+			{src:"sound/ambiant.ogg", id:"audio_ambiant"}
     ];
 	
 	createjs.Sound.registerPlugins([createjs.HTMLAudioPlugin, createjs.WebAudioPlugin, createjs.FlashPlugin]);
 	
 	preload = new createjs.LoadQueue(false, "res/");
+	createjs.Sound.alternateExtensions = ["mp3"];
 	preload.installPlugin(createjs.Sound);
-	preload.loadManifest(manifest);
 	preload.on("complete", function() { initAllSS(); handler(); });
-}
+	preload.loadManifest(manifest);
+};
 
 function res(id) { return preload.getResult(id); }
 function resSS(id) {
-	// switch(id) {
-		// case 'demihauth': case 'demihautb':
-			return preload.getResult('font_'+id);
-		// break;
-	// }
+	return preload.getResult('font_'+id);
 }
 
 scriptLoaded('src/rooter.js');

@@ -73,7 +73,7 @@ var App = App || {};
 			App.mainLoop();
 		});
 
-		Rooter.preloadAll(function(){	
+		Rooter.preloadAll(function(){
 			App.start();
 		});
 	};
