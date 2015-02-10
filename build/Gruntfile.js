@@ -107,5 +107,5 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-node-webkit-builder');
-    grunt.registerTask('default', ['uglify','nodewebkit']);
+    grunt.registerTask('default', ['uglify']);//,'nodewebkit']);
 };

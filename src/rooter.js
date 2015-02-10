@@ -48,14 +48,14 @@ Rooter.preloadAll = function(handler) {
 			// {src:"sound/rub2.ogg", id:"audio_rub2"},
 			// {src:"sound/tear1.ogg", id:"audio_tear1"},
 			// {src:"sound/tear2.ogg", id:"audio_tear2"},
-			{src:"sound/ambiant.ogg", id:"audio_ambiant"}
+			// {src:"sound/ambiant.ogg", id:"audio_ambiant"}
     ];
 	
-	createjs.Sound.registerPlugins([createjs.HTMLAudioPlugin, createjs.WebAudioPlugin, createjs.FlashPlugin]);
+	// createjs.Sound.registerPlugins([createjs.HTMLAudioPlugin, createjs.WebAudioPlugin, createjs.FlashPlugin]);
 	
 	preload = new createjs.LoadQueue(false, "res/");
-	createjs.Sound.alternateExtensions = ["mp3"];
-	preload.installPlugin(createjs.Sound);
+	// createjs.Sound.alternateExtensions = ["mp3"];
+	// preload.installPlugin(createjs.Sound);
 	preload.on("complete", function() { initAllSS(); handler(); });
 	preload.loadManifest(manifest);
 };
