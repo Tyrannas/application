@@ -1,11 +1,9 @@
-4.0.1 (10/02/2015)
-====
+#### 4.0.1 (10/02/2015)
 Features:
 * Better size for first gui icon
 * Reloading the app when the window is resized
 
-4.0.0 (5/02/2015)
-====
+#### 4.0.0 (5/02/2015)
 Features:
 * Add Grunt
 * Add node-webkit (with grunt)
