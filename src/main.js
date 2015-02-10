@@ -32,6 +32,10 @@ App.init = function() {
 	stage.on(Event.events.tap, Event.tap);
 	canvas.addEventListener(Event.events.touchmove, Event.touchmove);
 	document.addEventListener(Event.events.touchend, Event.touchend);
+	window.addEventListener('resize', function () { 
+		if(can_reload)
+			window.location.reload();
+	});
 	
 	// Initialisation des FPS
 	//createjs.Ticker.setFPS(NB_FPS);

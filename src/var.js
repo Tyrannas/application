@@ -22,6 +22,8 @@ var Ease = createjs.Ease;
 var margin = Math.max(W/60,H/40);
 var size_icon = Math.max(W/15,H/10);
 
+var can_reload = true;
+
 /* Variables */
 
 var canvas;			// Canvas contenant le jeu
