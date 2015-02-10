@@ -19,7 +19,10 @@ var TIMEOUT_AIDES_AGAIN = 2000;
 var Tween = createjs.Tween;
 var Ease = createjs.Ease;
 
-var margin = 15;
+var margin = Math.max(W/60,H/40);
+var size_icon = Math.max(W/15,H/10);
+
+var can_reload = true;
 
 /* Variables */
 

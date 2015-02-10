@@ -2,23 +2,23 @@
 	Class Gui
 */
 function Gui() {
-	this.margin = 10;
+	this.margin = margin;
 }
 
 Gui.prototype.MenuPrincipal = function() {
 	this.menuButton(function() { Intro.start(); });
-}
+};
 
 Gui.prototype.Editeur_classic_displayRecherche = function() {
 	this.Editeur_classic_button_up();
 	this.Editeur_classic_button_down();
 	this.backButton(function() { Editeur.start(); } );
-}
+};
 
 Gui.prototype.Editeur_displayAll = function() {
 	this.menuButton();
 	//this.backButton(function() { Labo.start(); } );
-}
+};
 
 Gui.prototype.Recit_displayAll = function() {
 	// this.menuButton();
@@ -26,13 +26,15 @@ Gui.prototype.Recit_displayAll = function() {
 	// Gui.Recit.storiesBtn();
 	// Gui.Recit.nextBtn();
 	// Gui.Recit.lastBtn();
-}
+};
+
 Gui.prototype.Recit_menu_displayAll = function() {
 	this.menuButton();
 	// Gui.Recit.storiesBtn();
 	// Gui.Recit.nextBtn();
 	// Gui.Recit.lastBtn();
-}
+};
+
 Gui.prototype.Labo_displayAll = function() {
 	// this.menuButton();
 	this.Labo_button_up();
@@ -42,7 +44,8 @@ Gui.prototype.Labo_displayAll = function() {
 	// this.Labo_nextButton();
 	// this.Labo_previousButton();
 	// Gui.Labo.policeBtn();
-}
+};
+
 Gui.prototype.Labo_menu_displayAll = function() {
 	this.menuButton();
 	// this.Labo_button_up();
@@ -51,27 +54,29 @@ Gui.prototype.Labo_menu_displayAll = function() {
 	// this.Labo_nextButton();
 	// this.Labo_previousButton();
 	// Gui.Labo.policeBtn();
-}
+};
 
 // COMMUNS
 Gui.prototype.menuButton = function(handler) {
 	this.logo_min = new Image(res('gui_logo'));
-	this.logo_min.setXY(this.margin, H - this.logo_min.h - this.margin);
+	this.logo_min.setSizeXY(size_icon, size_icon);
+	this.logo_min.setXY(this.margin, H - this.logo_min.getHeight() - this.margin);
 	this.logo_min.display();
 	
-	if (handler == undefined) {
-		Event.onTap('logo_min_to_menu', this.logo_min, function() { Menu.start(); }, false);
+	if (handler === undefined) {
+		Event.onTap('logo_min_to_menu', this.logo_min, Menu.start, false);
 	} else {
 		Event.onTap('logo_sep_generic', this.logo_min, handler, false);
 	}
-}
+};
+
 Gui.prototype.backButton = function(handler) {
 	this.arrow_back = new Image(res('gui_arrow_back'));
 	this.arrow_back.setXY(this.margin, H - this.arrow_back.h - this.margin);
 	this.arrow_back.display();
 	
 	Event.onTap('arrow_back', this.arrow_back, handler, false);
-}
+};
 
 // LABO
 Gui.prototype.Labo_nextButton = function() {
@@ -80,14 +85,16 @@ Gui.prototype.Labo_nextButton = function() {
 	this.labo_next_button.display();
 	
 	Event.onTap('labo_next_button', this.labo_next_button, function() { Labo.nextPage(); }, true);
-}
+};
+
 Gui.prototype.Labo_previousButton = function() {
 	this.labo_previous_button = new Image(res('gui_arrow_left'));
 	this.labo_previous_button.setXY(this.margin, this.margin);
 	this.labo_previous_button.display();
 	
 	Event.onTap('labo_previous_button', this.labo_previous_button, function() { Labo.previousPage(); }, true);
-}
+};
+
 Gui.prototype.Labo_button_up = function() {
 	this.labo_button_up = new Image(res('gui_roll_up'));
 	// this.labo_button_up.setCenterX(W*2/3-80);
@@ -96,7 +103,8 @@ Gui.prototype.Labo_button_up = function() {
 	this.labo_button_up.display();
 	
 	Event.onTap('labo_button_up', this.labo_button_up, function() { Labo.scrollUp(); }, true);
-}
+};
+
 Gui.prototype.Labo_button_down = function() {
 	this.labo_button_down = new Image(res('gui_roll_down'));
 	// this.labo_button_down.setCenterX(W*2/3-80);
@@ -105,7 +113,7 @@ Gui.prototype.Labo_button_down = function() {
 	this.labo_button_down.display();
 	
 	Event.onTap('labo_button_down', this.labo_button_down, function() { Labo.scrollDown(); }, true);
-}
+};
 
 Gui.prototype.Labo_button_clear = function() {
 	this.labo_button_clear = new Image(res('gui_clear'));
@@ -113,12 +121,12 @@ Gui.prototype.Labo_button_clear = function() {
 	this.labo_button_clear.display();
 	
 	Event.onTap('labo_button_clear', this.labo_button_clear, function() { MyStorage.clearWords(); }, true);
-}
+};
 
-Gui.prototype.Labo_nextButtonHide = function() { this.labo_next_button.setAlpha(0); }
-Gui.prototype.Labo_previousButtonHide = function() { this.labo_previous_button.setAlpha(0); }
-Gui.prototype.Labo_nextButtonShow = function() { this.labo_next_button.setAlpha(1); }
-Gui.prototype.Labo_previousButtonShow = function() { this.labo_previous_button.setAlpha(1); }
+Gui.prototype.Labo_nextButtonHide = function() { this.labo_next_button.setAlpha(0); };
+Gui.prototype.Labo_previousButtonHide = function() { this.labo_previous_button.setAlpha(0); };
+Gui.prototype.Labo_nextButtonShow = function() { this.labo_next_button.setAlpha(1); };
+Gui.prototype.Labo_previousButtonShow = function() { this.labo_previous_button.setAlpha(1); };
 
 
 // Editeur
@@ -130,7 +138,7 @@ Gui.prototype.Editeur_classic_button_up = function() {
 	this.editeur_classic_button_up.display();
 	
 	Event.onTap('editeur_classic_button_up', this.editeur_classic_button_up, function() { Editeur.scrollUp(); }, true);
-}
+};
 
 Gui.prototype.Editeur_classic_button_down = function() {
 	this.editeur_classic_button_down = new Image(res('gui_scroll_down'));
@@ -139,7 +147,7 @@ Gui.prototype.Editeur_classic_button_down = function() {
 	this.editeur_classic_button_down.display();
 	
 	Event.onTap('editeur_classic_button_down', this.editeur_classic_button_down, function() { Editeur.scrollDown(); }, true);
-}
+};
 
 // Aide visuelle
 Gui.prototype.Aide_hand = function(data) {
@@ -169,6 +177,6 @@ Gui.prototype.Aide_hand = function(data) {
 		});
 	}
 	step1();
-}
+};
 
 scriptLoaded('src/lib_separation/gui/gui.js');
