@@ -5,78 +5,64 @@
 		- Le namespace App contenant la fonction d'initialisation
 		  et la boucle principale de l'application
 *************************************************************/
-var App = App || {};
 // Namespace App
-(function () {
-	App.init = function() {
-		// Initialisation du canvas
-		canvas = document.createElement('canvas');//CocoonJS.App.createScreenCanvas();
-		GUIcanvas = document.createElement('canvas');
+var App = App || {};
 
-		canvas.width = W;
-		canvas.height = H;
-		GUIcanvas.width = W;// * window.devicePixelRatio;
-		GUIcanvas.height = H;// * window.devicePixelRatio;
+App.init = function() {
+	// Initialisation du canvas
+	canvas = document.createElement('canvas');
+	// GUIcanvas = document.createElement('canvas');
 
-		document.body.appendChild(canvas);
-		// document.body.appendChild(GUIcanvas);
+	canvas.width = W;
+	canvas.height = H;
+	// GUIcanvas.width = W;// * window.devicePixelRatio;
+	// GUIcanvas.height = H;// * window.devicePixelRatio;
 
-		// Initialisation du stage
-		stage = new createjs.Stage(canvas);
-		ctx = stage.canvas.getContext('2d');
-		// createjs.Touch.enable(stage);
+	document.body.appendChild(canvas);
 
-		
-		
-		// On enlève le lissage
-		// if(ctx.imageSmoothingEnabled) {ctx.imageSmoothingEnabled = false;}
-		// if(ctx.webkitImageSmoothingEnabled) {ctx.webkitImageSmoothingEnabled = false;}
-		// if(ctx.mozImageSmoothingEnabled) {ctx.mozImageSmoothingEnabled = false;}
-		// if(ctx.oImageSmoothingEnabled) {ctx.oImageSmoothingEnabled = false;}
-		
-		GUIstage = stage;//new createjs.Stage(GUIcanvas);
-		// stage.nextStage = GUIstage;
-		// ctx = GUIstage.canvas.getContext('2d');
-		createjs.Touch.enable(stage);
-		
-		gui = new Gui();
-		
-		// Initialisation des events
-		stage.on(Event.events.tap, Event.tap);
-		canvas.addEventListener(Event.events.touchmove, Event.touchmove);
-		document.addEventListener(Event.events.touchend, Event.touchend);
-		
-		// Initialisation des FPS
-		//createjs.Ticker.setFPS(NB_FPS);
-		
-		initConstantes();
-		
-		Destroy.all();
-	};
+	// Initialisation du stage
+	stage = new createjs.Stage(canvas);
+	ctx = stage.canvas.getContext('2d');
+	GUIstage = stage;
+	createjs.Touch.enable(stage);
+	
+	gui = new Gui();
+	
+	// Initialisation des events
+	stage.on(Event.events.tap, Event.tap);
+	canvas.addEventListener(Event.events.touchmove, Event.touchmove);
+	document.addEventListener(Event.events.touchend, Event.touchend);
+	
+	// Initialisation des FPS
+	//createjs.Ticker.setFPS(NB_FPS);
+	
+	initConstantes();
+	
+	Destroy.all();
+};
 
-	App.mainLoop = function() {
-		stage.update();
-		// GUIstage.update();
-	};
+App.mainLoop = function() {
+	stage.update();
+	// GUIstage.update();
+};
 
-	App.start = function() {
-		sound_manager = new Sound();
-		sound_manager.play("ambiant");
-		Intro.start();
-	};
+App.start = function() {
+	sound_manager = new Sound();
+	sound_manager.play("ambiant");
+	Intro.start();
+};
 
-	// Démarrage de l'application
-	App.main = function() {
-		App.init();
-		
-		createjs.Ticker.addEventListener("tick", function() {
-			App.mainLoop();
-		});
+// Démarrage de l'application
+App.main = function() {
+	App.init();
+	
+	createjs.Ticker.addEventListener("tick", function() {
+		App.mainLoop();
+	});
 
-		Rooter.preloadAll(function(){
-			App.start();
-		});
-	};
-})();
+	Rooter.preloadAll(function(){
+		App.start();
+	});
+};
 
 scriptLoaded('src/main.js');

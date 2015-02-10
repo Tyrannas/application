@@ -1,8 +1,8 @@
-var word_active = false;
-
 /**
 	Class Word
 */
+var word_active = false;
+
 function Word(value, next_value, police, code, autoAddGesture) {
 	this.id = ''; // Id unique
 	
@@ -12,12 +12,12 @@ function Word(value, next_value, police, code, autoAddGesture) {
 	this.size = fontSize; // Taille de la police en pixel
 	this.cst = fontConst; // Constantes en fonction de la taille
 
-	this.police = ((police == undefined) || (police == null)) ? this.cst.police.name : police; // Police
+	this.police = police || this.cst.police.name; // Police
 	this.color = this.cst.car.color; // Couleur
 	
 	this.value = value; // Valeur du mot actuel
-	this.next_value = ((next_value == undefined) || (next_value == null)) ? value : next_value; // Valeur du mot après transformation
-	this.code = ((code == undefined) || (code == null)) ? value : code; // Code du mot
+	this.next_value = next_value || value; // Valeur du mot après transformation
+	this.code = code || value; // Code du mot
 	this.font = null; // Groupe qui sera affiché
 	this.alpha = 1;
 	this.zoom = 1;
@@ -37,40 +37,39 @@ function Word(value, next_value, police, code, autoAddGesture) {
 	this.zoom = 1; // Zoom de la police (100% = 1)
 	
 	this.gesture = null;
-	this.tween = new Array();
-	this.timeouts = new Array();
+	this.tween = [];
+	this.timeouts = [];
 	
-	this.list_done = new Array(); // Liste des fonctions à appeler quand une fonction est terminée
-	
-	if(autoAddGesture == undefined || autoAddGesture == null)
-		this.autoAddGesture = true;
-	else
-		this.autoAddGesture = false;
+	this.list_done = []; // Liste des fonctions à appeler quand une fonction est terminée
+
+	this.autoAddGesture = !!(autoAddGesture || true);
 
 	this.generate();
 	this.setId(this.getUniqId());
 }
 
 Word.prototype.done = function(fct_done) {
-	if(this.list_done[fct_done] != undefined)
+	if(this.list_done[fct_done] !== undefined)
 		this.list_done[fct_done]();
-}
+};
 
 Word.prototype.generate = function() {
 
-	if(this.font != null && this.font != undefined) {
+	var new_code, new_value, new_next_value;
+
+	if(!this.font) {
 		this.destroy();
 	}
 	
 	if(this.getCode() != this.getValue()) {
-		var new_code = convertCode(this.getValue(), this.getCode(), this.getPolice());
-		var new_value = convertValue(this.getValue(), new_code, this.getPolice());
-		var new_next_value = convertValue(this.getNextValue(), new_code, this.getPolice());
+		new_code = convertCode(this.getValue(), this.getCode(), this.getPolice());
+		new_value = convertValue(this.getValue(), new_code, this.getPolice());
+		new_next_value = convertValue(this.getNextValue(), new_code, this.getPolice());
 	}
 	else {
-		var new_code = this.getCode();
-		var new_value = this.getValue();
-		var new_next_value = this.getNextValue();
+		new_code = this.getCode();
+		new_value = this.getValue();
+		new_next_value = this.getNextValue();
 	}
 	
 	switch(this.police)
@@ -101,7 +100,7 @@ Word.prototype.generate = function() {
 	this.font.container.scaleX = fontConst.car.scale * this.getZoom();
 	this.font.container.scaleY = fontConst.car.scale * this.getZoom();
 	this.font.container.alpha = this.getAlpha();
-}
+};
 
 Word.prototype.display = function() {
 	this.font.container.x = this.getX();
@@ -110,22 +109,26 @@ Word.prototype.display = function() {
 	this.font.container.scaleY = fontConst.car.scale * this.getZoom();
 	this.font.container.alpha = this.getAlpha();
 	
-	if(this.font.container.getStage() == null)
+	if(this.font.container.getStage() === null)
 		stage.addChild(this.font.container);
 
 	if(this.getValue() != this.getNextValue() && this.autoAddGesture) {
 		this.addGesture();
 	}
-}
+};
+
 Word.prototype.displayGUI = function() {
 	this.font.container.x = this.getX();
 	this.font.container.y = this.getY();
 
 	stageGUI.addChild(this.font.container);
-}
+};
 
 Word.prototype.destroy = function() {
 	this.destroyTimeouts();
+
+
+
 	Event.destroy(this.getId());
 	for(var i = 0; i < this.tween.length; i++) {
 		this.tween[i].pause();
@@ -133,16 +136,17 @@ Word.prototype.destroy = function() {
 	Destroy.listItem(this.tween);
 	Destroy.objet(this.font);
 	this.inAnimation = false;
-}
+};
+
 Word.prototype.destroyTimeouts = function() {
 	if(this.timeouts.length > 0) {
 		//debug('Destroy timeouts ' + this.value + ' ; '+this.timeouts);
 		for(var i = 0; i < this.timeouts.length; i++) {
 			clearTimeout(this.timeouts[i]);
 		}
-		this.timeouts = new Array();
+		this.timeouts = [];
 	}
-}
+};
 
 // Fonctions de mise en avant
 Word.prototype.activate = function() {
@@ -165,7 +169,7 @@ Word.prototype.activate = function() {
 	
 	this.addGesture();
 	this.activeDbltap();
-}
+};
 
 Word.prototype.disable = function() {
 	this.active = false;
@@ -185,45 +189,45 @@ Word.prototype.disable = function() {
 	}
 	
 	this.disableDbltap();
-}
+};
 
 // Get
-Word.prototype.getRepeat = function() { return this.repeatAnimation; }
-Word.prototype.getX = function() { if(!this.active) return this.x; else return this.activeX; }
-Word.prototype.getY = function() { if(!this.active) return this.y; else return this.activeY; }
-Word.prototype.getCenterX = function() { return this.getX() - this.getWidth() / 2; }
-Word.prototype.getCenterY = function() { return this.getY() - this.getHeight() / 2; }
-Word.prototype.getWidth = function() { return this.font.container.width * fontConst.car.scale * this.zoom; }
-Word.prototype.getHeight = function() { return this.font.container.height * fontConst.car.scale * this.zoom; }
-Word.prototype.getScale = function() { return fontConst.car.scale * this.zoom; }
-Word.prototype.getValue = function() { return this.value; }
-Word.prototype.getNextValue = function() { return this.next_value; }
-Word.prototype.getPolice = function() { return this.police; }
-Word.prototype.getCode = function() { return this.code; }
-Word.prototype.getAlpha = function() { return this.alpha; }
-Word.prototype.getZoom = function() { return this.zoom; }
-Word.prototype.getNode = function() { return this.font.container; }
-Word.prototype.getNodeUp = function() { return this.font.up; } // Police coupable
-Word.prototype.getNodeDown = function() { return this.font.down; } // Police coupable
-Word.prototype.getId = function() { return this.id; }
-Word.prototype.getUniqId = function() { return 'word_"' + this.getValue() + '"_' + Math.random(); }
+Word.prototype.getRepeat = function() { return this.repeatAnimation; };
+Word.prototype.getX = function() { if(!this.active) return this.x; else return this.activeX; };
+Word.prototype.getY = function() { if(!this.active) return this.y; else return this.activeY; };
+Word.prototype.getCenterX = function() { return this.getX() - this.getWidth() / 2; };
+Word.prototype.getCenterY = function() { return this.getY() - this.getHeight() / 2; };
+Word.prototype.getWidth = function() { return this.font.container.width * fontConst.car.scale * this.zoom; };
+Word.prototype.getHeight = function() { return this.font.container.height * fontConst.car.scale * this.zoom; };
+Word.prototype.getScale = function() { return fontConst.car.scale * this.zoom; };
+Word.prototype.getValue = function() { return this.value; };
+Word.prototype.getNextValue = function() { return this.next_value; };
+Word.prototype.getPolice = function() { return this.police; };
+Word.prototype.getCode = function() { return this.code; };
+Word.prototype.getAlpha = function() { return this.alpha; };
+Word.prototype.getZoom = function() { return this.zoom; };
+Word.prototype.getNode = function() { return this.font.container; };
+Word.prototype.getNodeUp = function() { return this.font.up; }; // Police coupable
+Word.prototype.getNodeDown = function() { return this.font.down; }; // Police coupable
+Word.prototype.getId = function() { return this.id; };
+Word.prototype.getUniqId = function() { return 'word_"' + this.getValue() + '"_' + Math.random(); };
 // Set
-Word.prototype.setRepeat = function(data) { this.repeatAnimation = data; }
-Word.prototype.setX = function(data) { this.x = Math.ceil(data); }
-Word.prototype.setY = function(data) { this.y = Math.ceil(data); }
-Word.prototype.setXY = function(data, data2) { this.setX(data); this.setY(data2); }
-Word.prototype.setCenterX = function(data) { this.setX(data - this.getWidth() / 2); }
-Word.prototype.setCenterY = function(data) { this.setY(data - this.getHeight() / 2); }
-Word.prototype.setCenterXY = function(data, data2) { this.setCenterX(data); this.setCenterY(data2); }
-Word.prototype.setId = function(data) { this.id = data; }
-Word.prototype.setValue = function(data) { this.value = data; }
-Word.prototype.setNextValue = function(data) { this.next_value = data; }
-Word.prototype.setCode = function(data) { this.code = data; }
-Word.prototype.setPolice = function(data) { this.police = data; }
-Word.prototype.setZoomOnActive = function(data) { this.zoomOnActive = data; }
-Word.prototype.setAlpha = function(data) { this.alpha = data; }
-Word.prototype.setZoom = function(data) { this.zoom = data; return this;}
-Word.prototype.setDone = function(fct_done, handler) { this.list_done[fct_done] = handler; }
-Word.prototype.removeDone = function(fct_done) { this.list_done[fct_done] = function(){}; }
+Word.prototype.setRepeat = function(data) { this.repeatAnimation = data; };
+Word.prototype.setX = function(data) { this.x = Math.ceil(data); };
+Word.prototype.setY = function(data) { this.y = Math.ceil(data); };
+Word.prototype.setXY = function(data, data2) { this.setX(data); this.setY(data2); };
+Word.prototype.setCenterX = function(data) { this.setX(data - this.getWidth() / 2); };
+Word.prototype.setCenterY = function(data) { this.setY(data - this.getHeight() / 2); };
+Word.prototype.setCenterXY = function(data, data2) { this.setCenterX(data); this.setCenterY(data2); };
+Word.prototype.setId = function(data) { this.id = data; };
+Word.prototype.setValue = function(data) { this.value = data; };
+Word.prototype.setNextValue = function(data) { this.next_value = data; };
+Word.prototype.setCode = function(data) { this.code = data; };
+Word.prototype.setPolice = function(data) { this.police = data; };
+Word.prototype.setZoomOnActive = function(data) { this.zoomOnActive = data; };
+Word.prototype.setAlpha = function(data) { this.alpha = data; };
+Word.prototype.setZoom = function(data) { this.zoom = data; return this;};
+Word.prototype.setDone = function(fct_done, handler) { this.list_done[fct_done] = handler; };
+Word.prototype.removeDone = function(fct_done) { this.list_done[fct_done] = function(){}; };
 
 scriptLoaded('src/lib_separation/word/word.js');
