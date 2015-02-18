@@ -8,18 +8,18 @@
 function Story() {
 	this.type = 'none';
 	this.name = 'none';
-	this.pages = new Array();
+	this.pages = [];
 	this.nb = 0;
 }
 
 Story.prototype.setName = function(name) {
 	this.name = name;
-}
+};
 
 Story.prototype.addPage = function(page) {
 	this.pages[this.nb] = page;
 	this.nb++;
-}
+};
 
 Story.prototype.changePage = function(page, page_nb) {
 	if (page_nb < this.nb) {
@@ -29,7 +29,7 @@ Story.prototype.changePage = function(page, page_nb) {
 	}
 	else
 		return false;
-}
+};
 
 Story.prototype.destroyPage = function(page_nb) {
 	if (page_nb < this.nb) {
@@ -40,11 +40,11 @@ Story.prototype.destroyPage = function(page_nb) {
 	}
 	else
 		return false;
-}
+};
 	
 Story.prototype.destroy = function() {
 	Destroy.arrayObjet(this.pages);
 	this.nb = 0;
-}
+};
 
 scriptLoaded('src/recit/story.js');

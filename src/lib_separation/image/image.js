@@ -52,7 +52,7 @@ Image.prototype.setAlpha = function(data) { this.bmp.alpha = data; };
 Image.prototype.getX = function() { return this.x; };
 Image.prototype.getY = function() { return this.y; };
 Image.prototype.getWidth = function() { return this.w * this.scaleX; };
-Image.prototype.getHeight = function() { console.log(this.h, this.scaleY); return this.h * this.scaleY; };
+Image.prototype.getHeight = function() { return this.h * this.scaleY; };
 Image.prototype.getNode = function() { return this.bmp; };
 Image.prototype.getAlpha = function() { return this.bmp.alpha; };
 Image.prototype.getScaleX = function() { return this.scaleX; };
