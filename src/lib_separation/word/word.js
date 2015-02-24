@@ -49,8 +49,9 @@ function Word(value, next_value, police, code, autoAddGesture) {
 }
 
 Word.prototype.done = function(fct_done) {
-	if(this.list_done[fct_done] !== undefined)
+	if(this.list_done[fct_done] !== undefined) {
 		this.list_done[fct_done]();
+	}
 };
 
 Word.prototype.generate = function() {
@@ -126,9 +127,6 @@ Word.prototype.displayGUI = function() {
 
 Word.prototype.destroy = function() {
 	this.destroyTimeouts();
-
-
-
 	Event.destroy(this.getId());
 	for(var i = 0; i < this.tween.length; i++) {
 		this.tween[i].pause();
