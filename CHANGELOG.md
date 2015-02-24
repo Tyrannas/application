@@ -1,3 +1,7 @@
+#### 4.1.1 (24/02/2015)
+Fonctionnalités :
+* Ajout du son ambiant à nouveau (+ version mp3)
+
 #### 4.1.0 (24/02/2015)
 Fonctionnalités :
 * Editeur multi-lignes
