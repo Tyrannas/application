@@ -3,7 +3,7 @@
 Editeur.multilignes = {
 	draft_name: "Editeur.multilignes.draft",
 	nb_lines: 3,
-	word_add: 'O'
+	word_add: '+'
 };
 
 Editeur.multilignes.start = function () {
