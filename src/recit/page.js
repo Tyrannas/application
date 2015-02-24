@@ -6,8 +6,6 @@ function Page(json_def) {
 	if (json_def !== undefined) {
 		JsonHandler.pageFromJson(json_def, this);
 	}
-	this.setYsize(H);
-	this.setCenterXY(W/2,H/2);
 }
 
 //Ajout d'une line
@@ -28,7 +26,9 @@ Page.prototype.changeLine = function(new_line, line_nbr) {
 };
 
 //Generation des phrases
-Page.prototype.generate = function() {
+Page.prototype.generate = function(Ysize, cX, cY) {
+	this.setYsize(Ysize || H);
+	this.setCenterXY(cX || W/2, cY || H/2);
 	for (var i=0; i<this.lines.length; i++) {
 		this.lines[i].generate();
 	}

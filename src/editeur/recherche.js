@@ -1,10 +1,15 @@
 /**
 	Classe RechercheEditeur
 */
-function RechercheEditeur(fct) {
-	this.possibilities = new Array(); // Tableau des mots possibles
-	this.words = new Array(); // Tableau des mots dans la liste déroualnte
-	this.words_next = new Array();
+RechercheEditeur  = {};
+
+RechercheEditeur.start = function(fct) {
+	Destroy.all();
+	gui.Editeur_classic_displayRecherche();
+
+	this.possibilities = []; // Tableau des mots possibles
+	this.words = []; // Tableau des mots dans la liste déroualnte
+	this.words_next = [];
 	this.nb_side = 3; // Nombre de mots de chaque côté du mot central
 	this.nb_max = this.nb_side * 2 + 1; // Nombre maximum de mots
 	
@@ -12,23 +17,18 @@ function RechercheEditeur(fct) {
 	this.central_word_value = null; // Objet Word
 	this.word_try = null; // Objet Word qui déclenche un test
 	
-	this.coords_word = new Array(); // Coordonnées centrées des mots dans la liste 
-	this.coords_word_next = new Array(); // Coordonnées centrées des mots dans la liste 
+	this.coords_word = []; // Coordonnées centrées des mots dans la liste 
+	this.coords_word_next = []; // Coordonnées centrées des mots dans la liste 
 	this.coords_word_try = {};
 	
 	this.mot_act = 0; // Mot courant
 	this.inAnimation = false;
 	this.inTransform = false;
 
-	this.callback = function() { fct(this.central_word);};
+	this.callback = function() {
+		fct(this.central_word);
+	}.bind(this);
 
-	RechercheEditeurConstruct(this);
-}
-
-/*
-	Constructeur
-*/
-function RechercheEditeurConstruct(r) {
 	// Initialisation des coordonnées des mots
 	/*
 	var x = Math.ceil(W*2/3);
@@ -45,54 +45,68 @@ function RechercheEditeurConstruct(r) {
 		};
 	}
 	*/
+
+	this.possibilities = MyStorage.listWords().map(function(x) {
+		return JsonHandler.wordFromJson(JSON.parse(MyStorage.getWord(x)));
+	});
+	if (this.possibilities.length <= 0) {
+		if (language == 'fr')
+			alert('Aucun mot enregistré, allez dans le Labo !');
+		else 
+			alert('No words saved, let\'s go to the Lab !');
+		Labo.start();
+		return null;
+	}
 	
-	var offsetAngle = Math.PI / (4 * (r.nb_side+1));
-	var offsetY = Math.ceil(H/(2*r.nb_side));
-	var offsetAlpha = 1 / r.nb_side;
+	var offsetAngle = Math.PI / (4 * (this.nb_side+1));
+	var offsetY = Math.ceil(H/(2*this.nb_side));
+	var offsetAlpha = 1 / this.nb_side;
 	var offsetAlphaErase = 1;
-	var offsetZoom = .2;
+	var offsetZoom = 0.2;
 	
 	var radius = 2/3*W - new Word('motdelongueurmax').getWidth()/2;
 	var height_def = new Word('temp').getHeight();
 
-	r.size_erase = 50;
+	this.size_erase = 50;
 	
-	for(var i = -r.nb_side; i <= r.nb_side; i++) {
-		r.coords_word[r.nb_side+i] = {
-			'x': 2*margin + r.size_erase,
+	for(var i = -this.nb_side; i <= this.nb_side; i++) {
+		this.coords_word[this.nb_side+i] = {
+			'x': 2*margin + this.size_erase,
 			'y': H/2 + Math.sin(i * offsetAngle) * radius,
 			'alpha': 1 - Math.abs(i) * offsetAlpha,
 			'zoom': 1 - Math.abs(i) * offsetZoom,
 		};
-		r.coords_word_next[r.nb_side+i] = {
-			'x': 2*margin + r.size_erase,
+		this.coords_word_next[this.nb_side+i] = {
+			'x': 2*margin + this.size_erase,
 			'y': H/2 + Math.sin(i * offsetAngle) * radius + height_def*(0.6 - Math.abs(i) * offsetZoom),
 			'alpha': 0.7 - Math.abs(i) * offsetAlpha,
 			'zoom': 0.6 - Math.abs(i) * offsetZoom,
 		};
 	}
 	temp = new Image(res('cross_erase'));
-	r.coords_erase = {
+	this.coords_erase = {
 		'x': margin,
-		'y': (r.coords_word[r.nb_side].y + r.coords_word_next[r.nb_side].y) / 2,
+		'y': (this.coords_word[this.nb_side].y + this.coords_word_next[this.nb_side].y) / 2,
 		'alpha': 1,
-		'scaleX': getScale(temp.getHeight(), r.size_erase),
-		'scaleY': getScale(temp.getWidth(), r.size_erase)
-	}
+		'scaleX': getScale(temp.getHeight(), this.size_erase),
+		'scaleY': getScale(temp.getWidth(), this.size_erase)
+	};
 	
-	r.coords_word_try = {'x': 2*W/3, 'y': H*3/4,};
-	this.callback = r.callback;
-}
+	this.coords_word_try = {'x': 2*W/3, 'y': H*3/4,};
 
-RechercheEditeur.prototype.resetWords = function() {
-	this.words = new Array();
-	this.words_next = new Array();
-}
+	this.generate();
+	this.display();
+};
+
+RechercheEditeur.resetWords = function() {
+	this.words = [];
+	this.words_next = [];
+};
 
 /*
 	Scroll
 */
-RechercheEditeur.prototype.scrollDown = function() { if(!this.inAnimation) { this.inAnimation = true;
+RechercheEditeur.scrollDown = function() { if(!this.inAnimation) { this.inAnimation = true;
 	// Décalage des mots vers le haut
 	Destroy.objet(this.words[0]);
 	Destroy.objet(this.words_next[0]);
@@ -113,8 +127,8 @@ RechercheEditeur.prototype.scrollDown = function() { if(!this.inAnimation) { thi
 	
 	this.scrollAnimation(200);
 	this.updateCentralWord();
-}}
-RechercheEditeur.prototype.scrollUp = function() { if(!this.inAnimation) { this.inAnimation = true;
+}};
+RechercheEditeur.scrollUp = function() { if(!this.inAnimation) { this.inAnimation = true;
 	// Décalage des mots vers le haut
 	Destroy.objet(this.words[this.nb_max-1]);
 	this.words.pop();
@@ -136,8 +150,8 @@ RechercheEditeur.prototype.scrollUp = function() { if(!this.inAnimation) { this.
 	
 	this.scrollAnimation(200);
 	this.updateCentralWord();
-}}
-RechercheEditeur.prototype.scrollAnimation = function(duration) {
+}};
+RechercheEditeur.scrollAnimation = function(duration) {
 	for(var i = 0; i < this.nb_max; i++) {
 		this.words[i].setAlpha(this.coords_word[i].alpha);
 		this.words[i].setZoom(this.coords_word[i].zoom);
@@ -165,32 +179,35 @@ RechercheEditeur.prototype.scrollAnimation = function(duration) {
 			'scaleY': this.words_next[i].getScale(),
 		}, duration);
 	}
-	setTimeout(function(r) { return function() { r.scrollFinish(); }}(this), duration);
-}
-RechercheEditeur.prototype.scrollFinish = function() {
+	setTimeout(function() {
+		this.scrollFinish();
+	}.bind(this), duration);
+};
+RechercheEditeur.scrollFinish = function() {
 	this.inAnimation = false;
 	Editeur.scrollFinish();
-}
+};
 
-RechercheEditeur.prototype.setPossibilities = function(data) {
+RechercheEditeur.setPossibilities = function(data) {
 	this.possibilities = data;
-}
+};
 
-RechercheEditeur.prototype.getValidId = function(i) {
+RechercheEditeur.getValidId = function(i) {
 	var l = this.possibilities.length;
 	while(i < 0) { i += l; }
 	while(i >= l) { i -= l; }
 	return i;
-}
+};
 
 /*
 	Génère la ligne en générant tous les mots à partir du mot_top
 */
-RechercheEditeur.prototype.generate = function(mot_act) {
+RechercheEditeur.generate = function(mot_act) {
 	this.resetWords();
-	this.mot_act = mot_act;
-	var j = 0;
-	for (var i = mot_act - this.nb_side; i <= mot_act + this.nb_side; i++) {
+	this.mot_act = mot_act || 0;
+
+	var i, j;
+	for (i = this.mot_act - this.nb_side, j = 0; i <= this.mot_act + this.nb_side; i++, j++) {
 		var ind = this.getValidId(i);
 		var p = this.possibilities[ind];
 		this.words[j] = new Word(p.getValue(), p.getNextValue(), p.getPolice(), p.getCode(), false);
@@ -204,8 +221,6 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 		this.words_next[j].setZoom(this.coords_word_next[j].zoom);
 		this.words_next[j].setCenterY(this.coords_word_next[j].y);
 		this.words_next[j].setX(this.coords_word_next[j].x);
-
-		j++;
 	}
 	
 	this.erase = new Image(res('cross_erase'));
@@ -213,7 +228,10 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 	this.erase.setScaleXY(this.coords_erase.scaleX, this.coords_erase.scaleY);
 	this.erase.setCenterY(this.coords_erase.y);
 	this.erase.setX(this.coords_erase.x);
-	Event.onTap('erase_word', this.erase, function(o) { return function() { MyStorage.removeWord(o.words[o.nb_side]); Editeur.classic_changeWord(o.mot_act) }}(this), true);
+	Event.onTap('erase_word', this.erase, function() {
+		MyStorage.removeWord(this.words[this.nb_side]);
+		Editeur.classic_changeWord(this.mot_act);
+	}.bind(this), true);
 
 	if (language == 'fr') 
 		this.word_try = new Word('Valider', null, 0);
@@ -229,9 +247,9 @@ RechercheEditeur.prototype.generate = function(mot_act) {
 	this.central_word.setPolice(this.words[this.nb_side].getPolice());
 	this.central_word.setCode(this.words[this.nb_side].getCode());
 	this.central_word.generate();
-}
+};
 
-RechercheEditeur.prototype.updateCentralWord = function() {
+RechercheEditeur.updateCentralWord = function() {
 	Destroy.objet(this.central_word);
 	this.central_word = new Word(this.words[this.nb_side].getValue());
 	this.central_word.setZoom(2);
@@ -260,12 +278,12 @@ RechercheEditeur.prototype.updateCentralWord = function() {
 	this.word_right.setCenterY(H/5);
 	this.word_right.generate();
 	this.word_right.display();
-}
+};
 
 /*
 	Affiche la ligne en affichant tous les mots
 */
-RechercheEditeur.prototype.display = function() {
+RechercheEditeur.display = function() {
 	for(var i = 0; i < this.words.length; i++) {
 		this.words[i].display();
 		this.words_next[i].display();
@@ -273,15 +291,15 @@ RechercheEditeur.prototype.display = function() {
 	this.erase.display();
 	this.word_try.display();
 	this.updateCentralWord();
-}
+};
 
-RechercheEditeur.prototype.destroy = function() {
+RechercheEditeur.destroy = function() {
 	Destroy.arrayObjet(this.words);
 	Destroy.arrayObjet(this.words_next);
 	Destroy.objet(this.erase);
 	Destroy.objet(this.central_word);
 	Destroy.objet(this.word_try);
-}
+};
 
 
 scriptLoaded('src/editeur/recherche.js');

@@ -54,7 +54,7 @@ App.start = function() {
 	sound_manager = new Sound();
 	// sound_manager.play("ambiant");
 	// Intro.start();
-	Editeur.start();
+	Menu.start();
 };
 
 // Démarrage de l'application

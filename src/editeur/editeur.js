@@ -5,9 +5,10 @@ var ask_to_scroll_up = 0;
 var ask_to_scroll_down = 0;
 
 Editeur.start = function() {
+	this.type = "multilignes";
 	Editeur.multilignes.start();
 	// Editeur.displayMenu();
-};
+}.bind(Editeur);
 
 //Affiche le menu de choix des types de récits
 //TODO - Pour l'instant, on bypass
@@ -66,17 +67,17 @@ Editeur.textInputTitle = function(x, y, z) {
 };
 
 Editeur.scrollUp = function() {
-	if(!this.recherche.inTransform) {
-		if(!this.recherche.inAnimation)
-			this.recherche.scrollUp();
+	if(!RechercheEditeur.inTransform) {
+		if(!RechercheEditeur.inAnimation)
+			RechercheEditeur.scrollUp();
 		else
 			ask_to_scroll_up++;
 	}
 };
 Editeur.scrollDown = function() {
-	if(!this.recherche.inTransform) {
-		if(!this.recherche.inAnimation)
-			this.recherche.scrollDown();
+	if(!RechercheEditeur.inTransform) {
+		if(!RechercheEditeur.inAnimation)
+			RechercheEditeur.scrollDown();
 		else
 			ask_to_scroll_down++;
 	}
@@ -97,7 +98,7 @@ Editeur.scrollFinish = function() {
 };
 
 Editeur.handle_recherche = function() {
-	this.recherche.callback();
+	RechercheEditeur.callback();
 };
 
 Editeur.saveStory = function() {

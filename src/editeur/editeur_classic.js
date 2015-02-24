@@ -65,8 +65,8 @@ Editeur.classic.display = function() {
 			o.word_save.setCenterX(W/2);
 			o.word_save.setY(H-margin-o.word_save.getHeight());
 			o.word_save.generate(); 
-			o.word_save.display(); }, 
-		true);
+			o.word_save.display();
+	}, true);
 	gui.Editeur_displayAll();
 };
 

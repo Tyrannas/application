@@ -24,7 +24,12 @@ Line.prototype.getWidth = function() {
  */
 
 Line.prototype.getHeight = function() {
-	return this.words[0].getHeight();
+	if(this.words.length > 0) {
+		return this.words[0].getHeight();
+	}
+	else {
+		return 0;
+	}
 };
 /*
 	Ajoute un mot sur la ligne.
@@ -43,12 +48,27 @@ Line.prototype.add = function(word) {
 		return false;
 	}
 };
+Line.prototype.addAtBegin = function(word) {
+	if(word.value !== ' ' && this.words.length > 0)
+		this.addSpaceAtBegin();
+	if(this.getWidth() + word.getWidth() < W) {
+		this.words.unshift(word);
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+};
 
 /*
 	Ajoute un espace à la ligne
 */
 Line.prototype.addSpace = function() {
 	this.add(new Word(' '));
+};
+Line.prototype.addSpaceAtBegin = function() {
+	this.addAtBegin(new Word(' '));
 };
 
 /*
@@ -63,8 +83,6 @@ Line.prototype.addTab = function(police) {
 */
 Line.prototype.generate = function() {
 	for(var i = 0; i < this.words.length; i++) {
-
-		console.log(this.words[i]);
 		this.words[i].generate();
 	}
 };
