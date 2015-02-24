@@ -39,6 +39,7 @@ module.exports = function(grunt) {
                         // Editeur 
                         '../src/editeur/editeur.js',
                         '../src/editeur/editeur_classic.js',
+                        '../src/editeur/editeur_multilignes.js',
                         '../src/editeur/recherche.js',
                         // Database
                         'res/db/local_db.js',

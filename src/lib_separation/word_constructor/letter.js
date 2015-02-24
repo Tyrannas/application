@@ -2,6 +2,8 @@
  *	Object Letter
 */
 function Letter(c, police, SS_name) {
+
+
 	var fc = fontConst.SS[SS_name];
 	
 	this.police = police;		// id de la police de la lettre
@@ -14,7 +16,7 @@ function Letter(c, police, SS_name) {
 	
 	this.bmp;
 	this.SS_name = SS_name;
-	
+
 	LetterConstruct(this);
 }
 

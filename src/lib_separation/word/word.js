@@ -42,7 +42,7 @@ function Word(value, next_value, police, code, autoAddGesture) {
 	
 	this.list_done = []; // Liste des fonctions à appeler quand une fonction est terminée
 
-	this.autoAddGesture = !!(autoAddGesture || true);
+	this.autoAddGesture = (autoAddGesture === false) ? false : true;
 
 	this.generate();
 	this.setId(this.getUniqId());

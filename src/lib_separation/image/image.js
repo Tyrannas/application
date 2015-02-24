@@ -45,14 +45,14 @@ Image.prototype.setCenterXY = function(data, data2) { this.setCenterX(data); thi
 Image.prototype.setScaleX = function(data) { this.scaleX = data; };
 Image.prototype.setScaleY = function(data) { this.scaleY = data; };
 Image.prototype.setScaleXY = function(data, data2) { this.setScaleX(data); this.setScaleY(data2); };
-Image.prototype.setSizeXY = function(data, data2) { this.setScaleX(data/this.w); this.setScaleY(data2/this.h); };
+Image.prototype.setSizeWH = function(data, data2) { this.setScaleX(data/this.w); this.setScaleY(data2/this.h); };
 Image.prototype.setAlpha = function(data) { this.bmp.alpha = data; };
 
 // Set
 Image.prototype.getX = function() { return this.x; };
 Image.prototype.getY = function() { return this.y; };
 Image.prototype.getWidth = function() { return this.w * this.scaleX; };
-Image.prototype.getHeight = function() { console.log(this.h, this.scaleY); return this.h * this.scaleY; };
+Image.prototype.getHeight = function() { return this.h * this.scaleY; };
 Image.prototype.getNode = function() { return this.bmp; };
 Image.prototype.getAlpha = function() { return this.bmp.alpha; };
 Image.prototype.getScaleX = function() { return this.scaleX; };
