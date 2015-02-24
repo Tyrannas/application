@@ -1,3 +1,7 @@
+#### 4.1.2 (24/02/2015)
+Correction de bugs :
+* Mots mal détruits
+
 #### 4.1.1 (24/02/2015)
 Fonctionnalités :
 * Ajout du son ambiant à nouveau (+ version mp3)

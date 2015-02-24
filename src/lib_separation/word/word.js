@@ -58,7 +58,7 @@ Word.prototype.generate = function() {
 
 	var new_code, new_value, new_next_value;
 
-	if(!this.font) {
+	if(!!this.font) {
 		this.destroy();
 	}
 	
