@@ -296,6 +296,8 @@ RechercheEditeur.display = function() {
 RechercheEditeur.destroy = function() {
 	Destroy.arrayObjet(this.words);
 	Destroy.arrayObjet(this.words_next);
+	Destroy.objet(this.word_left);
+	Destroy.objet(this.word_right);
 	Destroy.objet(this.erase);
 	Destroy.objet(this.central_word);
 	Destroy.objet(this.word_try);

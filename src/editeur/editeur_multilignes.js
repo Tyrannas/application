@@ -61,7 +61,6 @@ Editeur.multilignes.destroy = function () {
 }.bind(Editeur.multilignes);
 
 Editeur.multilignes.getJSON = function () {
-	console.log(this.story);
 	if(!this.story) {
 		this.loadDraft();
 	}
