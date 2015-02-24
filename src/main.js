@@ -52,9 +52,9 @@ App.mainLoop = function() {
 
 App.start = function() {
 	sound_manager = new Sound();
-	// sound_manager.play("ambiant");
-	// Intro.start();
-	Menu.start();
+	sound_manager.play("ambiant");
+	Intro.start();
+	// Menu.start();
 };
 
 // Démarrage de l'application
