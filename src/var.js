@@ -31,6 +31,7 @@ var ctx;			// Context2D du canvas
 var stage;			// Stage contenant le canvas
 var stageGUI;
 var gui;
+var inputbox;
 
 var fontConst;
 var fontSize = 28;
