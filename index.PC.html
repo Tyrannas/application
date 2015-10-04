@@ -105,8 +105,12 @@
 	<style>
 		* { margin:0; padding: 0; }
 		body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
-		.inputbox { background-color: #FFF; position: relative; display: none; border-radius: 10px;}
+		.inputbox { background-color: #FFF; position: relative; display: none; border-radius: 10px; padding: 10px; text-align: center; }
+		.inputboxcontainer { position: relative; top: 50%; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); }
 		canvas { position: absolute; top: 0; left: 0; }
+		input { width: 98%; height: 25px; }
+		.inputboxbuttoncontainer { text-align: right; }
+		.inputbox > .inputboxcontainer > .inputboxbuttoncontainer > button { border-radius: 5px; width: 75px; height: 25px; border: none; margin: 5px; }
 	</style>
 	</head>
 	<body></body>

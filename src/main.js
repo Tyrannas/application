@@ -22,7 +22,11 @@ App.init = function() {
 	
 	//Initialisation de l'inputbox
 	inputbox = document.createElement('div');
+	inputboxcontainer = document.createElement('div');
+	inputboxbuttoncontainer = document.createElement('div');
 	inputbox.setAttribute('class', 'inputbox');
+	inputboxcontainer.setAttribute('class', 'inputboxcontainer');
+	inputboxbuttoncontainer.setAttribute('class', 'inputboxbuttoncontainer');
 	
 	inputbox.style.width = W * 40/100 + "px";
 	inputbox.style.height = H * 50/100 + "px";
@@ -33,6 +37,8 @@ App.init = function() {
 	inputbox.style.top = (H - H * 50/100)/2 + "px";
 	
 	document.body.appendChild(inputbox);
+	inputbox.appendChild(inputboxcontainer)
+	inputboxcontainer.appendChild(inputboxbuttoncontainer);
 
 	// Initialisation du stage
 	stage = new createjs.Stage(canvas);

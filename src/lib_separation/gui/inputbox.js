@@ -59,10 +59,10 @@ Inputbox.text = function (options, callbacks) {
 	}.bind(this));
 	
 	//Ajout à l'inputbox de tous les éléments nécessaires
-	inputbox.appendChild(title);
-	inputbox.appendChild(input);
-	inputbox.appendChild(confirm);
-	inputbox.appendChild(cancel);
+	inputboxcontainer.insertBefore(input, inputboxcontainer.firstChild);//On inverse car
+	inputboxcontainer.insertBefore(title, inputboxcontainer.firstChild);//insertion devant le premier enfant
+	inputboxbuttoncontainer.appendChild(confirm);
+	inputboxbuttoncontainer.appendChild(cancel);
 	
 	this.show();
 };
