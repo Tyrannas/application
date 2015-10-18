@@ -134,9 +134,9 @@ Labo_Menu.prototype.textInput = function() {
 	}
 
 	if (language == 'fr') {
-		Cocoon.Dialog.prompt({
+		Inputbox.prompt({
 			message : "Tapez un mot a transformer :",
-			type : Cocoon.Dialog.keyboardType.TEXT,
+			type : "text",
 			confirmText : "Ok",
 			cancelText : "Annuler"
 		},
@@ -145,9 +145,9 @@ Labo_Menu.prototype.textInput = function() {
 		});
 	}
 	else {
-		Cocoon.Dialog.prompt({
+		Inputbox.prompt({
 			message : "Write a word to be transformed:",
-			type : Cocoon.Dialog.keyboardType.TEXT,
+			type : "text",
 			confirmText : "Ok",
 			cancelText : "Cancel"
 		},

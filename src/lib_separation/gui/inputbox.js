@@ -20,13 +20,6 @@ Inputbox.hide = function() {
 	}
 	else {
 		inputbox.style.display = 'none';
-		while (inputboxcontainer.firstChild) {
-			while (inputboxcontainer.firstChild.firstChild) {
-				inputboxcontainer.firstChild.removeChild(inputboxcontainer.firstChild.firstChild);
-			} 
-			inputboxcontainer.removeChild(inputboxcontainer.firstChild);
-		}
-		inputboxcontainer.appendChild(inputboxbuttoncontainer);
 	}
 	
 };
@@ -38,10 +31,10 @@ Inputbox.hide = function() {
 */
 Inputbox.prompt = function (options, callbacks) {
 	//Création des éléments nécessaires
-	var input = document.createElement('input');
-	var title = document.createElement('h3');
-	var confirm = document.createElement('button');
-	var cancel = document.createElement('button');
+	var input = document.getElementsByTagName('input')[0];
+	var title = document.getElementById('message');
+	var confirm = document.getElementById('confirm');
+	var cancel = document.getElementById('cancel');
 	
 	//Ajout du texte custom
 	title.textContent = options.message;
@@ -49,6 +42,11 @@ Inputbox.prompt = function (options, callbacks) {
 	cancel.textContent = options.cancelText;
 	
 	input.type = options.type;
+	
+	input.style.display = 'inline-block';
+	title.style.display = 'block';
+	confirm.style.display = 'inline-block';
+	cancel.style.display = 'inline-block';
 		
 	//Binding des évènements
 	inputbox.addEventListener("click", function (event){
@@ -59,6 +57,7 @@ Inputbox.prompt = function (options, callbacks) {
 		var text = input.value;
 		this.hide();
 		if(typeof callbacks != "undefined" && typeof callbacks.success == "function") {
+			canvas.removeEventListener("click", cancel_callback);
 			callbacks.success(text);
 		}
 	}.bind(this));
@@ -76,13 +75,7 @@ Inputbox.prompt = function (options, callbacks) {
 		}
 	};
 	
-	//Ajout à l'inputbox de tous les éléments nécessaires
-	inputboxcontainer.insertBefore(input, inputboxcontainer.firstChild);//On inverse car
-	inputboxcontainer.insertBefore(title, inputboxcontainer.firstChild);//insertion devant le premier enfant
-	inputboxbuttoncontainer.appendChild(confirm);
-	inputboxbuttoncontainer.appendChild(cancel);
-	
-	this.show();
+	Inputbox.show();
 };
 
 /*
@@ -92,12 +85,20 @@ Inputbox.prompt = function (options, callbacks) {
 */
 Inputbox.alert = function (options, callbacks) {
 	//Création des éléments nécessaires
-	var title = document.createElement('h3');
-	var confirm = document.createElement('button');
+	var input = document.getElementsByTagName('input')[0];
+	var title = document.getElementById('message');
+	var confirm = document.getElementById('confirm');
+	var cancel = document.getElementById('cancel');
 	
 	//Ajout du texte custom
 	title.textContent = options.message;
 	confirm.textContent = options.confirmText;
+	
+	cancel.style.display = 'none';
+	input.style.display = 'none';
+	title.style.display = 'block';
+	confirm.style.display = 'inline-block';
+	
 		
 	//Binding des évènements
 	inputbox.addEventListener("click", function (event){
@@ -122,9 +123,6 @@ Inputbox.alert = function (options, callbacks) {
 		}
 	};
 	
-	//Ajout à l'inputbox de tous les éléments nécessaires
-	inputboxcontainer.insertBefore(title, inputboxcontainer.firstChild);//insertion devant le groupe contenant les boutons
-	inputboxbuttoncontainer.appendChild(confirm);
 	
 	this.show();
 };
@@ -137,15 +135,20 @@ Inputbox.alert = function (options, callbacks) {
 
 Inputbox.confirm = function (options, callbacks) {
 	//Création des éléments nécessaires
-	var title = document.createElement('h3');
-	var confirm = document.createElement('button');
-	var cancel = document.createElement('button');
+	var input = document.getElementsByTagName('input')[0];
+	var title = document.getElementById('message');
+	var confirm = document.getElementById('confirm');
+	var cancel = document.getElementById('cancel');
 	
 	//Ajout du texte custom
 	title.textContent = options.message;
 	confirm.textContent = options.confirmText;
 	cancel.textContent = options.cancelText;
 	
+	input.style.display = 'none';
+	title.style.display = 'block';
+	confirm.style.display = 'inline-block';
+	cancel.style.display = 'inline-block';
 		
 	//Binding des évènements
 	inputbox.addEventListener("click", function (event){
@@ -171,11 +174,6 @@ Inputbox.confirm = function (options, callbacks) {
 			callbacks.cancel();
 		}
 	};
-	
-	//Ajout à l'inputbox de tous les éléments nécessaires
-	inputboxcontainer.insertBefore(title, inputboxcontainer.firstChild);//insertion devant le premier enfant
-	inputboxbuttoncontainer.appendChild(confirm);
-	inputboxbuttoncontainer.appendChild(cancel);
 	
 	this.show();
 };

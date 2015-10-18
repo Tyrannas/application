@@ -27,9 +27,9 @@ Labo.menu = function() {
 		}
 		else {
 			if (language == 'fr') 
-				alert("Veuillez choisir une police.");
+				Inputbox.alert({message: "Veuillez choisir une police.", confirmText: "Ok"});
 			else
-				alert("Please choose a font.");
+				Inputbox.alert({message: "Please choose a font.", confirmText: "Ok"});
 		}
 	});
 };
@@ -67,9 +67,9 @@ Labo.generateRecherche = function(word_searched, police) {
 			else
 			{
 				if (language == 'fr') 
-					alert("Aucune correspondance.");
+					Inputbox.alert({message: "Aucune correspondance.", confirmText: "Ok"});
 				else
-					alert("No match found.");
+					Inputbox.alert({message: "No match found.", confirmText: "Ok"});
 				Labo.menu();
 			}
 		}

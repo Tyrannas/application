@@ -129,9 +129,9 @@ Editeur.multilignes.textInputTitle = function(callback_success) {
 	}
 
 	if (language == 'fr') {
-		Cocoon.Dialog.prompt({
+		Inputbox.prompt({
 			message : "Tapez un titre :",
-			type : Cocoon.Dialog.keyboardType.TEXT,
+			type : "text",
 			confirmText : "Ok",
 			cancelText : "Annuler"
 		},
@@ -140,9 +140,9 @@ Editeur.multilignes.textInputTitle = function(callback_success) {
 		});
 	}
 	else {
-		Cocoon.Dialog.prompt({
+		Inputbox.prompt({
 			message : "Write a title:",
-			type : Cocoon.Dialog.keyboardType.TEXT,
+			type : "text",
 			confirmText : "Ok",
 			cancelText : "Cancel"
 		},
@@ -198,9 +198,9 @@ ButtonPlus.prototype.textInputWord = function(callback_success) {
 	}
 
 	if (language == 'fr') {
-		Cocoon.Dialog.prompt({
+		Inputbox.prompt({
 			message : "Tapez un mot à ajouter :",
-			type : Cocoon.Dialog.keyboardType.TEXT,
+			type : "text",
 			confirmText : "Ok",
 			cancelText : "Annuler"
 		},
@@ -209,9 +209,9 @@ ButtonPlus.prototype.textInputWord = function(callback_success) {
 		});
 	}
 	else {
-		Cocoon.Dialog.prompt({
+		Inputbox.prompt({
 			message : "Write a word to be added:",
-			type : Cocoon.Dialog.keyboardType.TEXT,
+			type : "text",
 			confirmText : "Ok",
 			cancelText : "Cancel"
 		},

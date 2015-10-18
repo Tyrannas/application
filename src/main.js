@@ -21,12 +21,9 @@ App.init = function() {
 	document.body.appendChild(canvas);
 	
 	//Initialisation de l'inputbox
-	inputbox = document.createElement('div');
-	inputboxcontainer = document.createElement('div');
-	inputboxbuttoncontainer = document.createElement('div');
-	inputbox.setAttribute('class', 'inputbox');
-	inputboxcontainer.setAttribute('class', 'inputboxcontainer');
-	inputboxbuttoncontainer.setAttribute('class', 'inputboxbuttoncontainer');
+	inputbox = document.getElementsByClassName('inputbox')[0];
+	inputboxcontainer = document.getElementsByClassName('inputboxcontainer')[0];
+	inputboxbuttoncontainer = document.getElementsByClassName('inputboxbuttoncontainer')[0];
 	
 	inputbox.style.width = W * 40/100 + "px";
 	inputbox.style.height = H * 50/100 + "px";
@@ -35,10 +32,6 @@ App.init = function() {
 	//Positionnement de la boite
 	inputbox.style.left = (W - W * 40/100)/2 + "px";
 	inputbox.style.top = (H - H * 50/100)/2 + "px";
-	
-	document.body.appendChild(inputbox);
-	inputbox.appendChild(inputboxcontainer)
-	inputboxcontainer.appendChild(inputboxbuttoncontainer);
 
 	// Initialisation du stage
 	stage = new createjs.Stage(canvas);

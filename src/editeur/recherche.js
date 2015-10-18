@@ -51,9 +51,9 @@ RechercheEditeur.start = function(fct) {
 	});
 	if (this.possibilities.length <= 0) {
 		if (language == 'fr')
-			alert('Aucun mot enregistré, allez dans le Labo !');
+			Inputbox.alert({message: 'Aucun mot enregistré, allez dans le Labo !', confirmText: 'Ok'});
 		else 
-			alert('No words saved, let\'s go to the Lab !');
+			Inputbox.alert({message: 'No words saved, let\'s go to the Lab !', confirmText: "Ok"});
 		Labo.start();
 		return null;
 	}

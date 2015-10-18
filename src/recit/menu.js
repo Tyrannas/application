@@ -102,7 +102,7 @@ Recit_Menu.prototype.generate = function() {
 					this.erase[i][j].display();
 					Event.onTap('erase_'+k, this.erase[i][j], function(name) { return function() { MyStorage.removeStory(name); Recit.start(); }}(name), true);
 				}
-				// Evènements
+				// Evï¿½nements
 			}
 			k++;
 		}
@@ -111,10 +111,10 @@ Recit_Menu.prototype.generate = function() {
 		show_err_message_too_many_stories = false;
 		var msg;
 		if (language == 'fr')
-			msg = "Le nombre de récits enregistré dépasse la capacité maximale de l'affichage, supprimez des récits et d'autres apparaitront";
+			msg = "Le nombre de rï¿½cits enregistrï¿½ dï¿½passe la capacitï¿½ maximale de l'affichage, supprimez des rï¿½cits et d'autres apparaitront";
 		else
 			msg = "There are too many stories saved, you may want to delete some so other may appear";
-		alert(msg);
+		Inputbox.alert({message: msg, confirmText: "Ok"});
 	}
 }
 
