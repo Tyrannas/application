@@ -32,6 +32,7 @@ var Word_polices = {
 	3 : 'ombre',
 	4 : 'coupable_entier',
 	5 : 'coupable_haut',
+	6 : 'test'
 }
 
 function Word_getNormalizedPolice(police) {
@@ -102,6 +103,9 @@ var fontConst = {
 			offset: 0,			// Décalage y
 			name: 'demihaut_entier',	// Nom de la police
 		},
+		6: {
+			offset: -5,
+		}
 	},
 	SS: {
 		'demihauth': {

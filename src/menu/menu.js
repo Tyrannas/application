@@ -72,6 +72,25 @@ Menu.labo = function() {
 	}, true);
 }
 
+Menu.editeur = function() {
+	var zoom = 2;
+	if (language == 'fr') 
+		Menu.words['editeur'] = new Word('editeur', null, 5);
+	else 
+		Menu.words['editeur'] = new Word('editor', null, 5);
+	//Menu.words['editeur'].setCenterXY(W / 2, H * 8/12);
+	Menu.words['editeur'].setZoom(zoom);
+	Menu.words['editeur'].setCenterXY(W / 2, H * 1/2);
+	Menu.words['editeur'].getNode().alpha = 0;
+	Menu.words['editeur'].display();
+	
+	/*Tween.get(Menu.words['editeur'].getNode()).to({
+			alpha: Menu.opacity,
+		}, Menu.anim_duration, Ease.sineIn);*/
+	
+	Event.onTap('Menu.editeur', Menu.words['editeur'], Editeur.start, true);
+}
+
 Menu.aide = function() {
 	if (language == 'fr')
 		Menu.words['aide'] = new Word('aide', null, 0);
@@ -91,21 +110,6 @@ Menu.aide = function() {
 	}, true);
 }
 
-Menu.editeur = function() {
-	if (language == 'fr') 
-		Menu.words['editeur'] = new Word('editeur', null, 0);
-	else 
-		Menu.words['editeur'] = new Word('editor', null, 0);
-	Menu.words['editeur'].setCenterXY(W / 2, H * 8/12);
-	Menu.words['editeur'].getNode().alpha = 0;
-	Menu.words['editeur'].display();
-	
-	Tween.get(Menu.words['editeur'].getNode()).to({
-			alpha: Menu.opacity,
-		}, Menu.anim_duration, Ease.sineIn);
-	
-	Event.onTap('Menu.editeur', Menu.words['editeur'], Editeur.start, true);
-}
 
 Menu.lang = function() {
 	Menu.words['lang_EN'] = new Word('en', null, 0);

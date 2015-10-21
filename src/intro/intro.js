@@ -23,18 +23,20 @@ var Intro = Intro || {};
 		gui.menuButton();
 		
 		Effects.respire('logo', logo.getNode(), 0.2, 1);
-		Event.onTap('logo', logo, function() {
+		//Event.onTap('logo', logo, function() {
+		setTimeout(function(){
 			Effects.stopRespire('logo');
 			logo.animateIntro(function(logo) {
 				Intro.laSeparation();
-			});
-		}, false);
+			});}
+		,1000);
+		//}, false);
 	};
 
 	Intro.laSeparation = function() {
 		Destroy.all();
 		
-		var anim_duration = 2000;
+		var anim_duration = 1750;
 		var zoom = 2;
 		la_separation = new Word('Separation', 'Perception', 5, null, false);
 		la_separation.setZoom(zoom);
